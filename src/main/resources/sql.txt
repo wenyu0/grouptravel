@@ -140,7 +140,7 @@ CREATE TABLE `gt_user` (
   `province` varchar(20) DEFAULT NULL,
   `country` varchar(20) DEFAULT NULL,
   `avatarUrl` varchar(100) DEFAULT NULL,
-  `gender` varchar(10) DEFAULT NULL,
+  `gender` int(3) DEFAULT NULL,
   `nickname` varchar(50) DEFAULT NULL,
 
   PRIMARY KEY (`userId`)
