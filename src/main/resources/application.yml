@@ -11,5 +11,6 @@ logging:
   level:
     hust: debug
 
-
-
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: hust.shixun.grouptravel.entities
