@@ -117,6 +117,19 @@ public class Order {
         this.travelTime = travelTime;
     }
 
+    public Order(Date createTime, int productId, int userId, double orderPrice, Date payTime, int status, int PTid, int pNum, double currentDiscount, Date travelTime) {
+        this.createTime = createTime;
+        this.productId = productId;
+        this.userId = userId;
+        this.orderPrice = orderPrice;
+        this.payTime = payTime;
+        this.status = status;
+        this.PTid = PTid;
+        this.pNum = pNum;
+        this.currentDiscount = currentDiscount;
+        this.travelTime = travelTime;
+    }
+
     public Order() {
     }
 
