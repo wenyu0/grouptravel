@@ -11,8 +11,17 @@ public class User {
     private String province;
     private String country;
     private String avatarUrl;
-    private String gender;
+    private int gender;
     private String nickname;
+    private String phoneNum;
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
 
     public int getUserId() {
         return userId;
@@ -78,11 +87,11 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -94,7 +103,7 @@ public class User {
         this.nickname = nickname;
     }
 
-    public User(int userId, String openId, Date creatTime, Date lastVisitTime, String city, String province, String country, String avatarUrl, String gender, String nickname) {
+    public User(int userId, String openId, Date creatTime, Date lastVisitTime, String city, String province, String country, String avatarUrl, int gender, String nickname, String phoneNum) {
         this.userId = userId;
         this.openId = openId;
         this.creatTime = creatTime;
@@ -105,6 +114,7 @@ public class User {
         this.avatarUrl = avatarUrl;
         this.gender = gender;
         this.nickname = nickname;
+        this.phoneNum = phoneNum;
     }
 
     public User() {
@@ -123,6 +133,7 @@ public class User {
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", gender='" + gender + '\'' +
                 ", nickname='" + nickname + '\'' +
+                ", phoneNum='" + phoneNum + '\'' +
                 '}';
     }
 }

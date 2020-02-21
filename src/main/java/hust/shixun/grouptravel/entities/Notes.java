@@ -4,10 +4,23 @@ import java.util.Date;
 
 public class Notes {
     private int notesId;
+    private int productId;
     private String title;
     private String content;
     private Date writeTime;
     private double rate;
+
+    @Override
+    public String toString() {
+        return "Notes{" +
+                "notesId=" + notesId +
+                ", productId=" + productId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", writeTime=" + writeTime +
+                ", rate=" + rate +
+                '}';
+    }
 
     public int getNotesId() {
         return notesId;
@@ -15,6 +28,14 @@ public class Notes {
 
     public void setNotesId(int notesId) {
         this.notesId = notesId;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getTitle() {
@@ -49,25 +70,15 @@ public class Notes {
         this.rate = rate;
     }
 
-    public Notes(int notesId, String title, String content, Date writeTime, double rate) {
+    public Notes() {
+    }
+
+    public Notes(int notesId, int productId, String title, String content, Date writeTime, double rate) {
         this.notesId = notesId;
+        this.productId = productId;
         this.title = title;
         this.content = content;
         this.writeTime = writeTime;
         this.rate = rate;
-    }
-
-    public Notes() {
-    }
-
-    @Override
-    public String toString() {
-        return "Notes{" +
-                "notesId=" + notesId +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", writeTime=" + writeTime +
-                ", rate=" + rate +
-                '}';
     }
 }

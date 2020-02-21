@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>抱团旅游小程序</title>
+		<!-- Bootstrap core CSS -->
+		<link href="../asserts/css/bootstrap.min.css"  th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="../asserts/css/dashboard.css" th:href="@{/asserts/css/dashboard.css}" rel="stylesheet">
+		<link href="../asserts/css/font-awesome.min.css"  th:href="@{/asserts/css/font-awesome.min.css}" rel="stylesheet">
+
+	</head>
+
+	<body>
+	<!--引入topbar-->
+	<div th:replace="commons/bar_1 :: top_bar"></div>
+
+
+	<div class="container-fluid">
+			<div class="row" >
+				<!--引入sidebar-->
+				<div th:replace="commons/bar_1 :: sidebar"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+						<nav class="h5">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#" th:href="@{#}">首页</a></li>
+								<li class="breadcrumb-item">游记管理</li>
+								<li class="breadcrumb-item active">游记中心</li>
+							</ol>
+						</nav>
+
+					</div>
+
+<!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
+					<div class="row">
+						<div class="col-3">
+							<div class="row">
+								<div class="col-8">
+									<input type="text" class="form-control" placeholder="产品id">
+								</div>
+								<div class="col-4">
+									<button class="btn-sm btn-primary">查找</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-3">
+							<div class="row">
+								<div class="col-8">
+								<input type="text" class="form-control" placeholder="地区">
+								</div>
+								<div class="col-4">
+								<button class="btn-sm btn-primary">查找</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-3">
+							<div class="row">
+								<div class="col-8">
+									<input type="text" class="form-control" placeholder="用户姓名">
+								</div>
+								<div class="col-4">
+									<button class="btn-sm btn-primary">查找</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="table-responsive mt-2">
+						<table class="table table-striped table-sm">
+							<thead>
+							<tr>
+								<th>游记编号</th>
+								<th>商品id</th>
+								<th>用户名</th>
+								<th>游记标题</th>
+								<th>游记图片</th>
+								<th>游记内容</th>
+								<th>游记评论</th>
+								<th>创建时间</th>
+								<th>产品评分</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>1</td>
+								<td>1</td>
+								<td>小红</td>
+								<td>武汉游心得</td>
+								<td>url</td>
+								<td><a href="#">游记内容</a></td>
+								<td><a href="#">评论</a></td>
+								<td>2020-2-4</td>
+								<td>4</td>
+
+								<td>
+									<a class="btn btn-sm btn-primary" th:href="@{youjiEdit}">编辑</a>
+									<button class="btn btn-sm btn-danger deletebtn" >删除
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>1</td>
+								<td>小红</td>
+								<td>武汉游心得</td>
+								<td>url</td>
+								<td><a href="#">游记内容</a></td>
+								<td><a href="#">评论</a></td>
+								<td>2020-2-4</td>
+								<td>4</td>
+
+								<td>
+									<a class="btn btn-sm btn-primary" th:href="@{youjiEdit}">编辑</a>
+									<button class="btn btn-sm btn-danger deletebtn" >删除
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>1</td>
+								<td>小红</td>
+								<td>武汉游心得</td>
+								<td>url</td>
+								<td><a href="#">游记内容</a></td>
+								<td><a href="#">评论</a></td>
+								<td>2020-2-4</td>
+								<td>4</td>
+
+								<td>
+									<a class="btn btn-sm btn-primary" th:href="@{youjiEdit}">编辑</a>
+									<button class="btn btn-sm btn-danger deletebtn" >删除
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>1</td>
+								<td>小红</td>
+								<td>武汉游心得</td>
+								<td>url</td>
+								<td><a href="#">游记内容</a></td>
+								<td><a href="#">评论</a></td>
+								<td>2020-2-4</td>
+								<td>4</td>
+
+								<td>
+									<a class="btn btn-sm btn-primary" href="youjiEdit.html" th:href="@{youjiEdit}">编辑</a>
+									<button class="btn btn-sm btn-danger deletebtn" >删除
+									</button>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="nav justify-content-center mt-4">
+						<ul class="pagination ">
+							<li class="page-item"><a href="javascript:void (0)" th:href="@{javascript:void (0)}" class="page-link disabled">&laquo;</a></li>
+							<li class="page-item active"><a href="javascript:void (0)" th:href="@{javascript:void (0)}" class="page-link">1</a></li>
+							<li class="page-item"><a href="#"  th:href="@{#}" class="page-link">2</a></li>
+							<li class="page-item"><a href="#"  th:href="@{#}" class="page-link">3</a></li>
+							<li class="page-item"><a href="#" th:href="@{#}" class="page-link">&raquo;</a></li>
+						</ul>
+					</div>
+				</main>
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery-3.2.1.slim.min.js}"></script>
+	<script type="text/javascript" src="../asserts/js/popper.min.js" th:src="@{/asserts/js/popper.min.js}"></script>
+	<script type="text/javascript" src="../asserts/js/bootstrap.bundle.min.js"  th:src="@{/asserts/js/bootstrap.bundle.min.js}"></script>
+
+	</body>
+
+</html>

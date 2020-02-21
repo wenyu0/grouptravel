@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hust.shixun.grouptravel.itemsManagement.mapper.ProductMapper">
+    <select id="queryAllProducts" resultType="Product">
+        select * from grouptravel.gt_product
+    </select>
+    
+    <select id="queryProductById" parameterType="int" resultType="Product">
+        select * from grouptravel.gt_product where productId=#{id}
+    </select>
+
+    <select id="queryProductByName" parameterType="String" resultType="Product">
+        select * from grouptravel.gt_product where productName like "%"#{name}"%"
+    </select>
+
+    <insert id="addProduct" parameterType="Product" useGeneratedKeys="true">
+        insert into grouptravel.gt_product (productId, productName, cityId, price, description, maxNum, maxDiscount, productTime, transportationId, themeId)
+        values (default ,#{productName},#{cityId},#{price},#{description},#{maxNum},#{maxDiscount},#{productTime},#{transportationId},#{themeId})
+    </insert>
+
+    <update id="updateProduct" parameterType="Product" >
+        update grouptravel.gt_product set productName=#{productName},cityId=#{cityId},price=#{price},description=#{description},maxNum=#{maxNum},maxDiscount=#{maxDiscount},
+        productTime=#{productTime},transportationId=#{transportationId},themeId=#{themeId} where productId=#{productId}
+    </update>
+
+    <delete id="deleteProductById" parameterType="int">
+        delete from grouptravel.gt_product where productId=#{productId}
+    </delete>
+
+    <select id="queryHotProductId"  parameterType="map" resultType="int">
+             select  productId from (select count(*) number,productId from grouptravel.gt_order where payTime &gt; #{date_1} AND  payTime &lt; #{date_2} group by productId order by number desc limit 3 ) a
+    </select>
+
+    <select id="queryNoteByProductId" parameterType="int" resultType="Notes">
+        select * from grouptravel.gt_notes where productId=#{id}
+    </select>
+
+</mapper>
