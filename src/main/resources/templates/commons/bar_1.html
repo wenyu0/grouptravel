@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--top_bar-->
+<nav class="navbar navbar-dark sticky-top  flex-md-nowrap p-0 justify-content-between" style="background-color: #e3f2fd;" th:fragment="top_bar">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img src="../asserts/img/bootstrap-solid.svg" th:src="@{/asserts/img/bootstrap-solid.svg}" style="width: 30px;height: 30px
+" class="d-inline-block mr-2 align-top">抱团旅游</a>
+    <ul class="navbar-nav px-3">
+        <div class="row">
+            <li class="nav-item text-nowrap mx-2">
+                <a class="nav-link text-success" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#" th:href="@{#}">admin</a>
+            </li>
+            <li class="nav-item text-nowrap mx-2">
+                <a class="nav-link text-secondary" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#" th:href="@{#}">退出</a>
+            </li>
+        </div>
+    </ul>
+</nav>
+<!--sidebar-->
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" style="margin-top: 48px" th:fragment="sidebar">
+    <div class="sidebar-sticky ">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link  d-inline-block" data-toggle="collapse" href="#myCollapse1" th:href="@{#myCollapse1}">
+                    <i class="fa fa-sun-o mr-2" aria-hidden="true"></i>
+                    <span>系统管理</span><i class="fa fa-angle-down ml-5"  aria-hidden="true"></i>
+                </a>
+                <div class="collapse" id="myCollapse1">
+                    <ul class="nav  flex-column">
+                        <li class="nav-item "><a class="nav-link" href="userManage/userManagement.html" th:href="@{userManagement}"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>用户管理</a></li>
+                        <li class="nav-item"><a class="nav-link" href="jueseManage/jueSeManagement.html" th:href="@{jueSeManagement}"><i class="fa fa-user-circle mr-2" aria-hidden="true"></i>角色管理</a></li>
+                    </ul>
+                </div>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-inline-block" data-toggle="collapse"  href="#myCollapse2" th:href="@{#myCollapse2}">
+                    <i class="fa fa-sun-o mr-2" aria-hidden="true"></i>
+                    数据中心<i class="fa fa-angle-down ml-5"  aria-hidden="true"></i>
+                </a>
+                <div class="collapse " id="myCollapse2">
+                    <ul class="nav  flex-column">
+                        <li class="nav-item "><a class="nav-link" href="../dataManage/dataManagement.html" th:href="@{dataManagement}"><i class="fa fa-bar-chart mr-2" aria-hidden="true"></i>订单对比</a></li>
+                        <li class="nav-item "><a class="nav-link" href="#" th:href="@{dataManagement}"><i class="fa fa-bar-chart mr-2" aria-hidden="true"></i>今日订单统计</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-inline-block" data-toggle="collapse"  href="#myCollapse3" th:href="@{#myCollapse3}">
+                    <i class="fa fa-sun-o mr-2" aria-hidden="true"></i>
+                    订单管理<i class="fa fa-angle-down ml-5"  aria-hidden="true"></i>
+                </a>
+                <div class="collapse " id="myCollapse3">
+                    <ul class="nav  flex-column">
+                        <li class="nav-item "><a class="nav-link" href="../orderManage/orderManagement.html" th:href="@{orderManagement}"><i class="fa fa-bars mr-2" aria-hidden="true"></i>订单中心</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-inline-block" data-toggle="collapse" href="#myCollapse4" th:href="@{#myCollapse4}">
+                    <i class="fa fa-sun-o mr-2" aria-hidden="true"></i>
+                    商品管理<i class="fa fa-angle-down ml-5"  aria-hidden="true"></i>
+                </a>
+                <div class="collapse " id="myCollapse4">
+                    <ul class="nav  flex-column">
+                        <li class="nav-item "><a class="nav-link" href="../productManage/productManagement.html" th:href="@{productManagement}"><i class="fa fa-shopping-bag mr-2" aria-hidden="true"></i>商品中心</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-inline-block" data-toggle="collapse" href="#myCollapse5" th:href="@{#myCollapse5}">
+                    <i class="fa fa-sun-o mr-2" aria-hidden="true"></i>
+                    游记管理<i class="fa fa-angle-down ml-5"  aria-hidden="true"></i>
+                </a>
+                <div class="collapse " id="myCollapse5">
+                    <ul class="nav  flex-column">
+                        <li class="nav-item "><a class="nav-link" href="../youjiManage/youjiManagement.html" th:href="@{youjiManagement}"><i class="fa fa-sticky-note-o mr-2" aria-hidden="true"></i>游记中心</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-inline-block" data-toggle="collapse" href="#myCollapse6" th:href="@{#myCollapse6}">
+                    <i class="fa fa-sun-o mr-2" aria-hidden="true"></i>
+                    砍价管理<i class="fa fa-angle-down ml-5"  aria-hidden="true"></i>
+                </a>
+                <div class="collapse " id="myCollapse6">
+                    <ul class="nav  flex-column">
+                        <li class="nav-item "><a class="nav-link" href="../kanjiaManage/KanjiaManagement.html" th:href="@{KanjiaManagement}"><i class="fa fa-gift mr-2" aria-hidden="true"></i>砍价设置</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+</body>
+</html>

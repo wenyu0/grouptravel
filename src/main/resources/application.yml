@@ -7,9 +7,16 @@ spring:
   #禁用模板引擎的缓存
   thymeleaf:
     cache: false
+#    实现thymleaf的页面跳转
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
 logging:
   level:
     hust: debug
 
 
-
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: hust.shixun.grouptravel.entities

@@ -30,6 +30,7 @@ CREATE TABLE `gt_kanjia` (
 
 CREATE TABLE `gt_notes` (
   `notesId` int(20) NOT NULL,
+ `productId` int(20) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `content` text,
   `writeTime` datetime DEFAULT NULL,
@@ -65,6 +66,7 @@ CREATE TABLE `gt_noteslike` (
 
 CREATE TABLE `gt_order` (
   `orderId` int(20) NOT NULL,
+ `productId` int(20) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
   `productId` int(20) NOT NULL,
   `userId` int(20) NOT NULL,
