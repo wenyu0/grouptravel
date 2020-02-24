@@ -16,6 +16,7 @@
         select * from grouptravel.gt_product where productName like "%"#{name}"%"
     </select>
 
+
     <insert id="addProduct" parameterType="Product" useGeneratedKeys="true">
         insert into grouptravel.gt_product (productId, productName, cityId, price, description, maxNum, maxDiscount, productTime, transportationId, themeId)
         values (default ,#{productName},#{cityId},#{price},#{description},#{maxNum},#{maxDiscount},#{productTime},#{transportationId},#{themeId})

@@ -6,25 +6,26 @@ import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.itemsManagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.crypto.Data;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-@RestController
+@Controller
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/product/queryAllproducts")
-    public List<Product> queryAllProducts() throws JsonProcessingException {
 
-        return  productService.queryAllProducts();
+    @RequestMapping("/product/queryAllproducts")
+    public String queryAllProducts(Model model){
+        List<Product> products = productService.queryAllProducts();
+        model.addAttribute("products",products);
+        return  "pages/productManage/productManagement";
     }
 
     @RequestMapping("/product/queryProductById")
@@ -38,20 +39,31 @@ public class ProductController {
     }
 
     @RequestMapping("/product/addProduct")
-    public Boolean addProduct(Product product) {
-        return productService.addProduct(product);
+    public String addProduct(Product product) {
+        productService.addProduct(product);
+        return "redirect:/product/queryAllproducts";
     }
 
 
-    @RequestMapping("/product/updateProduct")
-    public Boolean updateProduct(Product product) {
-        return productService.updateProduct(product);
+    @GetMapping("/product/updateProduct{id}")
+    public String updateProduct(@PathVariable Integer id, Model model) {
+        Product product = productService.queryProductById(id);
+        model.addAttribute("pro",product);
+        return "/pages/productManage/ProductEdit";
+    }
+
+    @PostMapping("/product/updateProduct")
+    public String updateProduct1(Product product){
+        productService.updateProduct(product);
+        return "redirect:/product/queryAllproducts";
     }
 
 
-    @RequestMapping("/product/deleteProductById")
-    public Boolean deleteProductById(int id) {
-        return productService.deleteProductById(id);
+
+    @RequestMapping("/product/deleteProduct{id}")
+    public String deleteProductById(@PathVariable Integer id) {
+        productService.deleteProductById(id);
+        return "redirect:/product/queryAllproducts";
 
     }
 

@@ -43,18 +43,15 @@
 								<div class="card-body">
 									<h4 class="card-title">商品编辑</h4>
 
-									<form class="forms-sample">
-										<div class="form-group">
-											<label for="InputId">编号</label>
-											<input type="text" class="form-control" th:name="productId" id="InputId" placeholder="id">
-										</div>
+									<form class="forms-sample" th:action="@{/product/updateProduct}" method="post">
+										<input  type="hidden" name="productId" th:value="${pro.getProductId()}">
 										<div class="form-group">
 											<label for="InputName">商品名</label>
-											<input type="text" class="form-control" id="InputName" th:name="productName" placeholder="productName">
+											<input type="text" class="form-control" id="InputName" name="productName" placeholder="productName">
 										</div>
 										<div class="form-group">
 											<label for="InputName">城市Id</label>
-											<input type="text" class="form-control" id="InputCity" th:name="cityId" placeholder="productcity">
+											<input type="text" class="form-control" id="InputCity" name="cityId" placeholder="productcity">
 										</div>
 										<div class="form-group">
 											<label for="InputUrl">商品url直接显示为图片</label>
@@ -64,54 +61,54 @@
 											<label >价格</label>
 											<div class="input-group">
 												<span class="input-group-addon bg-primary text-white">$</span>
-												<input type="text" class="form-control" th:name="price">
+												<input type="text" class="form-control" name="price">
 												<span class="input-group-addon bg-primary border-primary text-white">.00</span>
 											</div>
 										</div>
 										<div class="form-group">
 											<label for="InputUrl">文字描述</label>
-											<textarea class="form-control" id="InputArea" th:name="description" placeholder="description"></textarea>
+											<textarea class="form-control" id="InputArea" name="description" placeholder="description"></textarea>
 										</div>
 										<div class="form-group">
 											<label>拼团上限人数</label>
-											<input type="text" th:name="maxNum" class="form-control">
+											<input type="text" name="maxNum" class="form-control">
 										</div>
 										<div class="form-group">
 											<label >最大折扣</label>
 											<div class="input-group">
 												<span class="input-group-addon bg-primary text-white">$</span>
-												<input type="text" th:name="maxDiscount" class="form-control">
+												<input type="text" name="maxDiscount" class="form-control">
 												<span class="input-group-addon bg-primary border-primary text-white">.00</span>
 											</div>
 										</div>
 										<div class="form-group">
 											<label>产品行程时间</label>
-											<input type="text" th:name="productTime" class="form-control">
+											<input type="text" name="productTime" class="form-control">
 										</div>
 
 										<div class="form-group">
 											<label>产品出行方式</label>
 											<div class="form-check">
 												<label class="form-check-label">
-													<input type="checkbox" th:name="transportationId" class="form-check-input">
+													<input type="checkbox" name="transportationId" value="1" class="form-check-input">
 													飞机
 												</label>
 											</div>
 											<div class="form-check">
 												<label class="form-check-label">
-													<input type="checkbox" th:name="transportationId" class="form-check-input" >
+													<input type="checkbox" name="transportationId" value="2" class="form-check-input" >
 													火车
 												</label>
 											</div>
 											<div class="form-check">
 												<label class="form-check-label">
-													<input type="checkbox" th:name="transportationId" class="form-check-input" >
+													<input type="checkbox" name="transportationId" value="3" class="form-check-input" >
 													汽车
 												</label>
 											</div>
 											<div class="form-check">
 												<label class="form-check-label">
-													<input type="checkbox" th:name="transportationId" class="form-check-input" >
+													<input type="checkbox" name="transportationId"  value="4" class="form-check-input" >
 													自行车
 												</label>
 											</div>
@@ -120,25 +117,25 @@
 											<label>主题</label>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox" th:name="themeId" class="form-check-input">
+													<input type="checkbox" name="themeId" value="1" class="form-check-input">
 													风景游
 												</label>
 											</div>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox" th:name="themeId" class="form-check-input" >
+													<input type="checkbox" name="themeId" value="2" class="form-check-input" >
 													文艺游
 												</label>
 											</div>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox"  th:name="themeId" class="form-check-input" >
+													<input type="checkbox"  name="themeId" value="3" class="form-check-input" >
 													童话游
 												</label>
 											</div>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox" th:name="themeId" class="form-check-input" >
+													<input type="checkbox" name="themeId" value="4" class="form-check-input" >
 													美食游
 												</label>
 											</div>
