@@ -30,8 +30,8 @@ public interface UserService {
     //更新未被支付的订单，如更新成功则返回ture否则为false。(用户付款将状态更新为已支付)
     Boolean updateUnpayOrder(int orderId);
 
-    //通过名字查询相应的旅游项目中的所有已完成的订单号（唯一主键），通过此查询其游记评论表中的信息并返回其一个集合。
-    List<Notes> queryNotesByOrderId(int orderId);
+    //查询用户的游记
+    List<Notes> queryNotesByUserId(int userId);
 
     //添加游记
     Boolean addNotes(Notes notes);

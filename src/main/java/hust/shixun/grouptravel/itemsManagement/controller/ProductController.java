@@ -7,6 +7,7 @@ import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.itemsManagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.crypto.Data;
@@ -78,7 +79,7 @@ public class ProductController {
     }
 
     @RequestMapping("/notes/queryNotesByProductId")
-    public List<Notes> queryNotesByProductId(int productId){
+    public List<Notes> queryNotesByProductId(@RequestParam("id") int productId){
         List<Notes> notes = productService.queryNoteByProductId (productId);
         return notes;
     }

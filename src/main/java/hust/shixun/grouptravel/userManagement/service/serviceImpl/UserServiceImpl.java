@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Notes> queryNotesByOrderId(int orderId) {
-        return userMapper.queryNotesByOrderId(orderId);
+    public List<Notes> queryNotesByUserId(int orderId) {
+        return userMapper.queryNotesByUserId(orderId);
     }
 
     @Override

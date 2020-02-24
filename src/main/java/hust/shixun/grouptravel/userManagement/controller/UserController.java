@@ -35,6 +35,7 @@ public class UserController {
         return userService.queryProductByName(productName);
     }
 
+//通过省份名查找产品
     @RequestMapping("/user/queryProductByProvince")
     @ResponseBody
     public List<Product> queryProductByProvince(@RequestParam(value = "provinceName") String provinceName) {
@@ -43,6 +44,19 @@ public class UserController {
         for(int cityId:cityList)
             products.addAll(userService.queryProductByCity(cityId));
         return products;
+    }
+    //通过省份名查找所属城市
+    @RequestMapping("/user/querycitys")
+    @ResponseBody
+    public  List<Integer>  getCityList(String provinceName){
+        return userService.getCityList(provinceName);
+    }
+
+//    通过城市id查找产品
+    @RequestMapping("/user/queryProductByCity")
+    @ResponseBody
+    public  List<Product>  queryProductByCity(int cityId){
+        return userService.queryProductByCity(cityId);
     }
 
     @RequestMapping("/user/queryOrdersWithUnpay")
@@ -57,10 +71,10 @@ public class UserController {
         return userService.updateUnpayOrder(orderId);
     }
 
-    @RequestMapping("/user/queryNotesByOrderId")
+    @RequestMapping("/user/queryNotesByUserId")
     @ResponseBody
-    public List<Notes> queryNotesByOrderId(int orderId) {
-        return userService.queryNotesByOrderId(orderId);
+    public List<Notes> queryNotesByUserId(int userId) {
+        return userService.queryNotesByUserId(userId);
     }
 
     @RequestMapping("/user/addNotes")

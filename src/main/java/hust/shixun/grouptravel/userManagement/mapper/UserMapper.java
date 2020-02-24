@@ -20,6 +20,7 @@ public interface UserMapper {
     @Select("SELECT cityId from gt_city where provinceId in(SELECT provinceId from gt_province where provinceName = #{provinceName})")
     List<Integer> getCityList(String provinceName);
 
+//    添加订单
     @Insert("INSERT into gt_order(createTime,productId,userId,orderPrice,payTime,status,PTid,pNum,currentDiscount,travelTime,notesId)" +
             " VALUES(#{createTime},#{productId},#{userId},#{orderPrice},#{payTime},#{status},#{PTid},#{pNum},#{currentDiscount},#{travelTime},#{notesId})")
     boolean addOrder(Order order);
@@ -44,9 +45,13 @@ public interface UserMapper {
     @Select("UPDATE gt_order SET status=1 WHERE orderId=#{orderId}")
     Boolean updateUnpayOrder(int orderId);
 
-    //通过名字查询相应的旅游项目中的所有已完成的订单号（唯一主键），通过此查询其游记评论表中的信息并返回其一个集合。
-    @Select("SELECT * FROM gt_notes,gt_order WHERE gt_notes.notesId=gt_order.notesId AND gt_order.orderId=#{orderId}")
-    List<Notes> queryNotesByOrderId(int orderId);
+//    //通过名字查询相应的旅游项目中的所有已完成的订单号（唯一主键），通过此查询其游记评论表中的信息并返回其一个集合。   （待改）
+//    @Select("SELECT * FROM gt_notes,gt_order WHERE gt_notes.notesId=gt_order.notesId AND gt_order.orderId=#{orderId}")
+//    List<Notes> queryNotesByOrderId(int orderId);
+
+    //查询用户的游记
+    @Select("SELECT * FROM gt_notes,gt_order WHERE gt_notes.notesId=gt_order.notesId AND gt_order.userId=#{userId}")
+    List<Notes> queryNotesByUserId(int userId);
 
     //添加游记
     @Insert("INSERT INTO gt_notes(title,content,writeTime,rate,productId) VALUES(#{title},#{content},#{writeTime},#{rate},#{productId})")
