@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 @Controller
 public class UserController {
     @Autowired
@@ -21,17 +19,8 @@ public class UserController {
 
     @RequestMapping("/user/addOrder")
     @ResponseBody
-    public boolean addOrder(@RequestParam(value = "createTime")Date createTime,
-                            @RequestParam(value = "productId") int productId,
-                            @RequestParam(value = "userId") int userId,
-                            @RequestParam(value = "orderPrice") double orderPrice,
-                            @RequestParam(value = "payTime") Date payTime,
-                            @RequestParam(value = "status") int status,
-                            @RequestParam(value = "PTid") String PTid,
-                            @RequestParam(value = "pNum") int pNum,
-                            @RequestParam(value = "currentDiscount") double currentDiscount,
-                            @RequestParam(value = "travelTime") Date travelTime) {
-        return userService.addOrder(new java.sql.Date(createTime.getTime()),productId,userId,orderPrice,payTime,0,null,0,0,new java.sql.Date(travelTime.getTime()));
+    public boolean addOrder(Order order) {
+        return userService.addOrder(order);
     }
 
     @RequestMapping("/user/queryProductById")
@@ -76,10 +65,8 @@ public class UserController {
 
     @RequestMapping("/user/addNotes")
     @ResponseBody
-    public Boolean addNotes(@RequestParam(value = "title") String title,
-                            @RequestParam(value = "content") String content,
-                            @RequestParam(value = "writeTime") Date writeTime) {
-        return userService.addNotes(title,content,new java.sql.Date(writeTime.getTime()));
+    public Boolean addNotes(Notes notes) {
+        return userService.addNotes(notes);
     }
 
     @RequestMapping("/user/queryOrderPrice")
@@ -103,25 +90,25 @@ public class UserController {
 
     @RequestMapping("/user/addRates")
     @ResponseBody
-    public Boolean addRates(double rate, int orderId) {
-        return userService.addRates(rate,orderId);
+    public Boolean addRates(double rate, int orderId){
+        return  userService.addRates(rate,orderId);
     }
 
     @RequestMapping("/user/likeNotes")
     @ResponseBody
-    public Boolean likeNotes(int userId, int notesId) {
+    public Boolean likeNotes(int userId,int notesId){
         return userService.likeNotes(userId,notesId);
     }
 
     @RequestMapping("/user/commentNotes")
     @ResponseBody
-    public Boolean commentNotes(int userId, int notesId, String commentContent) {
+    public Boolean commentNotes(int userId,int notesId,String commentContent){
         return userService.commentNotes(userId,notesId,commentContent);
     }
 
     @RequestMapping("/user/queryLikeNotes")
     @ResponseBody
-    public List<Notes> queryLikeNotes(int userId) {
+    public List<Notes> queryLikeNotes(int userId){
         return userService.queryLikeNotes(userId);
     }
 }

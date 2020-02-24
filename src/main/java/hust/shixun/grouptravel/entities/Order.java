@@ -14,6 +14,15 @@ public class Order {
     private int pNum;
     private double currentDiscount;
     private Date travelTime;//产品出发时间
+    private int notesId;
+
+    public int getNotesId() {
+        return notesId;
+    }
+
+    public void setNotesId(int notesId) {
+        this.notesId = notesId;
+    }
 
     public int getOrderId() {
         return orderId;
@@ -103,7 +112,12 @@ public class Order {
         this.travelTime = travelTime;
     }
 
-    public Order(int orderId, Date createTime, int productId, int userId, double orderPrice, Date payTime, int status, int PTid, int pNum, double currentDiscount, Date travelTime) {
+
+
+    public Order() {
+    }
+
+    public Order(int orderId, Date createTime, int productId, int userId, double orderPrice, Date payTime, int status, int PTid, int pNum, double currentDiscount, Date travelTime, int notesId) {
         this.orderId = orderId;
         this.createTime = createTime;
         this.productId = productId;
@@ -115,22 +129,7 @@ public class Order {
         this.pNum = pNum;
         this.currentDiscount = currentDiscount;
         this.travelTime = travelTime;
-    }
-
-    public Order(Date createTime, int productId, int userId, double orderPrice, Date payTime, int status, int PTid, int pNum, double currentDiscount, Date travelTime) {
-        this.createTime = createTime;
-        this.productId = productId;
-        this.userId = userId;
-        this.orderPrice = orderPrice;
-        this.payTime = payTime;
-        this.status = status;
-        this.PTid = PTid;
-        this.pNum = pNum;
-        this.currentDiscount = currentDiscount;
-        this.travelTime = travelTime;
-    }
-
-    public Order() {
+        this.notesId = notesId;
     }
 
     @Override
@@ -147,6 +146,7 @@ public class Order {
                 ", pNum=" + pNum +
                 ", currentDiscount=" + currentDiscount +
                 ", travelTime=" + travelTime +
+                ", notesId=" + notesId +
                 '}';
     }
 }

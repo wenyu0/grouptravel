@@ -3,14 +3,8 @@ package hust.shixun.grouptravel.userManagement.service;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-
 
 public interface UserService {
     //传入市的id得到省的id
@@ -19,7 +13,7 @@ public interface UserService {
     //通过省的名字得到市的集合
     List<Integer> getCityList(String provinceName);
 
-    boolean addOrder(Date createTime, int productId, int userId, double orderPrice, Date payTime, int status, String PTid, int pNum, double currentDiscount, Date travelTime);
+    boolean addOrder(Order order);
 
     //通过旅游产品id查询旅游产品，并返回该旅游产品。
     Product queryProductById(int productId);
@@ -40,23 +34,27 @@ public interface UserService {
     List<Notes> queryNotesByOrderId(int orderId);
 
     //添加游记
-    Boolean addNotes(String title, String content, Date writeTime);
+    Boolean addNotes(Notes notes);
 
 
     //查询当前订单的价格
     double queryOrderPrice(int orderId);
 
     //修改与该订单相关联的（由于拼团）所有订单的价格
-    Boolean updateOrderPrice(int orderId,double orderPrice);
+    Boolean updateOrderPrice(int orderId, double orderPrice);
 
     //查询与当前订单所关联的所有订单
     List<Order> queryOrder(int orderId);
 
+    //对产品评分
     Boolean addRates(double rate,int orderId);
+
     //点赞游记
     Boolean likeNotes(int userId,int notesId);
+
     //评论游记
     Boolean commentNotes(int userId,int notesId,String commentContent);
+
     //查看点赞的游记
     List<Notes> queryLikeNotes(int userId);
 }

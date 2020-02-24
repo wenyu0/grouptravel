@@ -3,15 +3,12 @@ package hust.shixun.grouptravel.userManagement.service.serviceImpl;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
-import hust.shixun.grouptravel.orderManagerment.mapper.OrderMapper;
 import hust.shixun.grouptravel.userManagement.mapper.UserMapper;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -28,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addOrder(Date createTime, int productId, int userId, double orderPrice, Date payTime, int status, String PTid, int pNum, double currentDiscount, Date travelTime) {
-        return userMapper.addOrder(new java.sql.Date(createTime.getTime()),productId,userId,orderPrice,payTime,0,null,0,0,new java.sql.Date(travelTime.getTime()));
+    public boolean addOrder(Order order) {
+        return userMapper.addOrder(order);
     }
 
     @Override
@@ -49,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Order> queryOrdersWithUnpay(int userId) {
-        return queryOrdersWithUnpay(userId);
+        return userMapper.queryOrdersWithUnpay(userId);
     }
 
     @Override
@@ -63,8 +60,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean addNotes(String title, String content, Date writeTime) {
-        return userMapper.addNotes(title,content,new java.sql.Date(writeTime.getTime()));
+    public Boolean addNotes(Notes notes) {
+        return userMapper.addNotes(notes);
     }
 
     @Override
@@ -84,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean addRates(double rate, int orderId) {
-        return userMapper.addRates(rate,orderId);
+        return userMapper.addRates(rate, orderId);
     }
 
     @Override

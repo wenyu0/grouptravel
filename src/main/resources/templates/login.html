@@ -14,20 +14,19 @@
 <body class="text-center">
 <form class="form-signin" th:action="@{/login}" th:method="post">
     <img class="mb-4" src="asserts/img/bootstrap-solid.svg" th:src="@{/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label class="sr-only">Username</label>
-    <input type="text" class="form-control" placeholder="Username" required="" autofocus="" th:name="username">
-    <label class="sr-only">Password</label>
-    <input type="password" class="form-control" placeholder="Password" required="" th:name="password">
+    <h1 class="h3 mb-3 font-weight-normal">后台管理系统登录</h1>
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p><br>
+    <label class="sr-only">管理员姓名</label>
+    <input type="text" class="form-control" placeholder="Username" required="" autofocus="" th:name="adminName">
+    <label class="sr-only">密码</label>
+    <input type="password" class="form-control" placeholder="Password" required="" th:name="adminPassword">
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me"> 记住我
         </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-    <a class="btn btn-sm">中文</a>
-    <a class="btn btn-sm">English</a>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    <p class="mt-5 mb-3 text-muted">© hust_19_grouptravel</p>
 </form>
 
 </body>

@@ -22,6 +22,8 @@ public class MyWebMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/productEdit").setViewName("pages/productManage/productEdit");
         registry.addViewController("/youjiEdit").setViewName("pages/youjiManage/youjiEdit");
         registry.addViewController("/jueSeEdit").setViewName("pages/jueSeManage/jueSeEdit");
-
+        registry.addViewController("/addProduct").setViewName("pages/productManage/addProduct");
+        registry.addViewController("/test").setViewName("pages/productManage/test");
+        registry.addViewController("/productAdd").setViewName("pages/productManage/productAdd");
     }
 }
