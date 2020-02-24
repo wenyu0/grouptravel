@@ -18,7 +18,7 @@ public interface UserMapper {
     int getProvinceId(int cityId);
 
     //通过省的名字得到市的集合
-    @Select("SELECT cityId from gt_city where provinceId in(SELECT provinceId from gt_province where provinceName = #{provinceName}")
+    @Select("SELECT cityId from gt_city where provinceId in(SELECT provinceId from gt_province where provinceName = #{provinceName})")
     List<Integer> getCityList(String provinceName);
 
     @Insert("INSERT into gt_order(createTime,productId,userId,orderPrice,payTime,status,PTid,pNum,currentDiscount,travelTime)" +
@@ -45,9 +45,9 @@ public interface UserMapper {
     @Select("UPDATE gt_order SET status=1 WHERE orderId=#{orderId}")
     Boolean updateUnpayOrder(int orderId);
 
-    //通过名字查询相应的旅游项目中的所有已完成的订单号（唯一主键），通过此查询其游记评论表中的信息并返回其一个集合。
-    @Select("SELECT * FROM gt_notes,gt_ordernotes WHERE gt_notes.notesId=gt_ordernotes.notesId AND gt_ordernotes.orderId=#{orderId}")
-    List<Notes> queryNotesByOrderId(int orderId);
+    //查询用户的游记
+    @Select("SELECT * FROM gt_notes,gt_order WHERE gt_notes.notesId=gt_order.notesId AND gt_order.userId=#{userId}")
+    List<Notes> queryNotesByUserId(int userId);
 
     //添加游记
     @Insert("INSERT INTO gt_notes(title,content,writeTime) VALUES(#{title},#{content},#{writeTime) ")
@@ -59,11 +59,24 @@ public interface UserMapper {
     double queryOrderPrice(int orderId);
 
     //修改与该订单相关联的（由于拼团）所有订单的价格
-    @Update("UPDATE get_order SET orderPrice = #{orderPrice} WHERE PTid in (SELECT PTid from gt_order WHERE orderId = #{orderId}")
+    @Update("UPDATE gt_order SET orderPrice = #{orderPrice} WHERE PTid in (SELECT samePTid from(SELECT PTid as samePTid from gt_order WHERE orderId = #{orderId})) as A")
     Boolean updateOrderPrice(int orderId,double orderPrice);
 
     //查询与当前订单所关联的所有订单
-    @Update("Select * from get_order WHERE PTid in (SELECT PTid from gt_order WHERE orderId = #{orderId}")
+    @Select("Select * from gt_order WHERE PTid in (SELECT PTid from gt_order WHERE orderId = #{orderId})")
     List<Order> queryOrder(int orderId);
+
+    //对产品评分
+    @Update("UPDATE gt_notes set rate = #{rate} where notesId in(SELECT notesId from gt_order where orderId = #{orderId})")
+    Boolean addRates(double rate,int orderId);
+    //点赞游记
+    @Insert("INSERT INTO gt_noteslike(userId,notesId) values(#{userId},#{notesId}")
+    Boolean likeNotes(int userId,int notesId);
+    //评论游记
+    @Insert("INSERT INTO gt_notescomment(userId,notesId,commentContent) VALUES(#{userId},#{notesId},#{commentContent})")
+    Boolean commentNotes(int userId,int notesId,String commentContent);
+    //查看点赞的游记
+    @Select("SELECT * from gt_notes where userId in (SELECT userId from gt_noteslike where userId = #{userId})")
+    List<Notes> queryLikeNotes(int userId);
 
 }

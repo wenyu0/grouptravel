@@ -7,10 +7,12 @@ import hust.shixun.grouptravel.orderManagerment.mapper.OrderMapper;
 import hust.shixun.grouptravel.userManagement.mapper.UserMapper;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     public UserMapper userMapper;
@@ -78,5 +80,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Order> queryOrder(int orderId) {
         return userMapper.queryOrder(orderId);
+    }
+
+    @Override
+    public Boolean addRates(double rate, int orderId) {
+        return userMapper.addRates(rate,orderId);
+    }
+
+    @Override
+    public Boolean likeNotes(int userId, int notesId) {
+        return userMapper.likeNotes(userId,notesId);
+    }
+
+    @Override
+    public Boolean commentNotes(int userId, int notesId, String commentContent) {
+        return userMapper.commentNotes(userId,notesId,commentContent);
+    }
+
+    @Override
+    public List<Notes> queryLikeNotes(int userId) {
+        return userMapper.queryLikeNotes(userId);
     }
 }

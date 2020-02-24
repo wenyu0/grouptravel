@@ -5,6 +5,7 @@ import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Controller
 public class UserController {
     @Autowired
     public UserService userService;
@@ -97,5 +99,29 @@ public class UserController {
     @ResponseBody
     public List<Order> queryOrder(@RequestParam(value = "orderId") int orderId) {
         return userService.queryOrder(orderId);
+    }
+
+    @RequestMapping("/user/addRates")
+    @ResponseBody
+    public Boolean addRates(double rate, int orderId) {
+        return userService.addRates(rate,orderId);
+    }
+
+    @RequestMapping("/user/likeNotes")
+    @ResponseBody
+    public Boolean likeNotes(int userId, int notesId) {
+        return userService.likeNotes(userId,notesId);
+    }
+
+    @RequestMapping("/user/commentNotes")
+    @ResponseBody
+    public Boolean commentNotes(int userId, int notesId, String commentContent) {
+        return userService.commentNotes(userId,notesId,commentContent);
+    }
+
+    @RequestMapping("/user/queryLikeNotes")
+    @ResponseBody
+    public List<Notes> queryLikeNotes(int userId) {
+        return userService.queryLikeNotes(userId);
     }
 }

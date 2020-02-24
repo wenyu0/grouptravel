@@ -6,9 +6,11 @@ import hust.shixun.grouptravel.entities.Product;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
 
 public interface UserService {
     //传入市的id得到省的id
@@ -49,4 +51,12 @@ public interface UserService {
 
     //查询与当前订单所关联的所有订单
     List<Order> queryOrder(int orderId);
+
+    Boolean addRates(double rate,int orderId);
+    //点赞游记
+    Boolean likeNotes(int userId,int notesId);
+    //评论游记
+    Boolean commentNotes(int userId,int notesId,String commentContent);
+    //查看点赞的游记
+    List<Notes> queryLikeNotes(int userId);
 }
