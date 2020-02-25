@@ -1,6 +1,7 @@
 package hust.shixun.grouptravel.userManagement.controller;
 
 import hust.shixun.grouptravel.entities.Notes;
+import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.userManagement.service.UserService;
@@ -110,5 +111,71 @@ public class UserController {
     @ResponseBody
     public List<Notes> queryLikeNotes(int userId){
         return userService.queryLikeNotes(userId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith1")
+    @ResponseBody
+    public List<Order> queryOrdersWith1(int userId) {
+        return userService.queryOrdersWith1(userId);
+    }
+
+    @RequestMapping("/user/updateOrder2")
+    @ResponseBody
+    public Boolean updateOrder2(int orderId) {
+        return userService.updateOrder2(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith2")
+    @ResponseBody
+    public List<Order> queryOrdersWith2(int userId) {
+        return userService.queryOrdersWith2(userId);
+    }
+
+    @RequestMapping("/user/updateOrder3")
+    @ResponseBody
+    public Boolean updateOrder3(int orderId) {
+        return userService.updateOrder3(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith3")
+    @ResponseBody
+    public List<Order> queryOrdersWith3(int userId) {
+        return userService.queryOrdersWith3(userId);
+    }
+
+    @RequestMapping("/user/updateOrder4")
+    @ResponseBody
+    public Boolean updateOrder4(int orderId) {
+        return userService.updateOrder4(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith4")
+    @ResponseBody
+    public List<Order> queryOrdersWith4(int userId) {
+        return userService.queryOrdersWith4(userId);
+    }
+
+    @RequestMapping("/user/updateOrder5")
+    @ResponseBody
+    public Boolean updateOrder5(int orderId) {
+        return userService.updateOrder5(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith5")
+    @ResponseBody
+    public List<Order> queryOrdersWith5(int userId) {
+        return userService.queryOrdersWith5(userId);
+    }
+
+    @RequestMapping("/user/queryCityNotes")
+    @ResponseBody
+    public List<Notes> queryCityNotes(int cityId) {
+        return userService.queryCityNotes(cityId);
+    }
+
+    @RequestMapping("/user/queryNotesCommentsByUserId")
+    @ResponseBody
+    public List<NotesComments> queryNotesCommentsByUserId(int userId) {
+        return userService.queryNotesCommentsByUserId(userId);
     }
 }

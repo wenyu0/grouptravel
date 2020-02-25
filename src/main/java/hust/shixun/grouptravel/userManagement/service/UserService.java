@@ -1,8 +1,11 @@
 package hust.shixun.grouptravel.userManagement.service;
 
 import hust.shixun.grouptravel.entities.Notes;
+import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -57,4 +60,37 @@ public interface UserService {
 
     //查看点赞的游记
     List<Notes> queryLikeNotes(int userId);
+
+    //查询用户未出行订单
+    List<Order> queryOrdersWith1(int userId);
+
+    //用户出行后将状态更新为已出行但未评价
+    Boolean updateOrder2(int orderId);
+
+    //查询用户未评价订单
+    List<Order> queryOrdersWith2(int userId);
+
+    //用户评价后将状态更新为已完成
+    Boolean updateOrder3(int orderId);
+
+    //查询用户已完成订单
+    List<Order> queryOrdersWith3(int userId);
+
+    //用户申请退款
+    Boolean updateOrder4(int orderId);
+
+    //查询用户退款中订单
+    List<Order> queryOrdersWith4(int userId);
+
+    //同意退款申请 退款成功
+    Boolean updateOrder5(int orderId);
+
+    //查询用户退款完成订单
+    List<Order> queryOrdersWith5(int userId);
+
+    //城市id查询城市游记
+    List<Notes> queryCityNotes(int cityId);
+
+    //通过用户id查找对游记的评论
+    List<NotesComments> queryNotesCommentsByUserId(int userId);
 }
