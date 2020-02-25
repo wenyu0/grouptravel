@@ -1,5 +1,6 @@
 package hust.shixun.grouptravel.userManagement.mapper;
 
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
@@ -62,9 +63,13 @@ public interface UserMapper {
     @Select("SELECT orderPrice FROM gt_order WHERE orderId = #{orderId}")
     double queryOrderPrice(int orderId);
 
-    //修改与该订单相关联的（由于拼团）所有订单的价格
-    @Update("UPDATE gt_order SET orderPrice = #{orderPrice} WHERE PTid in (SELECT PTid from(SELECT PTid from gt_order WHERE orderId = #{orderId})as A) ")
-    Boolean updateOrderPrice(int orderId, double orderPrice);
+//    修改订单价格的前一步，查出当前订单信息
+    @Select("select * from gt_order where orderId= #{orderId}")
+    Order selectOrderByOrderId(int orderId);
+    //修改与该订单相关联的（由于拼团）所有订单的价格、当前拼团人数、当前折扣
+    @Update("UPDATE gt_order SET orderPrice = #{orderPrice} , pNum=#{pNum} ,currentDiscount=#{currentDiscount} WHERE PTid in (SELECT PTid from(SELECT PTid from gt_order WHERE orderId = #{orderId})as A) ")
+    Boolean updateOrderPrice(int orderId, double orderPrice,int pNum, double currentDiscount);
+
 
     //查询与当前订单所关联的所有订单
     @Select("Select * from gt_order WHERE PTid in (SELECT PTid from gt_order WHERE orderId = #{orderId})")
@@ -85,4 +90,12 @@ public interface UserMapper {
     //查看点赞的游记
     @Select("SELECT * from gt_notes where notesId in (SELECT notesId from gt_noteslike where userId = #{userId})")
     List<Notes> queryLikeNotes(int userId);
+
+//    根据城市id查找图片
+    @Select("select imageUrl from gt_image where imageId in (select imageId from gt_city where cityId= #{cityId})")
+    String getimgByCity(int cityId);
+
+//    返回所有城市名称
+    @Select("select  cityId,cityName from gt_city ORDER BY cityName DESC")
+    List<City> getAllCitys();
 }

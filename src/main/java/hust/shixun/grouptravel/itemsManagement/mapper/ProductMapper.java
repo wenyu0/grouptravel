@@ -39,10 +39,8 @@ public interface ProductMapper {
      //通过最热门的产品id来查询出相应的游记
      List<Notes> queryNoteByProductId(int id);
 
-
-
-
-
+//  找出折扣优惠最大的三个旅游产品
+    List<Product> getMaxDiscountPro();
 }
 
 

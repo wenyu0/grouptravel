@@ -25,4 +25,5 @@ public interface ProductService {
 
     public List<Notes> queryNoteByProductId(int id);
 
+    List<Product> getMaxDiscountPro();
 }

@@ -1,5 +1,6 @@
 package hust.shixun.grouptravel.userManagement.controller;
 
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
@@ -88,13 +89,13 @@ public class UserController {
     public double queryOrderPrice(@RequestParam(value = "orderId") int orderId) {
         return userService.queryOrderPrice(orderId);
     }
-
-    @RequestMapping("/user/updateOrderPrice")
-    @ResponseBody
-    public Boolean updateOrderPrice(@RequestParam(value = "orderId") int orderId,
-                                    @RequestParam(value = "orderPrice") double orderPrice) {
-        return userService.updateOrderPrice(orderId,orderPrice);
-    }
+///*更新ptid一样人的订单  orderPrice传入的是要砍的金额*/
+//    @RequestMapping("/user/updateOrderPrice")
+//    @ResponseBody
+//    public Boolean updateOrderPrice(@RequestParam(value = "orderId") int orderId,
+//                                    @RequestParam(value = "orderPrice") double orderPrice) {
+//        return userService.updateOrderPrice(orderId,orderPrice);
+//    }
 
     @RequestMapping("/user/queryOrder")
     @ResponseBody
@@ -125,4 +126,19 @@ public class UserController {
     public List<Notes> queryLikeNotes(int userId){
         return userService.queryLikeNotes(userId);
     }
+
+//    根据城市id返回城市对应的图片路径
+    @RequestMapping("/user/getimgByCity")
+    @ResponseBody
+    public String getimgByCity(int cityId){
+        return userService.getimgByCity(cityId);
+    }
+
+//    返回所有城市名称以及id
+    @RequestMapping("/user/getAllCitys")
+    @ResponseBody
+    public List<City> getAllCitys(){
+        return userService.getAllCitys();
+    }
+
 }

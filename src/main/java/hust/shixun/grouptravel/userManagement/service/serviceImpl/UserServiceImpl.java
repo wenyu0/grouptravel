@@ -1,5 +1,7 @@
 package hust.shixun.grouptravel.userManagement.service.serviceImpl;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
@@ -71,7 +73,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updateOrderPrice(int orderId, double orderPrice) {
-        return userMapper.updateOrderPrice(orderId,orderPrice);
+        Order order =userMapper.selectOrderByOrderId(orderId);
+        Double price=order.getOrderPrice();
+        int pNum=order.getPNum();
+        Double currentDiscount=order.getCurrentDiscount();
+//       砍价金额超出原有金额
+        if(orderPrice>=price){
+            return false;
+        }
+        // 修改后的价格
+        price-=orderPrice;
+        pNum+=1;
+        currentDiscount+=orderPrice;
+        return userMapper.updateOrderPrice(orderId,price,pNum,currentDiscount);
     }
 
     @Override
@@ -97,5 +111,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Notes> queryLikeNotes(int userId) {
         return userMapper.queryLikeNotes(userId);
+    }
+
+    @Override
+    public String getimgByCity(int cityId) {
+        return userMapper.getimgByCity(cityId);
+    }
+
+    @Override
+    public List<City> getAllCitys() {
+        return userMapper.getAllCitys();
     }
 }

@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Kanjia {
-    private String PTid;
-    private String discountList;
-    private int productId;
-    private String uuid;
-
+public class City {
+    private int cityId;
+    private String cityName;
+    private int provinceId;
+    private int imageId;
 }

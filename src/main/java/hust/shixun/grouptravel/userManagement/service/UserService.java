@@ -1,5 +1,6 @@
 package hust.shixun.grouptravel.userManagement.service;
 
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
@@ -57,4 +58,10 @@ public interface UserService {
 
     //查看点赞的游记
     List<Notes> queryLikeNotes(int userId);
+
+//    根据城市id查找城市图片
+    String getimgByCity(int cityId);
+
+//    返回所有城市名称
+    List<City> getAllCitys();
 }

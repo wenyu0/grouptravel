@@ -16,6 +16,7 @@
         select * from grouptravel.gt_product where productName like "%"#{name}"%"
     </select>
 
+
     <insert id="addProduct" parameterType="Product" useGeneratedKeys="true">
         insert into grouptravel.gt_product (productId, productName, cityId, price, description, maxNum, maxDiscount, productTime, transportationId, themeId)
         values (default ,#{productName},#{cityId},#{price},#{description},#{maxNum},#{maxDiscount},#{productTime},#{transportationId},#{themeId})
@@ -38,4 +39,7 @@
         select * from grouptravel.gt_notes where productId=#{id}
     </select>
 
+    <select id="getMaxDiscountPro"  resultType="Product">
+        select * from gt_product ORDER BY maxDiscount DESC  LIMIT 3
+    </select>
 </mapper>
