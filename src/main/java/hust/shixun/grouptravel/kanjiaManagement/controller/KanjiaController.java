@@ -125,8 +125,8 @@ public class KanjiaController {
 
 
 /*从数据库中查找当前加入拼团的有多少人，人数-1即为参与砍价人数，新加入的砍价用户取出砍价金额即为砍价金额列表中的参与砍价人数所对应的金额*/
-//    @ResponseBody
-//    @PostMapping("/kanjia/getKanjiaPrice")
+    @ResponseBody
+    @PostMapping("/kanjia/getKanjiaPrice")
     public Double getKanjiaPrice(String uuid){
         int PTid = mapper.getPTidByuuid(uuid);
         String list=mapper.getKanjiaList(PTid);
