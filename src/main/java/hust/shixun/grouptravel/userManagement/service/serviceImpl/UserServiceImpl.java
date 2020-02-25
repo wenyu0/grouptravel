@@ -3,6 +3,7 @@ package hust.shixun.grouptravel.userManagement.service.serviceImpl;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
+import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.userManagement.mapper.UserMapper;
@@ -121,5 +122,59 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<City> getAllCitys() {
         return userMapper.getAllCitys();
+    }
+
+    public List<Order> queryOrdersWith1(int userId) {
+        return userMapper.queryOrdersWith1(userId);
+    }
+
+    @Override
+    public Boolean updateOrder2(int orderId) {
+        return userMapper.updateOrder2(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith2(int userId) {
+        return userMapper.queryOrdersWith2(userId);
+    }
+
+    @Override
+    public Boolean updateOrder3(int orderId) {
+        return userMapper.updateOrder3(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith3(int userId) {
+        return userMapper.queryOrdersWith3(userId);
+    }
+
+    @Override
+    public Boolean updateOrder4(int orderId) {
+        return userMapper.updateOrder4(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith4(int userId) {
+        return userMapper.queryOrdersWith4(userId);
+    }
+
+    @Override
+    public Boolean updateOrder5(int orderId) {
+        return userMapper.updateOrder5(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith5(int userId) {
+        return userMapper.queryOrdersWith5(userId);
+    }
+
+    @Override
+    public List<Notes> queryCityNotes(int cityId) {
+        return userMapper.queryCityNotes(cityId);
+    }
+
+    @Override
+    public List<NotesComments> queryNotesCommentsByUserId(int userId) {
+        return userMapper.queryNotesCommentsByUserId(userId);
     }
 }
