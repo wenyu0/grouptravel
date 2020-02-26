@@ -10,4 +10,8 @@ import lombok.NoArgsConstructor;
 public class Image {
     private int imageId;
     private String imageUrl;
+
+    public Image(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

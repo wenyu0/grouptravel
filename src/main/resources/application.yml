@@ -20,3 +20,6 @@ logging:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: hust.shixun.grouptravel.entities
+
+web:
+  upload-path: /Users/yimmerse/upload
