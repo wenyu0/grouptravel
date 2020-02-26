@@ -44,10 +44,11 @@
                             <h4 class="card-title">商品编辑</h4>
 
                             <form class="forms-sample" th:action="@{/product/addProduct}" >
-                                <div class="form-group">
+                                <!--不需要productId，利用其自增的性质-->
+                            <!--    <div class="form-group">
                                     <label for="InputId">编号</label>
                                     <input type="text" class="form-control" name="productId" id="InputId" placeholder="id">
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <label for="InputName">商品名</label>
                                     <input type="text" class="form-control" id="InputName" name="productName" placeholder="productName">

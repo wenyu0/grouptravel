@@ -12,6 +12,7 @@ spring:
     view:
       prefix: classpath:/templates/
       suffix: .html
+
 logging:
   level:
     hust: debug

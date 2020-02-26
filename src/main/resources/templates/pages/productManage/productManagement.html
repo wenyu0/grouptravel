@@ -74,16 +74,17 @@
 										<td th:text="${prod.getProductId()}"></td>
 										<td th:text="${prod.getProductName()}"></td>
 										<td>url</td>
-										<td th:text="${prod.getCityId()}"></td>
+										<td th:text="${citys.get(prod.getProductId())}"></td>
 										<td th:text="${prod.getPrice()}"></td>
 										<td th:text="${prod.getDescription()}"></td>
 										<td th:text="${prod.getMaxNum()}"></td>
 										<td th:text="${prod.getMaxDiscount()}"></td>
 										<td th:text="${prod.getProductTime()}"></td>
 										<!--此处要进行商讨，看起能否是单个还是多个在判断，根据id来确定旅游方式-->
-										<td th:text="${prod.getTransportationId()}"></td>
+										<td th:text="${transportations.get(prod.getProductId())}"></td>
 										<!--根据查询到的themeid去查询相应的theme名称-->
-										<td th:text="${prod.getThemeId()}"></td>
+
+										<td th:text="${themes.get(prod.getProductId())}"></td>
 										<td>
 											<a class="btn btn-sm btn-primary" th:href="@{/product/updateProduct}+${prod.getProductId()}" >编辑</a>
 											<a class="btn btn-sm btn-danger"  th:href="@{/product/deleteProduct}+${prod.getProductId()}">删除</a>

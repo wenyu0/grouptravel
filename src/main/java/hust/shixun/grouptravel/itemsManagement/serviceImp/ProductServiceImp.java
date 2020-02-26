@@ -95,6 +95,21 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
+    public String queryProductThemeById(int id) {
+        return productMapper.queryProductThemeById(id);
+    }
+
+    @Override
+    public String queryTransportationNameById(int id) {
+        return productMapper.queryTransportationNameById(id);
+    }
+
+    @Override
+    public String queryCityNameById(int id) {
+        return productMapper.queryCityNameById(id);
+    }
+
+    @Override
     public List<Notes> queryNoteByProductId (int id) {
         return productMapper.queryNoteByProductId (id);
     }

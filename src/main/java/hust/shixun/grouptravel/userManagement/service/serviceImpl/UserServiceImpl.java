@@ -6,6 +6,7 @@ import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
+import hust.shixun.grouptravel.entities.User;
 import hust.shixun.grouptravel.userManagement.mapper.UserMapper;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,6 +116,63 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+<<<<<<< HEAD
+    public List<User> queryAllUser() {
+        return userMapper.queryAllUser();
+    }
+
+    @Override
+    public User queryUserById(int id) {
+        return userMapper.queryUserById(id);
+    }
+
+    @Override
+    public Boolean deleteUserById(int id) {
+        int i = 0;
+        try {
+            i = userMapper.deleteUserById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        if (i>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public Boolean addUser(User user) {
+        int i = 0;
+        try {
+            i = userMapper.addUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        if (i>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public Boolean updateUser(User user) {
+        int i = 0;
+        try {
+            i = userMapper.updateUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        if (i>0)
+            return true;
+        else
+            return false;
+    }
+
+
+=======
     public String getimgByCity(int cityId) {
         return userMapper.getimgByCity(cityId);
     }
@@ -177,4 +235,5 @@ public class UserServiceImpl implements UserService {
     public List<NotesComments> queryNotesCommentsByUserId(int userId) {
         return userMapper.queryNotesCommentsByUserId(userId);
     }
+>>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 }

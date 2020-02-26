@@ -36,4 +36,49 @@ public class OrderServiceImp implements OrderService {
     public Order queryOrderById(Integer id) {
         return orderMapper.queryOrderById(id);
     }
+
+    @Override
+    public Boolean deleteOrderById(int id) {
+        int i = 0;
+        try {
+            i = orderMapper.deleteOrderById(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        if (i>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public Boolean addOrder(Order order) {
+        int i = 0;
+        try {
+            i = orderMapper.addOrder(order);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        if (i>0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public Boolean updateOrder(Order order) {
+        int i = 0;
+        try {
+            i = orderMapper.updateOrder(order);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        if (i>0)
+            return true;
+        else
+            return false;
+    }
 }
