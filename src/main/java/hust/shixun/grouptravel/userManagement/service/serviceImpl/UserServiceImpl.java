@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
     public double queryOrderPrice(int orderId) {
         return userMapper.queryOrderPrice(orderId);
     }
-
+//修改价格，拼团人数、折扣
     @Override
     public Boolean updateOrderPrice(int orderId, double orderPrice) {
         Order order =userMapper.selectOrderByOrderId(orderId);
@@ -92,6 +92,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Order> queryOrder(int orderId) {
         return userMapper.queryOrder(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrderByPTid(int PTid) {
+        return userMapper.queryOrderByPTid(PTid);
     }
 
     @Override

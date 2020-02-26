@@ -50,6 +50,9 @@ public interface UserService {
     //查询与当前订单所关联的所有订单
     List<Order> queryOrder(int orderId);
 
+//    通过PTid查询相关联的所有订单
+    List<Order> queryOrderByPTid(int PTid);
+
     //对产品评分
     Boolean addRates(double rate,int orderId);
 
