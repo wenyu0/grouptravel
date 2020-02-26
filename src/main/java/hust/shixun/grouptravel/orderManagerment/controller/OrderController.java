@@ -4,10 +4,8 @@ import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.orderManagerment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.text.DateFormat;
@@ -54,5 +52,79 @@ public class OrderController {
     public Order queryOrderById(Integer id){
         return  orderService.queryOrderById(id);
     }
+
+
+
+
+    @RequestMapping("/order/queryAllOrders")
+    public String queryAllOrders(Model model){
+        List<Order> orders = orderService.queryAllOrderList();
+        model.addAttribute("orders",orders);
+        return "pages/orderManage/orderManagement";
+    }
+
+
+
+   @RequestMapping("/order/deleteOrderById{id}")
+    public String deleteOrderById(@PathVariable Integer id){
+        orderService.deleteOrderById(id);
+        return "redirect:/order/queryAllOrder";
+   }
+
+   @RequestMapping("/order/addOrder")
+    public String addOrder(Order order){
+        orderService.addOrder(order);
+        return "redirect:/order/queryAllOrder";
+   }
+
+
+   @GetMapping("/order/updateOrder{id}")
+    public String updateOrder(@PathVariable Integer id,Model model){
+       Order order = orderService.queryOrderById(id);
+       model.addAttribute("order",order);
+       return "pages/orderManage/orderEdit";
+   }
+
+
+   @PostMapping("/order/updateOrder")
+    public String updateOrder(Order order){
+        orderService.updateOrder(order);
+        return "redirect:/order/queryAllOrder";
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

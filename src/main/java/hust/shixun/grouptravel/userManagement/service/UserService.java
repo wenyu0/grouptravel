@@ -3,6 +3,11 @@ package hust.shixun.grouptravel.userManagement.service;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
+import hust.shixun.grouptravel.entities.User;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -57,4 +62,28 @@ public interface UserService {
 
     //查看点赞的游记
     List<Notes> queryLikeNotes(int userId);
+
+
+
+
+    List<User> queryAllUser();
+
+
+    User queryUserById(int id);
+
+
+    Boolean deleteUserById(int id);
+
+
+   Boolean addUser(User user);
+
+    Boolean updateUser(User user);
+
+
+
+
+
+
+
+
 }

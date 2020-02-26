@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
     private int userId;
     private String openId;
-    private Date creatTime;
+    private Date createTime;
     private Date lastVisitTime;
     private String city;
     private String province;
@@ -39,12 +39,12 @@ public class User {
         this.openId = openId;
     }
 
-    public Date getCreatTime() {
-        return creatTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(Date creatTime) {
+        this.createTime = creatTime;
     }
 
     public Date getLastVisitTime() {
@@ -103,10 +103,10 @@ public class User {
         this.nickname = nickname;
     }
 
-    public User(int userId, String openId, Date creatTime, Date lastVisitTime, String city, String province, String country, String avatarUrl, int gender, String nickname, String phoneNum) {
+    public User(int userId, String openId, Date createTime, Date lastVisitTime, String city, String province, String country, String avatarUrl, int gender, String nickname, String phoneNum) {
         this.userId = userId;
         this.openId = openId;
-        this.creatTime = creatTime;
+        this.createTime = createTime;
         this.lastVisitTime = lastVisitTime;
         this.city = city;
         this.province = province;
@@ -125,7 +125,7 @@ public class User {
         return "User{" +
                 "userId=" + userId +
                 ", openId='" + openId + '\'' +
-                ", creatTime=" + creatTime +
+                ", createTime=" + createTime +
                 ", lastVisitTime=" + lastVisitTime +
                 ", city='" + city + '\'' +
                 ", province='" + province + '\'' +

@@ -48,53 +48,45 @@
 								<div class="card-body">
 									<h4 class="card-title">订单编辑</h4>
 
-									<form class="forms-sample" th:action="@{#}">
+									<form class="forms-sample" th:action="@{/order/updateOrder}">
+										<input type="hidden" name="orderId" th:value="${order.getOrderId()}">
+										<input type="hidden" name="createTime" th:value="${order.getCreateTime()}">
+										<input type="hidden" name="productId" th:value="${order.getProductId()}">
+										<input type="hidden" name="useId" th:value="${order.getUserId()}">
+										<input type="hidden" name="PTId" th:value="${order.getPTid()}">
+										<input type="hidden" name="notesId" th:value="${order.getNotesId()}">
+
 										<div class="form-group">
-											<label for="InputId">编号</label>
-											<input type="text" class="form-control" th:name="orderId" id="InputId" placeholder="id">
-										</div>
-										<div class="form-group">
-											<label for="InputuserId">用户id</label>
-											<input type="text" class="form-control" id="InputuserId" placeholder="userId">
-										</div>
-										<div class="form-group">
-											<label for="InputproId">产品id</label>
-											<input type="text" class="form-control" id="InputproId" placeholder="productId">
-										</div>
-										<div class="form-group">
-											<label>订单创建时间</label>
-											<input type="date" th:name="createTime" class="form-control" >
+											<label>订单支付时间</label>
+											<input type="date" name="payTime"   class="form-control" >
 										</div>
 										<div class="form-group">
 											<label>订单出发时间</label>
-											<input type="date" th:name="travelTime" class="form-control" >
+											<input type="date" name="travelTime" class="form-control" >
 										</div>
 										<div class="form-group">
 											<label >订单状态</label>
-											<select class="form-control form-control-lg" th:name="status">
+											<select class="form-control form-control-lg" name="status">
 												<option>----------------</option>
-												<option>未支付</option>
-												<option>已支付</option>
-												<option>已退款</option>
+												<option th:value="1">未支付</option>
+												<option th:value="2">已支付</option>
+												<option th:value="3">已退款</option>
 											</select>
 										</div>
-										<div class="form-group">
-											<label>拼团编号</label>
-											<input type="text" th:name="PTid" class="form-control">
-										</div>
+
 										<div class="form-group">
 											<label >拼团人数</label>
-											<input type="text" class="form-control" th:name="PNum" placeholder="num">
+											<input type="text" class="form-control" name="PNum" placeholder="num">
 										</div>
 										<div class="form-group">
 											<label >当前折扣</label>
-											<input type="text" class="form-control" th:name="currentDiscount" placeholder="currentDiscount">
+											<input type="text" class="form-control" name="currentDiscount" placeholder="currentDiscount">
 										</div>
 										<div class="form-group">
 											<label>价格</label>
 											<div class="input-group">
 												<span class="input-group-addon bg-primary text-white">$</span>
-												<input type="text" class="form-control" th:name="orderPrice">
+												<input type="text" class="form-control" name="orderPrice">
 												<span class="input-group-addon bg-primary border-primary text-white">.00</span>
 											</div>
 										</div>

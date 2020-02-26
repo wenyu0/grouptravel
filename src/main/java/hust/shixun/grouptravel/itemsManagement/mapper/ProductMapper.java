@@ -39,7 +39,11 @@ public interface ProductMapper {
      //通过最热门的产品id来查询出相应的游记
      List<Notes> queryNoteByProductId(int id);
 
+     String queryProductThemeById(int id);
 
+    String  queryTransportationNameById(int id);
+
+    String  queryCityNameById(int id);
 
 
 

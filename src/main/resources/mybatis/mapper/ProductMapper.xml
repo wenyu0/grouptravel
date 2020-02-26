@@ -39,4 +39,16 @@
         select * from grouptravel.gt_notes where productId=#{id}
     </select>
 
+
+    <select id="queryProductThemeById" parameterType="int" resultType="String">
+        select themeName from grouptravel.gt_producttheme where themeId=#{id};
+    </select>
+
+    <select id="queryTransportationNameById" parameterType="int" resultType="String">
+        select transportationName from grouptravel.gt_transportation where transportationId=#{id}
+    </select>
+
+    <select id="queryCityNameById" parameterType="int" resultType="String">
+        select cityName from grouptravel.gt_city where cityId=#{id}
+    </select>
 </mapper>

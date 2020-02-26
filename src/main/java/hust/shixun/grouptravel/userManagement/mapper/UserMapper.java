@@ -3,14 +3,14 @@ package hust.shixun.grouptravel.userManagement.mapper;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import hust.shixun.grouptravel.entities.User;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
+
 public interface UserMapper {
     //传入市的id得到省的id
     @Select("select provinceId from gt_city where cityId = #{cityId}")
@@ -80,4 +80,20 @@ public interface UserMapper {
     //查看点赞的游记
     @Select("SELECT * from gt_notes where notesId in (SELECT notesId from gt_noteslike where userId = #{userId})")
     List<Notes> queryLikeNotes(int userId);
+
+    @Select("select * from gt_user")
+    List<User> queryAllUser();
+
+    @Select("select * from gt_user where userId=#{userId}")
+    User queryUserById(int id);
+
+    @Delete("delete from gt_user where userId=#{userId}")
+    int deleteUserById(int id);
+
+    @Insert("insert into gt_user (userId,openId,createTime,lastVisitTime,city,province,country,avatarUrl,gender,nickname,phoneNum) " +
+            "values (#{userId},#{openId},#{createTime},#{lastVisitTime},#{city},#{province},#{country},#{avatarUrl},#{gender},#{nickname},#{phoneNum})")
+    int addUser(User user);
+
+    @Update("update gt_user set openId=#{openId},createTime=#{createTime},lastVisitTime=#{lastVisitTime},city=#{city},province=#{province},country=#{country},avatarUrl=#{avatarUrl},gender=#{gender},nickname=#{nickname},phoneNum=#{phoneNum} where userId=#{userId}")
+    int updateUser(User user);
 }

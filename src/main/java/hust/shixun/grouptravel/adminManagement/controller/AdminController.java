@@ -3,16 +3,18 @@ package hust.shixun.grouptravel.adminManagement.controller;
 import hust.shixun.grouptravel.adminManagement.entities.Admin;
 import hust.shixun.grouptravel.adminManagement.service.AdminService;
 import hust.shixun.grouptravel.entities.Order;
+import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.orderManagerment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.sound.midi.Soundbank;
 import java.sql.SQLOutput;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -38,4 +40,45 @@ public class AdminController {
     public String index(){
         return "login";
     }
+
+
+    @RequestMapping("/admin/queryAlladmin")
+    public String queryAllAlladmin(Model model){
+        List<Admin> admins = adminService.queryAllAdmin();
+        model.addAttribute("admins",admins);
+        return  "pages/jueseManage/jueSeManagement";
+
+    }
+
+
+
+    @RequestMapping("/admin/addAdmin")
+    public String addAdmin(Admin admin){
+        adminService.addAdmin(admin);
+        return "redirect:/admin/queryAlladmin";
+    }
+
+
+    @RequestMapping("/admin/deleteAdmin{id}")
+    public String deleteAdmin(@PathVariable Integer id){
+        adminService.deleteAdminById(id);
+        return "redirect:/admin/queryAlladmin";
+    }
+
+    @PostMapping("/admin/updateAdmin")
+    public String updateAdmin(Admin admin){
+        adminService.updateAdmin(admin);
+        return "redirect:/admin/queryAlladmin";
+    }
+
+
+
+    @GetMapping("/admin/updateAdmin{id}")
+    public String updateAdmin(@PathVariable Integer id, Model model) {
+        Admin admin = adminService.queryAdminById(id);
+        model.addAttribute("adm",admin);
+        return "pages/jueseManage/jueSeEdit";
+    }
+
+
 }

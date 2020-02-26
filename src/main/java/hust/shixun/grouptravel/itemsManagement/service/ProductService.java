@@ -23,6 +23,13 @@ public interface ProductService {
 
     public List<Integer> queryHotProductId(Map<String, String> map);
 
-    public List<Notes> queryNoteByProductId(int id);
+    List<Notes> queryNoteByProductId(int id);
+
+
+    public  String queryProductThemeById(int id);
+
+    String  queryTransportationNameById(int id);
+
+    String  queryCityNameById(int id);
 
 }
