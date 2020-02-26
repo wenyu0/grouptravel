@@ -114,5 +114,10 @@ public class ProductServiceImp implements ProductService {
         return productMapper.queryNoteByProductId (id);
     }
 
+    @Override
+    public List<Product> getMaxDiscountPro() {
+        return productMapper.getMaxDiscountPro();
+    }
+
 
 }

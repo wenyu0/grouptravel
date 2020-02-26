@@ -1,6 +1,9 @@
 package hust.shixun.grouptravel.userManagement.service.serviceImpl;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
+import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.entities.User;
@@ -56,8 +59,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Notes> queryNotesByOrderId(int orderId) {
-        return userMapper.queryNotesByOrderId(orderId);
+    public List<Notes> queryNotesByUserId(int orderId) {
+        return userMapper.queryNotesByUserId(orderId);
     }
 
     @Override
@@ -72,7 +75,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updateOrderPrice(int orderId, double orderPrice) {
-        return userMapper.updateOrderPrice(orderId,orderPrice);
+        Order order =userMapper.selectOrderByOrderId(orderId);
+        Double price=order.getOrderPrice();
+        int pNum=order.getPNum();
+        Double currentDiscount=order.getCurrentDiscount();
+//       砍价金额超出原有金额
+        if(orderPrice>=price){
+            return false;
+        }
+        // 修改后的价格
+        price-=orderPrice;
+        pNum+=1;
+        currentDiscount+=orderPrice;
+        return userMapper.updateOrderPrice(orderId,price,pNum,currentDiscount);
     }
 
     @Override
@@ -101,6 +116,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+<<<<<<< HEAD
     public List<User> queryAllUser() {
         return userMapper.queryAllUser();
     }
@@ -156,4 +172,68 @@ public class UserServiceImpl implements UserService {
     }
 
 
+=======
+    public String getimgByCity(int cityId) {
+        return userMapper.getimgByCity(cityId);
+    }
+
+    @Override
+    public List<City> getAllCitys() {
+        return userMapper.getAllCitys();
+    }
+
+    public List<Order> queryOrdersWith1(int userId) {
+        return userMapper.queryOrdersWith1(userId);
+    }
+
+    @Override
+    public Boolean updateOrder2(int orderId) {
+        return userMapper.updateOrder2(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith2(int userId) {
+        return userMapper.queryOrdersWith2(userId);
+    }
+
+    @Override
+    public Boolean updateOrder3(int orderId) {
+        return userMapper.updateOrder3(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith3(int userId) {
+        return userMapper.queryOrdersWith3(userId);
+    }
+
+    @Override
+    public Boolean updateOrder4(int orderId) {
+        return userMapper.updateOrder4(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith4(int userId) {
+        return userMapper.queryOrdersWith4(userId);
+    }
+
+    @Override
+    public Boolean updateOrder5(int orderId) {
+        return userMapper.updateOrder5(orderId);
+    }
+
+    @Override
+    public List<Order> queryOrdersWith5(int userId) {
+        return userMapper.queryOrdersWith5(userId);
+    }
+
+    @Override
+    public List<Notes> queryCityNotes(int cityId) {
+        return userMapper.queryCityNotes(cityId);
+    }
+
+    @Override
+    public List<NotesComments> queryNotesCommentsByUserId(int userId) {
+        return userMapper.queryNotesCommentsByUserId(userId);
+    }
+>>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 }

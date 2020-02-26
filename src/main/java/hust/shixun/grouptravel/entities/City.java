@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Admin {
-    private int adminId;
-    private String adminName;
-    private String adminPassword;
-
+public class City {
+    private int cityId;
+    private String cityName;
+    private int provinceId;
+    private int imageId;
 }

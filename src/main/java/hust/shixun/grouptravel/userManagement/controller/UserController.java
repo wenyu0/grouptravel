@@ -1,7 +1,12 @@
 package hust.shixun.grouptravel.userManagement.controller;
 
+
 import hust.shixun.grouptravel.adminManagement.entities.Admin;
+
+import hust.shixun.grouptravel.entities.City;
+
 import hust.shixun.grouptravel.entities.Notes;
+import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.entities.User;
@@ -36,6 +41,7 @@ public class UserController {
         return userService.queryProductByName(productName);
     }
 
+//通过省份名查找产品
     @RequestMapping("/user/queryProductByProvince")
     @ResponseBody
     public List<Product> queryProductByProvince(@RequestParam(value = "provinceName") String provinceName) {
@@ -44,6 +50,19 @@ public class UserController {
         for(int cityId:cityList)
             products.addAll(userService.queryProductByCity(cityId));
         return products;
+    }
+    //通过省份名查找所属城市
+    @RequestMapping("/user/querycitys")
+    @ResponseBody
+    public  List<Integer>  getCityList(String provinceName){
+        return userService.getCityList(provinceName);
+    }
+
+//    通过城市id查找产品
+    @RequestMapping("/user/queryProductByCity")
+    @ResponseBody
+    public  List<Product>  queryProductByCity(int cityId){
+        return userService.queryProductByCity(cityId);
     }
 
     @RequestMapping("/user/queryOrdersWithUnpay")
@@ -58,10 +77,10 @@ public class UserController {
         return userService.updateUnpayOrder(orderId);
     }
 
-    @RequestMapping("/user/queryNotesByOrderId")
+    @RequestMapping("/user/queryNotesByUserId")
     @ResponseBody
-    public List<Notes> queryNotesByOrderId(int orderId) {
-        return userService.queryNotesByOrderId(orderId);
+    public List<Notes> queryNotesByUserId(int userId) {
+        return userService.queryNotesByUserId(userId);
     }
 
     @RequestMapping("/user/addNotes")
@@ -75,13 +94,13 @@ public class UserController {
     public double queryOrderPrice(@RequestParam(value = "orderId") int orderId) {
         return userService.queryOrderPrice(orderId);
     }
-
-    @RequestMapping("/user/updateOrderPrice")
-    @ResponseBody
-    public Boolean updateOrderPrice(@RequestParam(value = "orderId") int orderId,
-                                    @RequestParam(value = "orderPrice") double orderPrice) {
-        return userService.updateOrderPrice(orderId,orderPrice);
-    }
+///*更新ptid一样人的订单  orderPrice传入的是要砍的金额*/
+//    @RequestMapping("/user/updateOrderPrice")
+//    @ResponseBody
+//    public Boolean updateOrderPrice(@RequestParam(value = "orderId") int orderId,
+//                                    @RequestParam(value = "orderPrice") double orderPrice) {
+//        return userService.updateOrderPrice(orderId,orderPrice);
+//    }
 
     @RequestMapping("/user/queryOrder")
     @ResponseBody
@@ -112,6 +131,7 @@ public class UserController {
     public List<Notes> queryLikeNotes(int userId){
         return userService.queryLikeNotes(userId);
     }
+
 
 
     @RequestMapping("/user/queryAllUser")
@@ -160,6 +180,88 @@ public class UserController {
 
 
 
+
+
+//    根据城市id返回城市对应的图片路径
+    @RequestMapping("/user/getimgByCity")
+    @ResponseBody
+    public String getimgByCity(int cityId){
+        return userService.getimgByCity(cityId);
+    }
+
+//    返回所有城市名称以及id
+    @RequestMapping("/user/getAllCitys")
+    @ResponseBody
+    public List<City> getAllCitys(){
+        return userService.getAllCitys();
+    }
+
+
+    @RequestMapping("/user/queryOrdersWith1")
+    @ResponseBody
+    public List<Order> queryOrdersWith1(int userId) {
+        return userService.queryOrdersWith1(userId);
+    }
+
+    @RequestMapping("/user/updateOrder2")
+    @ResponseBody
+    public Boolean updateOrder2(int orderId) {
+        return userService.updateOrder2(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith2")
+    @ResponseBody
+    public List<Order> queryOrdersWith2(int userId) {
+        return userService.queryOrdersWith2(userId);
+    }
+
+    @RequestMapping("/user/updateOrder3")
+    @ResponseBody
+    public Boolean updateOrder3(int orderId) {
+        return userService.updateOrder3(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith3")
+    @ResponseBody
+    public List<Order> queryOrdersWith3(int userId) {
+        return userService.queryOrdersWith3(userId);
+    }
+
+    @RequestMapping("/user/updateOrder4")
+    @ResponseBody
+    public Boolean updateOrder4(int orderId) {
+        return userService.updateOrder4(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith4")
+    @ResponseBody
+    public List<Order> queryOrdersWith4(int userId) {
+        return userService.queryOrdersWith4(userId);
+    }
+
+    @RequestMapping("/user/updateOrder5")
+    @ResponseBody
+    public Boolean updateOrder5(int orderId) {
+        return userService.updateOrder5(orderId);
+    }
+
+    @RequestMapping("/user/queryOrdersWith5")
+    @ResponseBody
+    public List<Order> queryOrdersWith5(int userId) {
+        return userService.queryOrdersWith5(userId);
+    }
+
+    @RequestMapping("/user/queryCityNotes")
+    @ResponseBody
+    public List<Notes> queryCityNotes(int cityId) {
+        return userService.queryCityNotes(cityId);
+    }
+
+    @RequestMapping("/user/queryNotesCommentsByUserId")
+    @ResponseBody
+    public List<NotesComments> queryNotesCommentsByUserId(int userId) {
+        return userService.queryNotesCommentsByUserId(userId);
+    }
 
 
 }

@@ -1,11 +1,16 @@
 package hust.shixun.grouptravel.adminManagement.mapper;
 
 import hust.shixun.grouptravel.adminManagement.entities.Admin;
+<<<<<<< HEAD
 import hust.shixun.grouptravel.entities.Product;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+=======
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+>>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 
 @Mapper
 @Repository

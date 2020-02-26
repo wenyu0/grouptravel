@@ -6,6 +6,9 @@ import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.itemsManagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -101,7 +104,7 @@ public class ProductController {
     }
 
     @RequestMapping("/notes/queryNotesByProductId")
-    public List<Notes> queryNotesByProductId(int productId){
+    public List<Notes> queryNotesByProductId(@RequestParam("id") int productId){
         List<Notes> notes = productService.queryNoteByProductId (productId);
         return notes;
     }
@@ -118,6 +121,7 @@ public class ProductController {
 
 
 
+
     public String queryProductThemeById(int id){
         return productService.queryProductThemeById(id);
     }
@@ -128,6 +132,13 @@ public class ProductController {
 
     public String queryCityNameById(int id){
         return productService.queryCityNameById(id);
+    }
+
+//    返回折扣优惠最多的三个旅游产品
+    @ResponseBody
+    @RequestMapping("/product/maxdiscountPros")
+    public List<Product> getMaxDiscountPro(){
+        return productService.getMaxDiscountPro();
     }
 
 }

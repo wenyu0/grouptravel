@@ -1,11 +1,16 @@
 package hust.shixun.grouptravel.userManagement.service;
 
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
+import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
+<<<<<<< HEAD
 import hust.shixun.grouptravel.entities.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+=======
+>>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -35,8 +40,8 @@ public interface UserService {
     //更新未被支付的订单，如更新成功则返回ture否则为false。(用户付款将状态更新为已支付)
     Boolean updateUnpayOrder(int orderId);
 
-    //通过名字查询相应的旅游项目中的所有已完成的订单号（唯一主键），通过此查询其游记评论表中的信息并返回其一个集合。
-    List<Notes> queryNotesByOrderId(int orderId);
+    //查询用户的游记
+    List<Notes> queryNotesByUserId(int userId);
 
     //添加游记
     Boolean addNotes(Notes notes);
@@ -64,6 +69,7 @@ public interface UserService {
     List<Notes> queryLikeNotes(int userId);
 
 
+<<<<<<< HEAD
 
 
     List<User> queryAllUser();
@@ -86,4 +92,44 @@ public interface UserService {
 
 
 
+=======
+//    根据城市id查找城市图片
+    String getimgByCity(int cityId);
+
+//    返回所有城市名称
+    List<City> getAllCitys();
+
+    //查询用户未出行订单
+    List<Order> queryOrdersWith1(int userId);
+
+    //用户出行后将状态更新为已出行但未评价
+    Boolean updateOrder2(int orderId);
+
+    //查询用户未评价订单
+    List<Order> queryOrdersWith2(int userId);
+
+    //用户评价后将状态更新为已完成
+    Boolean updateOrder3(int orderId);
+
+    //查询用户已完成订单
+    List<Order> queryOrdersWith3(int userId);
+
+    //用户申请退款
+    Boolean updateOrder4(int orderId);
+
+    //查询用户退款中订单
+    List<Order> queryOrdersWith4(int userId);
+
+    //同意退款申请 退款成功
+    Boolean updateOrder5(int orderId);
+
+    //查询用户退款完成订单
+    List<Order> queryOrdersWith5(int userId);
+
+    //城市id查询城市游记
+    List<Notes> queryCityNotes(int cityId);
+
+    //通过用户id查找对游记的评论
+    List<NotesComments> queryNotesCommentsByUserId(int userId);
+>>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 }
