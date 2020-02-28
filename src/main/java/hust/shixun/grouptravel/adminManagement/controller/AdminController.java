@@ -38,7 +38,7 @@ public class AdminController {
 
     @RequestMapping("/")
     public String index(){
-        return "test";
+        return "login";
     }
 
 

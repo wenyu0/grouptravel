@@ -125,7 +125,7 @@ public class OrderController {
     @RequestMapping("/order/dateUnPayPrice")
     @ResponseBody
     public double dateUnPayPrice(Date date) throws ParseException {
-        List<Order> unPayOders=querryTodayPayOrders(date);
+        List<Order> unPayOders=querryTodayUnpayOrders(date);
         Double prices=0.0;
         for(int i=0;i<unPayOders.size();i++){
             prices+=unPayOders.get(i).getOrderPrice();
@@ -134,9 +134,11 @@ public class OrderController {
     }
 //    返回给页面，当前日期已支付、未支付金额
     @RequestMapping("/order/datePayUnPayPrice")
-    public String datePayUnPayPrice(Date date,Model model) throws ParseException {
-        Double pay=datePayPrice(date);
-        Double unpay=dateUnPayPrice(date);
+    public String datePayUnPayPrice(String date,Model model) throws ParseException {
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1=ft.parse(date);
+        Double pay=datePayPrice(date1);
+        Double unpay=dateUnPayPrice(date1);
         model.addAttribute("pay",pay);
         model.addAttribute("unpay",unpay);
         model.addAttribute("date",date);
