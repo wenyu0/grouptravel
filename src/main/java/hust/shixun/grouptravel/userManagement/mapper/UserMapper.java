@@ -5,10 +5,9 @@ import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import hust.shixun.grouptravel.entities.User;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -91,6 +90,22 @@ public interface UserMapper {
     @Select("SELECT * from gt_notes where notesId in (SELECT notesId from gt_noteslike where userId = #{userId})")
     List<Notes> queryLikeNotes(int userId);
 
+    @Select("select * from gt_user")
+    List<User> queryAllUser();
+
+    @Select("select * from gt_user where userId=#{userId}")
+    User queryUserById(int id);
+
+    @Delete("delete from gt_user where userId=#{userId}")
+    int deleteUserById(int id);
+
+    @Insert("insert into gt_user (userId,openId,createTime,lastVisitTime,city,province,country,avatarUrl,gender,nickname,phoneNum) " +
+            "values (#{userId},#{openId},#{createTime},#{lastVisitTime},#{city},#{province},#{country},#{avatarUrl},#{gender},#{nickname},#{phoneNum})")
+    int addUser(User user);
+
+    @Update("update gt_user set openId=#{openId},createTime=#{createTime},lastVisitTime=#{lastVisitTime},city=#{city},province=#{province},country=#{country},avatarUrl=#{avatarUrl},gender=#{gender},nickname=#{nickname},phoneNum=#{phoneNum} where userId=#{userId}")
+    int updateUser(User user);
+
 
 //    根据城市id查找图片
     @Select("select imageUrl from gt_image where imageId in (select imageId from gt_city where cityId= #{cityId})")
@@ -161,5 +176,6 @@ public interface UserMapper {
     //查询用户退款完成订单
     @Select("SELECT * FROM gt_order WHERE status=5 AND userId=#{userId}")
     List<Order> queryOrdersWith5(int userId);
+
 
 }

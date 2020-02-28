@@ -21,10 +21,11 @@
 	<!--引入topbar-->
 	<div th:replace="commons/bar_1 :: top_bar"></div>
 
-	<div class="container-fluid">
+		<div class="container-fluid">
 			<div class="row" >
 				<!--引入sidebar-->
 				<div th:replace="commons/bar_1 :: sidebar"></div>
+
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
 					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -32,33 +33,27 @@
 							<ol class="breadcrumb">
 								<!--不能这样直接跳-->
 								<li class="breadcrumb-item"><a href="#" th:href="@{#}">首页</a></li>
-								<li class="breadcrumb-item">系统管理</li>
-								<li class="breadcrumb-item "><a href="#" th:href="@{#}">角色管理</a></li>
-								<li class="breadcrumb-item">角色编辑</li>
+								<li class="breadcrumb-item">数据中心</li>
+								<li class="breadcrumb-item">数据管理</li>
 							</ol>
 						</nav>
 
 					</div>
-
-					<h4 class="mb-4">角色编辑|添加</h4>
-					<hr>
-					<div class="row">
-						<div class="col-8 align-items-stretch grid-margin" >
-						<form class="forms-sample mt-4" th:action="@{/admin/updateAdmin}" method="post">
-							<input type="hidden" name="adminId" th:value="${adm.getAdminId()}"></input>
-							<div class="form-group">
-								<label for="InputName">管理人员姓名</label>
-								<input type="text" class="form-control" name="adminName" id="InputName" placeholder="Admin name">
-							</div>
-							<div class="form-group">
-								<label for="InputPassword">密码</label>
-								<input type="password" class="form-control" th:value="${adm!=null}?${adm.adminPassword}" name="adminPassword" id="InputPassword" placeholder="Password">
-							</div>
-							<button type="submit" class="btn btn-success mr-2">提交</button>
-							<button class="btn btn-light">取消</button>
-						</form>
+					<div class="row mt-4 justify-content-center">
+						<div class="col-6">
+							<form class="forms-sample mt-3 form-inline" th:action="@{/order/queryPayAndUnPayOrder}">
+								<div class="form-group">
+									<label for="fromDate">选择日期</label>
+									<input type="date" class="form-control ml-2" name="date1" id="fromDate" placeholder="yyyy-mm-dd">
+								</div>
+								<button type="submit" class="btn btn-success ml-2">查询</button>
+							</form>
 						</div>
 					</div>
+<!--					<div id="main1" class="mt-2" style="height:410px;min-height:100px;margin:0 auto;"></div>-->
+
+
+					<div id="main1" style="width: 300px;height:300px;"></div>
 				</main>
 			</div>
 		</div>
@@ -70,6 +65,37 @@
 	<script type="text/javascript" src="../asserts/js/popper.min.js" th:src="@{/asserts/js/popper.min.js}"></script>
 	<script type="text/javascript" src="../asserts/js/bootstrap.bundle.min.js"  th:src="@{/asserts/js/bootstrap.bundle.min.js}"></script>
 
+
+	<script type="text/javascript" src="../../asserts/js/echarts.min.js" th:src="@{/asserts/js/echarts.min.js}"> </script>
+
+		<script type="text/javascript" th:inline="javascript">
+			// 基于准备好的dom，初始化echarts实例
+			// var myChart = echarts.init(document.getElementById('main1'));
+			var pay=[[${pay}]];        //已付款数组
+			var unpay=[[${unpay}]];        //未付款数组
+			var date=[[${date}]];         //日期数组
+
+
+
+
+			// // 使用刚指定的配置项和数据显示图表。
+			// myChart.setOption(option);
+
+			//饼状图
+			echarts.init(document.getElementById('main1')).setOption({
+				series: [{
+					name: date+"当天的已付款和待付款",
+					type: 'pie',
+					data: [{name: '已付款',value:pay},
+						{name: '待付款',value:unpay},
+					]
+				}]
+			});
+			</script>
+	<script>
+
+
+	</script>
 	</body>
 
 </html>

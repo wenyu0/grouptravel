@@ -1,16 +1,20 @@
 package hust.shixun.grouptravel.userManagement.controller;
 
+
+import hust.shixun.grouptravel.adminManagement.entities.Admin;
+
 import hust.shixun.grouptravel.entities.City;
+
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
+import hust.shixun.grouptravel.entities.User;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +133,55 @@ public class UserController {
     }
 
 
+
+    @RequestMapping("/user/queryAllUser")
+    public String queryAllUser(Model model){
+        List<User> users = userService.queryAllUser();
+        model.addAttribute("users",users);
+        return "pages/userManage/userManagement";
+
+    }
+
+
+    @RequestMapping("/user/deleteUser{id}")
+    public String deleteAdmin(@PathVariable Integer id){
+        userService.deleteUserById(id);
+        return "redirect:/user/queryAllUser";
+    }
+
+    @PostMapping("/user/updateUser")
+    public String updateUser(User user){
+        userService.updateUser(user);
+        return "redirect:/user/queryAllUser";
+    }
+
+
+
+    @GetMapping("/user/updateUser{id}")
+    public String updateUser(@PathVariable Integer id, Model model) {
+        User user = userService.queryUserById(id);
+        model.addAttribute("user",user);
+        return "pages/userManage/userEdit";
+    }
+
+    @RequestMapping("user/addUser")
+    public String addUser(User user){
+        userService.addUser(user);
+        return "redirect:/user/queryAllUser";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    根据城市id返回城市对应的图片路径
     @RequestMapping("/user/getimgByCity")
     @ResponseBody
@@ -209,5 +262,6 @@ public class UserController {
     public List<NotesComments> queryNotesCommentsByUserId(int userId) {
         return userService.queryNotesCommentsByUserId(userId);
     }
+
 
 }

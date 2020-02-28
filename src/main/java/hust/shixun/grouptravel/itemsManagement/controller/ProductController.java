@@ -27,12 +27,24 @@ public class ProductController {
     @RequestMapping("/product/queryAllproducts")
     public String queryAllProducts(Model model){
         List<Product> products = productService.queryAllProducts();
+        Map<Integer,String> themes = new HashMap<Integer, String>();
+        Map<Integer,String> transportations = new HashMap<Integer, String>();
+        Map<Integer,String> citys = new HashMap<Integer, String>();
+        for(Product product:products){
+            themes.put(product.getProductId(),queryProductThemeById(product.getThemeId()));
+            transportations.put(product.getProductId(),queryTransportationNameById(product.getTransportationId()));
+            citys.put(product.getProductId(),queryCityNameById(product.getCityId()));
+        }
         model.addAttribute("products",products);
+        model.addAttribute("themes",themes);
+        model.addAttribute("transportations",transportations);
+        model.addAttribute("citys",citys);
         return  "pages/productManage/productManagement";
     }
 
     @RequestMapping("/product/queryProductById")
     public Product queryProductById(Integer id) {
+
         return productService.queryProductById(id);
     }
 
@@ -108,10 +120,26 @@ public class ProductController {
         return notes;
     }
 
+
+
+
+    public String queryProductThemeById(int id){
+        return productService.queryProductThemeById(id);
+    }
+
+    public String queryTransportationNameById(int id) {
+        return productService.queryTransportationNameById(id);
+    }
+
+    public String queryCityNameById(int id){
+        return productService.queryCityNameById(id);
+    }
+
 //    返回折扣优惠最多的三个旅游产品
     @ResponseBody
     @RequestMapping("/product/maxdiscountPros")
     public List<Product> getMaxDiscountPro(){
         return productService.getMaxDiscountPro();
     }
+
 }

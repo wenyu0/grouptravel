@@ -11,7 +11,7 @@ import java.util.Date;
 public class User {
     private int userId;
     private String openId;
-    private Date creatTime;
+    private Date createTime;
     private Date lastVisitTime;
     private String city;
     private String province;
@@ -20,5 +20,7 @@ public class User {
     private int gender;
     private String nickname;
     private String phoneNum;
+
+
 
 }

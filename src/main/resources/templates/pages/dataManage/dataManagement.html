@@ -39,9 +39,21 @@
 						</nav>
 
 					</div>
+					<div class="row mt-4 justify-content-center">
+						<div class="col-6">
+							<form class="forms-sample mt-3 form-inline" th:action="@{/order/queryPayAndUnPayOrder}">
+								<div class="form-group">
+									<label for="fromDate">起始日期</label>
+									<input type="text" class="form-control ml-2" name="date1" id="fromDate" placeholder="yyyy-mm-dd">
+								</div>
+								<button type="submit" class="btn btn-success ml-2">查询</button>
+							</form>
+						</div>
+					</div>
+					<div id="main1" class="mt-2" style="height:410px;min-height:100px;margin:0 auto;"></div>
 
-					<div id="main1" style="width: 600px;height:400px;"></div>
-					<div id="main2" style="width: 300px;height:300px;"></div>
+
+<!--					<div id="main2" style="width: 300px;height:300px;"></div>-->
 				</main>
 			</div>
 		</div>
@@ -56,114 +68,98 @@
 
 	<script type="text/javascript" src="../../asserts/js/echarts.min.js" th:src="@{/asserts/js/echarts.min.js}"> </script>
 
-		<script type="text/javascript">
+		<script type="text/javascript" th:inline="javascript">
 			// 基于准备好的dom，初始化echarts实例
 			var myChart = echarts.init(document.getElementById('main1'));
-
+			var pays=[[${payList}]];        //已付款数组
+			var unpays=[[${unpayList}]];        //未付款数组
+			var dates=[[${dateList}]];         //日期数组
 			// 指定图表的配置项和数据
 			option = {
 				// 标题
 				title: {
-					text: '多条折线图测试用例', // 标题名称
+					text: '已付款与待付款一周订单对比', // 标题名称
+				},
+				tooltip: {
+					trigger: 'axis', //坐标轴触发提示框，多用于柱状、折线图中
+
+					//  // 控制提示框内容输出格式
+					// formatter: '{b0}<br/><font color=#FF3333>&nbsp;●&nbsp;</font>{a0} : {c0} ℃ ' +
+					//                '<br/><font color=#53FF53>●&nbsp;</font>{a1} : {c1} % ' +
+					//                '<br/><font color=#68CFE8>&nbsp;●&nbsp;</font>{a3} : {c3} mm ' +
+					//                '<br/><font color=#FFDC35>&nbsp;●&nbsp;</font>{a4} : {c4} m/s ' +
+					//                '<br/><font color=#B15BFF>&nbsp;&nbsp;&nbsp;&nbsp;●&nbsp;</font>{a2} : {c2} hPa '
+
 				},
 				// x轴
 				xAxis: {
-					data: ['1-1','1-2','1-3','2-1','3-1','6-1','7-1',], // x轴坐标名称
+					type: 'category',
+					data: dates, // x轴坐标名称
 				},
 				// y轴
-				yAxis: {},
+				yAxis: [
+					{
+						//第一个（左边）Y轴，yAxisIndex为0
+						type : 'value',
+						name : '已付款',
+						axisLabel : {
+							formatter: '{value} 笔'    //控制输出格式
+						}
+					},
+					{
+						//第二个（右边）Y轴，yAxisIndex为1
+						type : 'value',
+						name : '待付款',
+						scale: true,
+						axisLabel : {
+							formatter: '{value} 笔'
+						}
+					}
+				],
 				// 提示框，鼠标悬浮交互时的信息提示
 				tooltip: {
 					show: true, // 是否显示
 					trigger: 'axis', // 触发类型，默认数据触发，见下图，可选为：'item' | 'axis'
 				},
 				legend: {
-					data: ['用例A', '用例B']
+					show: true, //图表上方的类别显示
+					data: ['已付款订单(笔)','待付款订单(笔)']
+				},
+				color:[
+					'#FF3333',    //已付款曲线颜色
+					'#53FF53',    //待付款曲线颜色
+
+				],
+				toolbox: {//工具栏
+					feature: {
+						dataView: {show: true, readOnly: false},//直接展示数据
+						magicType: {show: true, type: ['line', 'bar']},//分别以条形图、柱状图展示
+						restore: {show: true},//刷新
+						saveAsImage: {show: true}//保存
+					}
 				},
 				// 指定图标的类型
 				series: [
 					// 第一条折线图
 					{
-						name: '用例A', // 系列名称
+						name: '已付款', // 系列名称
 						type: 'line', // 类型：线
-						data: [212,45,444,341,235,55,157], // 数据
-						markPoint: {
-							// 标注图形数据
-							data: [{
-								type: 'max', // 类型
-								symbol: 'none', // 标志图形类型，默认自动选择（8种类型循环使用，不显示标志图形可设为'none'），默认循环选择类型有：'circle' | 'rectangle' | 'triangle' | 'diamond' |'emptyCircle' | 'emptyRectangle' | 'emptyTriangle' | 'emptyDiamond' 另外，还支持五种更特别的标志图形'heart'（心形）、'droplet'（水滴）、'pin'（标注）、'arrow'（箭头）和'star'（五角星），这并不出现在常规的8类图形中，但无论是在系列级还是数据级上你都可以指定使用，同时，'star' + n（n>=3)可变化出N角星，如指定为'star6'则可以显示6角星
-								name: '最大值'
-							},
-								{
-									type: 'min', // 类型
-									symbol: 'none',
-									name: '最小值'
-								},
-							],
+						symbol:'emptyrect',
+						data: pays, // 数据
 
-							// 触发操作
-							tooltip: {
-								show: true, // 是否显示
-								formatter: '{b}：{c}', // 内容格式器 a（系列名称），b（类目值），c（数值）, d（无）
-								trigger: 'item', // 触发类型，默认数据触发，见下图，可选为：'item' | 'axis'
-							},
-						},
-
-						// 折线图圆点
-						label: {
-							normal: {
-								show: true,
-								//position: 'bottom', // 文字位置
-								// 显示的文字
-								formatter: '{c}',
-								textStyle: {
-									color: '#000' // 文字颜色
-								}
-							}
-						},
 					},
 					// 第二条折线图
 					{
-						name: '用例B', // 系列名称
+						name: '待付款', // 系列名称
 						type: 'line', // 类型：线
-						data: [134,256,193,255,275,190,107], // 数据
-						markPoint: {
-							// 标注图形数据
-							data: [{
-								type: 'max', // 类型
-								symbol: 'none', // 标志图形类型，默认自动选择（8种类型循环使用，不显示标志图形可设为'none'），默认循环选择类型有：'circle' | 'rectangle' | 'triangle' | 'diamond' |'emptyCircle' | 'emptyRectangle' | 'emptyTriangle' | 'emptyDiamond' 另外，还支持五种更特别的标志图形'heart'（心形）、'droplet'（水滴）、'pin'（标注）、'arrow'（箭头）和'star'（五角星），这并不出现在常规的8类图形中，但无论是在系列级还是数据级上你都可以指定使用，同时，'star' + n（n>=3)可变化出N角星，如指定为'star6'则可以显示6角星
-								name: '最大值'
-							},
-								{
-									type: 'min', // 类型
-									symbol: 'none',
-									name: '最小值'
-								},
-							],
+						symbol:'emptydiamond',
+						yAxisIndex: 1,        //与第二y轴有关
+						data: unpays, // 数据
 
-							// 触发操作
-							tooltip: {
-								show: true, // 是否显示
-								formatter: '{b}：{c}', // 内容格式器 a（系列名称），b（类目值），c（数值）, d（无）
-								trigger: 'item', // 触发类型，默认数据触发，见下图，可选为：'item' | 'axis'
-							},
-						},
-
-						// 折线图圆点
-						label: {
-							normal: {
-								show: true,
-								//position: 'bottom', // 文字位置
-								// 显示的文字
-								formatter: '{c}',
-								textStyle: {
-									color: '#000' // 文字颜色
-								}
-							}
-						},
-					}
+					},
 				]
 			};
+
 
 
 			// 使用刚指定的配置项和数据显示图表。
@@ -181,7 +177,10 @@
 				}]
 			});
 			</script>
+	<script>
 
+
+	</script>
 	</body>
 
 </html>

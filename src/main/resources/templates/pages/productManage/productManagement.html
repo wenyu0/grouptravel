@@ -41,12 +41,14 @@
 					</div>
 
 <!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
+					<form th:action="@{/product/queryProductById}" th:method="post">
 					<div class="row">
 						<label class="mx-2">商品号</label>
-						<input type="text" class="custom-control mr-2">
-						<button class="btn btn-primary">查找</button>
+						<input type="text" class="custom-control mr-2" id="search1">
+						<button class="btn btn-primary" id="btn1" type="submit">查找</button>
 					</div>
-					<a class="btn btn-sm btn-primary" th:href="@{/productAdd}">添加商品</a>
+					</form>
+					<a class="btn btn-sm btn-primary mt-3" th:href="@{/productAdd}">添加商品</a>
 
 
 
@@ -74,16 +76,17 @@
 										<td th:text="${prod.getProductId()}"></td>
 										<td th:text="${prod.getProductName()}"></td>
 										<td>url</td>
-										<td th:text="${prod.getCityId()}"></td>
+										<td th:text="${citys.get(prod.getProductId())}"></td>
 										<td th:text="${prod.getPrice()}"></td>
 										<td th:text="${prod.getDescription()}"></td>
 										<td th:text="${prod.getMaxNum()}"></td>
 										<td th:text="${prod.getMaxDiscount()}"></td>
 										<td th:text="${prod.getProductTime()}"></td>
 										<!--此处要进行商讨，看起能否是单个还是多个在判断，根据id来确定旅游方式-->
-										<td th:text="${prod.getTransportationId()}"></td>
+										<td th:text="${transportations.get(prod.getProductId())}"></td>
 										<!--根据查询到的themeid去查询相应的theme名称-->
-										<td th:text="${prod.getThemeId()}"></td>
+
+										<td th:text="${themes.get(prod.getProductId())}"></td>
 										<td>
 											<a class="btn btn-sm btn-primary" th:href="@{/product/updateProduct}+${prod.getProductId()}" >编辑</a>
 											<a class="btn btn-sm btn-danger"  th:href="@{/product/deleteProduct}+${prod.getProductId()}">删除</a>
@@ -110,10 +113,17 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery-3.2.1.slim.min.js}"></script>
+	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery.js}"></script>
 	<script type="text/javascript" src="../asserts/js/popper.min.js" th:src="@{/asserts/js/popper.min.js}"></script>
 	<script type="text/javascript" src="../asserts/js/bootstrap.bundle.min.js"  th:src="@{/asserts/js/bootstrap.bundle.min.js}"></script>
 
+	<script>
+		$("#btn1").click(function(){
+			var productId=$('#search1').val();
+			alert(productId);
+			search_1(productId);
+		});
+	</script>
 	</body>
 
 </html>
