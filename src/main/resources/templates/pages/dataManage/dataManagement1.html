@@ -21,53 +21,39 @@
 	<!--引入topbar-->
 	<div th:replace="commons/bar_1 :: top_bar"></div>
 
-	<div class="container-fluid">
+		<div class="container-fluid">
 			<div class="row" >
 				<!--引入sidebar-->
 				<div th:replace="commons/bar_1 :: sidebar"></div>
+
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
 					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 						<nav class="h5">
 							<ol class="breadcrumb">
+								<!--不能这样直接跳-->
 								<li class="breadcrumb-item"><a href="#" th:href="@{#}">首页</a></li>
-								<li class="breadcrumb-item active"> 砍价管理</li>
+								<li class="breadcrumb-item">数据中心</li>
+								<li class="breadcrumb-item">数据管理</li>
 							</ol>
 						</nav>
 
 					</div>
-						<!--砍价只需要设置传入参数(前多少人砍价百分之多少)，调用砍价api：PingDuoDuoReduceRule-->
-<!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
-					<h2><a class="btn btn-sm btn-success" href="#" th:href="@{#}">砍价产品添加</a></h2>
-					<div class="table-responsive">
-						<table class="table table-striped table-sm">
-							<thead>
-							<tr>
-								<th>PTid</th>
-								<th>生成的砍价表</th>
-								<th>产品名</th>
-								<th>uuid</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr th:each="kanjia:${Kanjias}">
-								<td th:text="${kanjia.getPTid()}"></td>
-								<td th:text="${kanjia.getDiscountList()}"></td>
-								<td th:text="${kanjia.getProductId()}"></td>
-								<td th:text="${kanjia.getUuid()}"></td>
-							</tr>
-							</tbody>
-						</table>
+					<div class="row mt-4 justify-content-center">
+						<div class="col-6">
+							<form class="forms-sample mt-3 form-inline" th:action="@{/order/queryPayAndUnPayOrder}">
+								<div class="form-group">
+									<label for="fromDate">选择日期</label>
+									<input type="date" class="form-control ml-2" name="date1" id="fromDate" placeholder="yyyy-mm-dd">
+								</div>
+								<button type="submit" class="btn btn-success ml-2">查询</button>
+							</form>
+						</div>
 					</div>
-                    <div class="nav justify-content-center mt-4">
-						<ul class="pagination ">
-							<li class="page-item"><a href="javascript:void (0)" th:href="@{javascript:void (0)}" class="page-link disabled">&laquo;</a></li>
-							<li class="page-item active"><a href="javascript:void (0)" th:href="@{javascript:void (0)}" class="page-link">1</a></li>
-							<li class="page-item"><a href="#"  th:href="@{#}" class="page-link">2</a></li>
-							<li class="page-item"><a href="#"  th:href="@{#}" class="page-link">3</a></li>
-							<li class="page-item"><a href="#" th:href="@{#}" class="page-link">&raquo;</a></li>
-						</ul>
-                    </div>
+<!--					<div id="main1" class="mt-2" style="height:410px;min-height:100px;margin:0 auto;"></div>-->
+
+
+					<div id="main1" style="width: 300px;height:300px;"></div>
 				</main>
 			</div>
 		</div>
@@ -75,11 +61,41 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-	<!-- Placed at the end of the document so the pages load faster -->
 	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery-3.2.1.slim.min.js}"></script>
 	<script type="text/javascript" src="../asserts/js/popper.min.js" th:src="@{/asserts/js/popper.min.js}"></script>
 	<script type="text/javascript" src="../asserts/js/bootstrap.bundle.min.js"  th:src="@{/asserts/js/bootstrap.bundle.min.js}"></script>
 
+
+	<script type="text/javascript" src="../../asserts/js/echarts.min.js" th:src="@{/asserts/js/echarts.min.js}"> </script>
+
+		<script type="text/javascript" th:inline="javascript">
+			// 基于准备好的dom，初始化echarts实例
+			// var myChart = echarts.init(document.getElementById('main1'));
+			var pay=[[${pay}]];        //已付款数组
+			var unpay=[[${unpay}]];        //未付款数组
+			var date=[[${date}]];         //日期数组
+
+
+
+
+			// // 使用刚指定的配置项和数据显示图表。
+			// myChart.setOption(option);
+
+			//饼状图
+			echarts.init(document.getElementById('main1')).setOption({
+				series: [{
+					name: date+"当天的已付款和待付款",
+					type: 'pie',
+					data: [{name: '已付款',value:pay},
+						{name: '待付款',value:unpay},
+					]
+				}]
+			});
+			</script>
+	<script>
+
+
+	</script>
 	</body>
 
 </html>

@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @Mapper
-
 public interface UserMapper {
     //传入市的id得到省的id
     @Select("select provinceId from gt_city where cityId = #{cityId}")
@@ -88,6 +87,11 @@ public interface UserMapper {
     //查询与当前订单所关联的所有订单
     @Select("Select * from gt_order WHERE PTid in (SELECT PTid from gt_order WHERE orderId = #{orderId})")
     List<Order> queryOrder(int orderId);
+
+
+    //通过拼团id查询所有相关联的订单
+    @Select("Select * from gt_order where PTid=#{PTid}")
+    List<Order> queryOrderByPTid(int pTid);
 
     //对产品评分
     @Update("UPDATE gt_notes set rate = #{rate} where notesId in(SELECT notesId from gt_order where orderId = #{orderId})")
@@ -197,7 +201,6 @@ public interface UserMapper {
     //查询用户退款完成订单
     @Select("SELECT * FROM gt_order WHERE status=5 AND userId=#{userId}")
     List<Order> queryOrdersWith5(int userId);
-
 
 
 }

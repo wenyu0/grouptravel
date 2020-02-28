@@ -22,11 +22,15 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public List<Order> queryCurrentOrderListAmount(Date currentTime) {
+    public List<Order> queryDatePayOrder(Date currentTime) {
 
-        return orderMapper.queryCurrentOrderListAmount(new java.sql.Date(currentTime.getTime()));
+        return orderMapper.queryDatePayOrder(new java.sql.Date(currentTime.getTime()));
     }
 
+    @Override
+    public List<Order> queryDateAll(Date currentTime){
+        return orderMapper.queryDateAll(currentTime);
+    }
     @Override
     public List<Order> querrydateToDate(Date date_1, Date date_2) {
         return orderMapper.querrydateToDate(new java.sql.Date(date_1.getTime()),new java.sql.Date(date_2.getTime()));

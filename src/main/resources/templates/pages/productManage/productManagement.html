@@ -40,6 +40,7 @@
 						</nav>
 					</div>
 
+<<<<<<< HEAD
 					<!--<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
 					<div class="row">
 						<label class="mx-2">商品号</label>>
@@ -54,6 +55,17 @@
 
 
 					<a class="btn btn-sm btn-primary" th:href="@{/productAdd}">添加商品</a>
+=======
+<!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
+					<form th:action="@{/product/queryProductById}" th:method="post">
+					<div class="row">
+						<label class="mx-2">商品号</label>
+						<input type="text" class="custom-control mr-2" id="search1">
+						<button class="btn btn-primary" id="btn1" type="submit">查找</button>
+					</div>
+					</form>
+					<a class="btn btn-sm btn-primary mt-3" th:href="@{/productAdd}">添加商品</a>
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 
 
 
@@ -118,10 +130,17 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery-3.2.1.slim.min.js}"></script>
+	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery.js}"></script>
 	<script type="text/javascript" src="../asserts/js/popper.min.js" th:src="@{/asserts/js/popper.min.js}"></script>
 	<script type="text/javascript" src="../asserts/js/bootstrap.bundle.min.js"  th:src="@{/asserts/js/bootstrap.bundle.min.js}"></script>
 
+	<script>
+		$("#btn1").click(function(){
+			var productId=$('#search1').val();
+			alert(productId);
+			search_1(productId);
+		});
+	</script>
 	</body>
 
 </html>

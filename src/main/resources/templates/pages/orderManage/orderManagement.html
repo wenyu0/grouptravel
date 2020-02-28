@@ -55,7 +55,7 @@
 
 
 
-					<a class="btn btn-sm btn-primary" th:href="@{/orderAdd}">添加订单</a>
+					<a class="btn btn-sm btn-primary mt-3" th:href="@{/orderAdd}">添加订单</a>
 
 
 					<div class="table-responsive mt-2">
@@ -88,8 +88,15 @@
 									<td th:text="${order.getCurrentDiscount()}"></td>
 									<td th:text="${order.getOrderPrice()}"></td>
 									<td>
+<<<<<<< HEAD
 										<a class="btn btn-sm btn-primary" href="orderEdit.html" th:href="@{/order/updateOrder}+${order.orderId}">编辑</a>
 										<a class="btn btn-sm btn-danger" href="orderEdit.html" th:href="@{/order/deleteOrderById}+${order.orderId}">删除</a>
+=======
+
+										<a class="btn btn-sm btn-primary" href="orderEdit.html" th:href="@{/order/updateOrder}+${order.orderId}">编辑</a>
+										<a class="btn btn-sm btn-danger" href="orderEdit.html" th:href="@{/order/deleteOrderById}+${order.orderId}">删除</a>
+
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 									</td>
 								</tr>
 							</tbody>

@@ -1,10 +1,15 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/grouptravel?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/grouptravel?serverTimezone=Asia/Shanghai
     username: root
+<<<<<<< HEAD
     ###必须是password而不是date-password
     password: 123456
+=======
+    password: 123456
+
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
   #禁用模板引擎的缓存
   thymeleaf:
     cache: false

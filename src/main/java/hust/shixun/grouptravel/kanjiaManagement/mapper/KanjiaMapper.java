@@ -42,4 +42,7 @@ public interface KanjiaMapper {
 
     @Select("select maxNum from gt_product where productId in (select productId from gt_order where PTid= #{PTid})")
     int getmaxNum(int PTid);
+
+    @Select("select * from gt_kanjia")
+    List<Kanjia> queryAllKanjia();
 }

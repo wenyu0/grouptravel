@@ -26,8 +26,10 @@ public interface OrderService {
 
 
 
-//  查询当前时间（即当前日期天数）的所有的订单并且返回一个订单的集合
-    List<Order> queryCurrentOrderListAmount(Date currentTime);
+//  查询当前时间（即当前日期天数）的当天所有已支付订单并且返回一个订单的集合
+    List<Order> queryDatePayOrder(Date currentTime);
+//查询当前时间（即当前日期天数）的当天订单
+    List<Order> queryDateAll(Date currentTime);
 
     List<Order> querrydateToDate(Date date_1, Date date_2);
 

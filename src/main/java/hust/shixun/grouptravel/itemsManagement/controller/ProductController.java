@@ -44,6 +44,7 @@ public class ProductController {
     }
 
     @RequestMapping("/product/queryProductById")
+<<<<<<< HEAD
     public String queryProductById(Integer id, Model model) {
         Product product = productService.queryProductById(id);
         model.addAttribute("product",product);
@@ -56,6 +57,11 @@ public class ProductController {
         model.addAttribute("city",city);
 
         return "/pages/productManage/ProductQuery";
+=======
+    public Product queryProductById(Integer id) {
+
+        return productService.queryProductById(id);
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
     }
 
     @RequestMapping("/product/queryProductByName")
