@@ -5,12 +5,9 @@ import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
-<<<<<<< HEAD
 import hust.shixun.grouptravel.entities.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-=======
->>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -69,8 +66,6 @@ public interface UserService {
     List<Notes> queryLikeNotes(int userId);
 
 
-<<<<<<< HEAD
-
 
     List<User> queryAllUser();
 
@@ -87,12 +82,6 @@ public interface UserService {
 
 
 
-
-
-
-
-
-=======
 //    根据城市id查找城市图片
     String getimgByCity(int cityId);
 
@@ -131,5 +120,4 @@ public interface UserService {
 
     //通过用户id查找对游记的评论
     List<NotesComments> queryNotesCommentsByUserId(int userId);
->>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 }

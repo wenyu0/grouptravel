@@ -116,7 +116,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-<<<<<<< HEAD
     public List<User> queryAllUser() {
         return userMapper.queryAllUser();
     }
@@ -171,8 +170,6 @@ public class UserServiceImpl implements UserService {
             return false;
     }
 
-
-=======
     public String getimgByCity(int cityId) {
         return userMapper.getimgByCity(cityId);
     }
@@ -235,5 +232,4 @@ public class UserServiceImpl implements UserService {
     public List<NotesComments> queryNotesCommentsByUserId(int userId) {
         return userMapper.queryNotesCommentsByUserId(userId);
     }
->>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
 }

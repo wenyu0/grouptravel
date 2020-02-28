@@ -1,7 +1,9 @@
 package hust.shixun.grouptravel.imageUpload.service;
 
 import hust.shixun.grouptravel.entities.Image;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -11,7 +13,14 @@ public interface ImageService {
 
     boolean saveImg(Image image);
 
-    boolean saveProductImg(Image image,int productId);
+    boolean saveProductImg(int imageId,int productId);
 
-    boolean saveNotesImg(Image image,int notesId);
+    boolean saveNotesImg(int imageId,int notesId);
+    int queryImageId(String imageUrl);
+    List<Image> queryProductImages(int productId);
+
+
+    List<Image> queryNotesImages(int notesId);
+
+    boolean deleteImages(int imageId);
 }

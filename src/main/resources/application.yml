@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/grouptravel?serverTimezone=UTC
     username: root
-    data-password: 123456
+    password: ycj0307..
   #禁用模板引擎的缓存
   thymeleaf:
     cache: false
@@ -21,6 +21,3 @@ logging:
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: hust.shixun.grouptravel.entities
-
-web:
-  upload-path: /Users/yimmerse/upload

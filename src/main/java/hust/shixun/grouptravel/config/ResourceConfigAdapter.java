@@ -1,19 +1,25 @@
 package hust.shixun.grouptravel.config;
 
 
-import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Configuration
-public class ResourceConfigAdapter implements WebMvcConfigurer {
-    @Value("${upload-path}")
-    private String uploadPath;
+public class ResourceConfigAdapter extends WebMvcConfigurationSupport {
 
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:"+uploadPath);
+    /**
+     * 资源映射配置
+     *
+     * @param registry
+     */
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(AppConstant.FILE_MAP)
+                .addResourceLocations("file:" + AppConstant.FILE_PATH);
+
+        super.addResourceHandlers(registry);
     }
-
 }
+
