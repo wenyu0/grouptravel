@@ -16,6 +16,7 @@ public interface ImageService {
     boolean saveProductImg(int imageId,int productId);
 
     boolean saveNotesImg(int imageId,int notesId);
+    boolean setCityImg(int imageId,int cityId);
     int queryImageId(String imageUrl);
     List<Image> queryProductImages(int productId);
 

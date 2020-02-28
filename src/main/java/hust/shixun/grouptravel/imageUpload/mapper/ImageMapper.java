@@ -1,10 +1,7 @@
 package hust.shixun.grouptravel.imageUpload.mapper;
 
 import hust.shixun.grouptravel.entities.Image;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,6 +16,9 @@ public interface ImageMapper {
 
     @Insert("INSERT INTO gt_notesimage(notesId,imageId) VALUES(#{notesId},#{imageId})")
     boolean saveNotesImg(int imageId,int notesId);
+
+    @Update("UPDATE gt_city set imageId = #{imageId} where cityId = #{cityId}")
+    boolean setCityImg(int imageId,int cityId);
 
     @Select("SELECT imageId from gt_image where imageUrl=#{imageUrl}")
     int queryImageId(String imageUrl);

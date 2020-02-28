@@ -66,6 +66,11 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public boolean setCityImg(int imageId, int cityId) {
+        return imageMapper.setCityImg(imageId,cityId);
+    }
+
+    @Override
     public int queryImageId(String imageUrl) {
         return imageMapper.queryImageId(imageUrl);
     }
