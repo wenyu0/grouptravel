@@ -51,6 +51,7 @@
 
     <select id="queryCityNameById" parameterType="int" resultType="String">
         select cityName from grouptravel.gt_city where cityId=#{id}
+    </select>
 
     <select id="getMaxDiscountPro"  resultType="Product">
         select * from gt_product ORDER BY maxDiscount DESC  LIMIT 3

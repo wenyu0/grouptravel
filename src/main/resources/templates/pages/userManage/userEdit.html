@@ -49,27 +49,27 @@
 								<input type="hidden" name="userId" th:value="${user.getUserId()}">
 								<div class="form-group">
 									<label >openId</label>
-									<input type="text" class="form-control" name="openId"  placeholder="openId">
+									<input type="text" class="form-control" name="openId"  placeholder="openId" th:value="${user!=null}?${user.openId}">
 								</div>
 								<div class="form-group">
 									<label >avatar</label>
-									<input type="text" class="form-control" name="avatarUrl">
+									<input type="text" class="form-control" name="avatarUrl" th:value="${user!=null}?${user.avatarUrl}">
 								</div>
 								<div class="form-group">
 									<label for="InputphoneNum">手机号</label>
-									<input type="text" class="form-control" name="phoneNum" id="InputphoneNum" placeholder="phoneNum">
+									<input type="text" class="form-control" name="phoneNum" id="InputphoneNum" placeholder="phoneNum" th:value="${user!=null}?${user.phoneNum}">
 								</div>
 								<div class="form-group">
 									<label for="Inputprovince">国家</label>
-									<input type="text" class="form-control" name="country" id="Inputcountry" placeholder="country">
+									<input type="text" class="form-control" name="country" id="Inputcountry" placeholder="country" th:value="${user!=null}?${user.country}">
 								</div>
 								<div class="form-group">
 									<label for="Inputprovince">省份</label>
-									<input type="text" class="form-control" name="province" id="Inputprovince" placeholder="province">
+									<input type="text" class="form-control" name="province" id="Inputprovince" placeholder="province" th:value="${user!=null}?${user.province}">
 								</div>
 								<div class="form-group">
 									<label for="Inputcity">城市</label>
-									<input type="text" class="form-control" name="city" id="Inputcity" placeholder="city">
+									<input type="text" class="form-control" name="city" id="Inputcity" placeholder="city" th:value="${user!=null}?${user.city}">
 								</div>
 								<!--gender的String和int型值转换需解决-->
 								<div class="form-group">
@@ -85,17 +85,17 @@
 								</div>
 								<div class="form-group">
 									<label>昵称</label>
-									<input type="text" name="nickname" class="form-control">
+									<input type="text" name="nickname" class="form-control" th:value="${user!=null}?${user.nickname}">
 								</div>
 
 								<div class="form-group">
 									<label>账户创建时间</label>
-									<input type="date" name="createTime" class="form-control">
+									<input type="date" name="createTime" class="form-control" th:value="${user!=null}?${user.createTime}">
 								</div>
 
 								<div class="form-group">
 									<label>上次登录时间</label>
-									<input type="date" name="lastVisitTime" class="form-control">
+									<input type="date" name="lastVisitTime" class="form-control" th:value="${user!=null}?${user.lastVisitTime}">
 								</div>
 								<button type="submit" class="btn btn-success mr-2">提交</button>
 								<button class="btn btn-light">取消</button>

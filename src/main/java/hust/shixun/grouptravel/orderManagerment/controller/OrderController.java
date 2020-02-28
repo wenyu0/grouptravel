@@ -94,6 +94,14 @@ public class OrderController {
    }
 
 
+   @RequestMapping("/order/queryOrderById_")
+    public String queryOrderById(int orderId,Model model){
+       Order order = orderService.queryOrderById(orderId);
+       model.addAttribute("order",order);
+       return "pages/orderManage/orderQuery";
+   }
+
+
 
 
 

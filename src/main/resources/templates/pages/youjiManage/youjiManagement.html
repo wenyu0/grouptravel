@@ -42,7 +42,7 @@
 
 <!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
 					<div class="row">
-						<div class="col-3">
+					<!--	<div class="col-3">
 							<div class="row">
 								<div class="col-8">
 									<input type="text" class="form-control" placeholder="产品id">
@@ -51,112 +51,74 @@
 									<button class="btn-sm btn-primary">查找</button>
 								</div>
 							</div>
+						</div>-->
+
+						<div class="row">
+							<label class="mx-2">产品id</label>>
 						</div>
-						<div class="col-3">
-							<div class="row">
-								<div class="col-8">
-								<input type="text" class="form-control" placeholder="地区">
-								</div>
-								<div class="col-4">
-								<button class="btn-sm btn-primary">查找</button>
-								</div>
-							</div>
+
+						<form th:action="@{/notes/queryNotesByProductId_}">
+							<input  name="productId">
+							<button  type="submit" class="btn btn-success mr-2">查找</button>
+						</form>
+
+
+						<div class="row">
+							<label class="mx-2">地区</label>>
 						</div>
-						<div class="col-3">
-							<div class="row">
-								<div class="col-8">
-									<input type="text" class="form-control" placeholder="用户姓名">
-								</div>
-								<div class="col-4">
-									<button class="btn-sm btn-primary">查找</button>
-								</div>
-							</div>
+
+						<form th:action="@{/notes/queryNotesByCityId}">
+							<input  name="cityId">
+							<button  type="submit" class="btn btn-success mr-2">查找</button>
+						</form>
+
+						<div class="row">
+							<label class="mx-2">用户id</label>>
 						</div>
+
+						<form th:action="@{/notes/queryNotesByUserId_}">
+							<input  name="userId">
+							<button  type="submit" class="btn btn-success mr-2">查找</button>
+						</form>
+
+
+
+
 					</div>
 					<div class="table-responsive mt-2">
 						<table class="table table-striped table-sm">
 							<thead>
-							<tr>
-								<th>游记编号</th>
-								<th>商品id</th>
-								<th>用户名</th>
-								<th>游记标题</th>
-								<th>游记图片</th>
-								<th>游记内容</th>
-								<th>游记评论</th>
-								<th>创建时间</th>
-								<th>产品评分</th>
-							</tr>
+								<tr>
+									<th>游记编号</th>
+									<th>商品id</th>
+									<th>用户名</th>
+									<th>游记标题</th>
+									<th>游记图片</th>
+									<th>游记内容</th>
+									<th>游记评论</th>
+									<th>创建时间</th>
+									<th>产品评分</th>
+									<th>操作</th>
+								</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>1</td>
-								<td>1</td>
+							<tr th:each="note:${notes}">
+								<td th:text="${note.getNotesId()}"></td>
+								<td th:text="${note.getProductId()}"></td>
 								<td>小红</td>
-								<td>武汉游心得</td>
+								<td th:text="${note.getTitle()}">武汉游心得</td>
 								<td>url</td>
 								<td><a href="#">游记内容</a></td>
-								<td><a href="#">评论</a></td>
-								<td>2020-2-4</td>
-								<td>4</td>
+								<td><a th:href="@{/notes/queryNotesCommentsByNotesId}+${note.getNotesId()}">评论</a></td>
+								<td th:text="${note.getWriteTime()}">/td>
+								<td th:text="${note.getRate()}"></td>
 
 								<td>
-									<a class="btn btn-sm btn-primary" th:href="@{youjiEdit}">编辑</a>
-									<button class="btn btn-sm btn-danger deletebtn" >删除
-									</button>
+									<a class="btn btn-sm btn-primary" th:href="@{/notes/updateNotes}+${note.getNotesId()}">编辑</a>
+									<a class="btn btn-sm btn-danger" th:href="@{/notes/deleteNotes}+${note.getNotesId()}">删除</a>
 								</td>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td>1</td>
-								<td>小红</td>
-								<td>武汉游心得</td>
-								<td>url</td>
-								<td><a href="#">游记内容</a></td>
-								<td><a href="#">评论</a></td>
-								<td>2020-2-4</td>
-								<td>4</td>
 
-								<td>
-									<a class="btn btn-sm btn-primary" th:href="@{youjiEdit}">编辑</a>
-									<button class="btn btn-sm btn-danger deletebtn" >删除
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>1</td>
-								<td>小红</td>
-								<td>武汉游心得</td>
-								<td>url</td>
-								<td><a href="#">游记内容</a></td>
-								<td><a href="#">评论</a></td>
-								<td>2020-2-4</td>
-								<td>4</td>
-
-								<td>
-									<a class="btn btn-sm btn-primary" th:href="@{youjiEdit}">编辑</a>
-									<button class="btn btn-sm btn-danger deletebtn" >删除
-									</button>
-								</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>1</td>
-								<td>小红</td>
-								<td>武汉游心得</td>
-								<td>url</td>
-								<td><a href="#">游记内容</a></td>
-								<td><a href="#">评论</a></td>
-								<td>2020-2-4</td>
-								<td>4</td>
-
-								<td>
-									<a class="btn btn-sm btn-primary" href="youjiEdit.html" th:href="@{youjiEdit}">编辑</a>
-									<button class="btn btn-sm btn-danger deletebtn" >删除
-									</button>
-								</td>
-							</tr>
 							</tbody>
 						</table>
 					</div>

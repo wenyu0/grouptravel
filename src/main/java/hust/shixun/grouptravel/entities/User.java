@@ -21,7 +21,7 @@ public class User {
     private String nickname;
     private String phoneNum;
 
-<<<<<<< HEAD
+
     public String getPhoneNum() {
         return phoneNum;
     }
@@ -143,6 +143,5 @@ public class User {
                 ", phoneNum='" + phoneNum + '\'' +
                 '}';
     }
-=======
->>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
+
 }

@@ -1,6 +1,6 @@
 package hust.shixun.grouptravel.userManagement.service.serviceImpl;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
+
 import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.NotesComments;
@@ -116,7 +116,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-<<<<<<< HEAD
     public List<User> queryAllUser() {
         return userMapper.queryAllUser();
     }
@@ -171,8 +170,37 @@ public class UserServiceImpl implements UserService {
             return false;
     }
 
+    @Override
+    public List<NotesComments> queryNotesCommentsByNotesId(int notesId) {
+        return userMapper.queryNotesCommentsByNotesId(notesId);
+    }
 
-=======
+    @Override
+    public List<Notes> queryAllNotes() {
+        return userMapper.queryAllNotes();
+    }
+
+    @Override
+    public Notes queryNotesById(int id) {
+        return userMapper.queryNotesById(id);
+    }
+
+    @Override
+    public Boolean updateNotes(Notes notes) {
+        return userMapper.updateNotes(notes);
+    }
+
+    @Override
+    public Boolean deleteNotesById(int id) {
+        return deleteNotesById(id);
+    }
+
+    @Override
+    public List<Notes> queryNotesByProductId(int productId) {
+        return userMapper.queryNotesByProductId(productId);
+    }
+
+
     public String getimgByCity(int cityId) {
         return userMapper.getimgByCity(cityId);
     }
@@ -235,5 +263,5 @@ public class UserServiceImpl implements UserService {
     public List<NotesComments> queryNotesCommentsByUserId(int userId) {
         return userMapper.queryNotesCommentsByUserId(userId);
     }
->>>>>>> 70d898abf85e2b0ff70b158dc345dc2da0d728f8
+
 }

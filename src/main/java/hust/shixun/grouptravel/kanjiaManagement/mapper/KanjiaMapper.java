@@ -7,11 +7,13 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
+@Repository
 public interface KanjiaMapper {
 
     @Insert("insert into gt_kanjia (discountList,productId,uuid) values (#{discountList},#{productId},#{uuid})")

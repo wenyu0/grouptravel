@@ -47,50 +47,47 @@
 								<div class="card-body">
 									<h4 class="card-title">游记编辑</h4>
 
-									<form class="forms-sample">
-										<div class="form-group">
-											<label for="InputId">编号</label>
-											<input type="text" class="form-control" id="InputId" th:name="notesId" placeholder="id">
-										</div>
-										<div class="form-group">
-											<label for="InputproductId">商品id</label>
-											<input type="text" class="form-control" id="InputproductId" th:name="productId" placeholder="商品id">
-										</div>
+									<form class="forms-sample" method="post" action="@{/notes/updateNotes}">
+										<input type="hidden" th:value="${note.getNotesId()}" name="notesId">
+										<input type="hidden" th:value="${note.getProductId()}" name="produtId">
+
 										<div class="form-group">
 											<label >用户名</label>
-											<input type="text" class="form-control" th:name="userName" placeholder="userName">
+											<input type="text" class="form-control" name="userName" placeholder="userName">
 										</div>
 										<div class="form-group">
 											<label >游记标题</label>
-											<input type="text" class="form-control" th:name="title"  placeholder="title">
+											<input type="text" class="form-control" name="title"  placeholder="title" th:value="${note!=null}?${note.title}">
 										</div>
 
 										<div class="form-group">
 											<label>游记图片url</label>
-											<input type="text" th:name="url" class="form-control" >
+											<input type="text" name="url" class="form-control" >
 										</div>
 										<div class="form-group">
 											<label>游记内容</label>
-											<textarea  th:name="content" class="form-control"></textarea>
+											<textarea  name="content" class="form-control" th:value="${note!=null}?${note.content}"></textarea>
 										</div>
 										<div class="form-group">
 											<label>游记评论</label>
-											<textarea  th:name="comment" class="form-control"></textarea>
+											<textarea  name="comment" class="form-control"></textarea>
 										</div>
 										<div class="form-group">
 											<label>创建时间</label>
-											<input th:name="writeTime" type="date" class="form-control">
+											<input name="writeTime" type="date" class="form-control" th:value="${note!=null}?${note.writeTime}">
 										</div>
 										<div class="form-group">
-											<label for="exampleFormControlSelect1">产品评分</label>
-											<select th:name="rate" class="form-control form-control-lg" id="exampleFormControlSelect1">
-												<option>----------------</option>
+										<!--	<label for="exampleFormControlSelect1">产品评分</label>
+											<select name="rate" class="form-control form-control-lg" id="exampleFormControlSelect1">
+												<option>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>
 												<option>1</option>
 												<option>2</option>
 												<option>3</option>
 												<option>4</option>
 												<option>5</option>
-											</select>
+											</select>-->
+											<label>产品评分</label>
+											<input name="rate"  class="form-control" th:value="${note!=null}?${note.rate}">
 										</div>
 
 										<button type="submit" class="btn btn-success mr-2">提交</button>
