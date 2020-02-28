@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="e" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,16 +26,15 @@
     <div class="row" >
         <!--引入sidebar-->
         <div th:replace="commons/bar_1 :: sidebar"></div>
-
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <nav class="h5">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#" th:href="@{#}">首页</a></li>
-                        <li class="breadcrumb-item">订单管理</li>
-                        <li class="breadcrumb-item"><a href="#" th:href="@{#}">订单中心</a></li>
-                        <li class="breadcrumb-item">订单编辑</li>
+                        <li class="breadcrumb-item">游记管理</li>
+                        <li class="breadcrumb-item"><a href="#" th:href="@{#}">游记中心</a></li>
+                        <li class="breadcrumb-item">游记编辑</li>
                     </ol>
                 </nav>
 
@@ -46,57 +45,47 @@
                 <div class="col-md-8 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">订单编辑</h4>
+                            <h4 class="card-title">游记编辑</h4>
 
-                            <form class="forms-sample" th:action="@{/order/addOrder}">
+                            <form class="forms-sample" action="@{/notes/addNotes}">
+<!--                                <div class="form-group">
+                                    <label for="InputId">编号</label>
+                                    <input type="text" class="form-control" id="InputId" name="notesId" placeholder="id">
+                                </div>-->
                                 <div class="form-group">
-                                    <label for="InputuserId">用户id</label>
-                                    <input type="text" class="form-control" name="userId"   id="InputuserId" placeholder="userId">
+                                    <label for="InputproductId">商品id</label>
+                                    <input type="text" class="form-control" id="InputproductId" name="productId" placeholder="商品id">
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputproId">产品id</label>
-                                    <input type="text" class="form-control" name="productId" id="InputproId" placeholder="productId">
+                                    <label >用户名</label>
+                                    <input type="text" class="form-control" name="userName" placeholder="userName">
                                 </div>
                                 <div class="form-group">
-                                    <label>订单创建时间</label>
-                                    <input type="date" name="createTime" class="form-control" >
+                                    <label >游记标题</label>
+                                    <input type="text" class="form-control" name="title"  placeholder="title">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>游记图片url</label>
+                                    <input type="text" name="url" class="form-control" >
                                 </div>
                                 <div class="form-group">
-                                    <label>订单出发时间</label>
-                                    <input type="date" name="travelTime" class="form-control" >
+                                    <label>游记内容</label>
+                                    <textarea  name="content" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label >订单状态</label>
-                                    <select class="form-control form-control-lg" name="status">
-                                        <option>----------------</option>
-                                        <option th:value="0">下单未支付</option>
-                                        <option th:value="1">下单已支付</option>
-                                        <option th:value="2">出行完成</option>
-                                        <option th:value="3">订单完成</option>
-                                        <option th:value="4">退款中</option>
-                                        <option th:value="5">退款成功</option>
-                                    </select>
+                                    <label>游记评论</label>
+                                    <textarea  name="comment" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label>拼团编号</label>
-                                    <input type="text" name="PTid" class="form-control">
+                                    <label>创建时间</label>
+                                    <input name="writeTime" type="date" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label >拼团人数</label>
-                                    <input type="text" class="form-control" name="PNum" placeholder="num">
+                                    <label>产品评分</label>
+                                    <input name="rate"  class="form-control" >
                                 </div>
-                                <div class="form-group">
-                                    <label >当前折扣</label>
-                                    <input type="text" class="form-control" name="currentDiscount" placeholder="currentDiscount">
-                                </div>
-                                <div class="form-group">
-                                    <label>价格</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon bg-primary text-white">$</span>
-                                        <input type="text" class="form-control" name="orderPrice">
-                                        <span class="input-group-addon bg-primary border-primary text-white">.00</span>
-                                    </div>
-                                </div>
+
                                 <button type="submit" class="btn btn-success mr-2">提交</button>
                                 <button class="btn btn-light">取消</button>
                             </form>

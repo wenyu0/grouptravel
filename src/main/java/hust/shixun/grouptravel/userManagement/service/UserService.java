@@ -6,16 +6,22 @@ import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 import hust.shixun.grouptravel.entities.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 
 
+<<<<<<< HEAD
+=======
 import hust.shixun.grouptravel.entities.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -77,6 +83,12 @@ public interface UserService {
     List<Notes> queryLikeNotes(int userId);
 
 
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
     List<User> queryAllUser();
 
 
@@ -86,11 +98,40 @@ public interface UserService {
     Boolean deleteUserById(int id);
 
 
-   Boolean addUser(User user);
+    Boolean addUser(User user);
 
     Boolean updateUser(User user);
 
 
+<<<<<<< HEAD
+
+
+
+    List<NotesComments> queryNotesCommentsByNotesId(int notesId);
+
+
+    List<Notes> queryAllNotes();
+
+
+    Notes queryNotesById(int id);
+
+
+    Boolean updateNotes(Notes notes);
+
+
+
+    Boolean deleteNotesById(int id);
+
+
+    List<Notes> queryNotesByProductId(int productId);
+
+
+
+
+
+
+=======
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 //    根据城市id查找城市图片
     String getimgByCity(int cityId);
 

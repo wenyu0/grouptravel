@@ -48,6 +48,25 @@ public interface UserMapper {
     @Select("SELECT * FROM gt_notes,gt_order WHERE gt_notes.notesId=gt_order.notesId AND gt_order.userId=#{userId}")
     List<Notes> queryNotesByUserId(int userId);
 
+    //通过notesId查询评论
+    @Select("SELECT * FROM gt_notes,gt_notescomment WHERE gt_notes.notesId=gt_notescomment.notesId AND gt_notes.notesId=#{notesId}")
+    List<NotesComments> queryNotesCommentsByNotesId(int notesId);
+
+
+    @Select("select * from gt_notes ")
+    List<Notes> queryAllNotes();
+
+    @Select("select * from gt_notes where notesId=#{notesId}")
+    Notes queryNotesById(int id);
+
+    @Update("update gt_notes (title,content,writeTime,rate) values(#{title},#{content},#{writeTime},#{rate})")
+    Boolean updateNotes(Notes notes);
+
+
+    @Delete("delect from gt_notes where notesId=#{notesId}")
+    int deleteNotesById(int id);
+
+
     //添加游记
     @Insert("INSERT INTO gt_notes(title,content,writeTime,rate,productId) VALUES(#{title},#{content},#{writeTime},#{rate},#{productId})")
     Boolean addNotes(Notes notes);
@@ -105,6 +124,12 @@ public interface UserMapper {
 
     @Update("update gt_user set openId=#{openId},createTime=#{createTime},lastVisitTime=#{lastVisitTime},city=#{city},province=#{province},country=#{country},avatarUrl=#{avatarUrl},gender=#{gender},nickname=#{nickname},phoneNum=#{phoneNum} where userId=#{userId}")
     int updateUser(User user);
+
+    @Select("select * from gt_notes where productId=#{productId}")
+    List<Notes> queryNotesByProductId(int productId);
+
+
+
 
 
 //    根据城市id查找图片

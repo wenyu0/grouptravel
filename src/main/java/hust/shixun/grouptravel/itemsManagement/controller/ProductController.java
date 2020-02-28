@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.xml.crypto.Data;
 import java.util.*;
 
@@ -43,9 +44,24 @@ public class ProductController {
     }
 
     @RequestMapping("/product/queryProductById")
+<<<<<<< HEAD
+    public String queryProductById(Integer id, Model model) {
+        Product product = productService.queryProductById(id);
+        model.addAttribute("product",product);
+        String theme = queryProductThemeById(product.getThemeId());
+        String  transportation = queryTransportationNameById(product.getTransportationId());
+        String city = queryCityNameById(product.getCityId());
+
+        model.addAttribute("theme",theme);
+        model.addAttribute("transportation",transportation);
+        model.addAttribute("city",city);
+
+        return "/pages/productManage/ProductQuery";
+=======
     public Product queryProductById(Integer id) {
 
         return productService.queryProductById(id);
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
     }
 
     @RequestMapping("/product/queryProductByName")
@@ -99,7 +115,7 @@ public class ProductController {
         List<Integer> i = queryHotProductId(date_1,date_2);
         List<Product> products = new ArrayList<Product>();
         for(int j:i){
-            products.add(queryProductById(j));
+            products.add(productService.queryProductById(j));
         }
         return products;
     }

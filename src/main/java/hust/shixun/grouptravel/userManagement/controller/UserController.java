@@ -164,21 +164,78 @@ public class UserController {
         return "pages/userManage/userEdit";
     }
 
-    @RequestMapping("user/addUser")
+    @RequestMapping("/user/addUser")
     public String addUser(User user){
         userService.addUser(user);
         return "redirect:/user/queryAllUser";
     }
 
+    @RequestMapping("/notes/queryNotesCommentsByNotesId")
+    public String queryNotesCommentsByNotesId(@PathVariable Integer notesId) {
+         userService.queryNotesCommentsByNotesId(notesId);
+         return null;
+
+    }
+
+    @RequestMapping("/notes/queryAllNotes")
+    public String queryAllNotes(Model model) {
+        List<Notes> notes = userService.queryAllNotes();
+        model.addAttribute("notes",notes);
+        return "pages/youjiManage/youjiManagement";
+    }
 
 
+    public Notes queryNotesById(int id) {
+        return userService.queryNotesById(id);
+    }
+
+    @PostMapping("/notes/updateNotes")
+    public String updateNotes(Notes notes) {
+        userService.updateNotes(notes);
+        return "redirect:/notes/queryAllNotes";
+    }
+
+    @GetMapping("/notes/updateNotes{id}")
+    public String updateNotes(@PathVariable Integer id,Model model) {
+        Notes note = userService.queryNotesById(id);
+        model.addAttribute("note",note);
+        return "pages/youjiManage/youjiEdit";
+    }
+
+    @RequestMapping("/notes/deleteNotes{id}")
+    public String deleteNotesById(@PathVariable Integer id) {
+        userService.deleteNotesById(id);
+        return "redirect:/notes/queryAllNotes";
+    }
 
 
+    @RequestMapping("/notes/addNotes")
+    public String addNotes1(Notes notes){
+        userService.addNotes(notes);
+        return "redirect:/notes/queryAllNotes";
+    }
+
+    @RequestMapping("/notes/queryNotesByProductId_")
+    public String queryNotesByProductId(int productId,Model model){
+        List<Notes> notes = userService.queryNotesByProductId(productId);
+        model.addAttribute("notes",notes);
+        return "/pages/youjiManage/youjiQuery";
+    }
+
+    @RequestMapping("/notes/queryNotesByCityId")
+    public String queryNotesByCityId(int cityId,Model model){
+        List<Notes> notes = userService.queryCityNotes(cityId);
+        model.addAttribute("notes",notes);
+        return "/pages/youjiManage/youjiQuery";
+    }
 
 
-
-
-
+    @RequestMapping("/user/queryNotesByUserId_")
+    public String queryNotesByUserId(int userId,Model model) {
+        List<Notes> notes = userService.queryNotesByUserId(userId);
+        model.addAttribute("notes",notes);
+        return "/pages/youjiManage/youjiQuery";
+    }
 
 
 

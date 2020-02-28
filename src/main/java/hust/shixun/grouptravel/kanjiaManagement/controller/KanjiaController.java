@@ -1,5 +1,9 @@
 package hust.shixun.grouptravel.kanjiaManagement.controller;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 import hust.shixun.grouptravel.entities.Kanjia;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;

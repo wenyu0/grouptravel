@@ -17,6 +17,124 @@
 
 	</head>
 
+<<<<<<< HEAD
+	<body>
+	<!--引入topbar-->
+	<div th:replace="commons/bar_1 :: top_bar"></div>
+
+
+	<div class="container-fluid">
+			<div class="row" >
+				<!--引入sidebar-->
+				<div th:replace="commons/bar_1 :: sidebar"></div>
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+						<nav class="h5">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#" th:href="@{#}">首页</a></li>
+								<li class="breadcrumb-item">游记管理</li>
+								<li class="breadcrumb-item"><a href="#" th:href="@{#}">游记中心</a></li>
+								<li class="breadcrumb-item">游记编辑</li>
+							</ol>
+						</nav>
+
+					</div>
+
+<!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
+					<div class="row">
+						<div class="col-md-8 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">游记编辑</h4>
+
+									<form class="forms-sample" method="post" action="@{/notes/updateNotes}">
+										<input type="hidden" th:value="${note.getNotesId()}" name="notesId">
+										<input type="hidden" th:value="${note.getProductId()}" name="produtId">
+
+										<div class="form-group">
+											<label >用户名</label>
+											<input type="text" class="form-control" name="userName" placeholder="userName">
+										</div>
+										<div class="form-group">
+											<label >游记标题</label>
+											<input type="text" class="form-control" name="title"  placeholder="title" th:value="${note!=null}?${note.title}">
+										</div>
+
+										<div class="form-group">
+											<label>游记图片url</label>
+											<input type="text" name="url" class="form-control" >
+										</div>
+										<div class="form-group">
+											<label>游记内容</label>
+											<textarea  name="content" class="form-control" th:value="${note!=null}?${note.content}"></textarea>
+										</div>
+										<div class="form-group">
+											<label>游记评论</label>
+											<textarea  name="comment" class="form-control"></textarea>
+										</div>
+										<div class="form-group">
+											<label>创建时间</label>
+											<input name="writeTime" type="date" class="form-control" th:value="${note!=null}?${note.writeTime}">
+										</div>
+										<div class="form-group">
+										<!--	<label for="exampleFormControlSelect1">产品评分</label>
+											<select name="rate" class="form-control form-control-lg" id="exampleFormControlSelect1">
+												<option>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+											</select>-->
+											<label>产品评分</label>
+											<input name="rate"  class="form-control" th:value="${note!=null}?${note.rate}">
+										</div>
+
+										<button type="submit" class="btn btn-success mr-2">提交</button>
+										<button class="btn btn-light">取消</button>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+				</main>
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" src="../../asserts/js/jquery-3.2.1.slim.min.js" ></script>
+		<script type="text/javascript" src="../../asserts/js/popper.min.js" ></script>
+		<script type="text/javascript" src="../../asserts/js/bootstrap.bundle.min.js" ></script>
+
+		<!-- Icons -->
+		<script type="text/javascript" src="../../asserts/js/feather.min.js" ></script>
+		<script>
+			feather.replace()
+		</script>
+
+		<!-- Graphs -->
+		<script type="text/javascript" src="../../asserts/js/Chart.min.js" ></script>
+		<script>
+			var ctx = document.getElementById("myChart");
+			var myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+					datasets: [{
+						data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff'
+					}]
+=======
 	<!-- 显示Echarts图表 -->
 	<div style="height:410px;min-height:100px;margin:0 auto;" id="main"></div>
 
@@ -48,6 +166,7 @@
 					type: 'slider',    //支持鼠标滚轮缩放
 					start: 0,            //默认数据初始缩放范围为10%到90%
 					end: 100
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 				},
 				{
 					type: 'inside',    //支持单独的滑动条缩放

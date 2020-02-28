@@ -18,6 +18,7 @@
 	</head>
 
 	<body>
+
 	<!--引入topbar-->
 	<div th:replace="commons/bar_1 :: top_bar"></div>
 
@@ -37,9 +38,24 @@
 								<li class="breadcrumb-item active">商品中心</li>
 							</ol>
 						</nav>
-
 					</div>
 
+<<<<<<< HEAD
+					<!--<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
+					<div class="row">
+						<label class="mx-2">商品号</label>>
+				<!--		<input  type="button" value="查找" >&lt;!&ndash;
+						<button class="btn btn-primary">查找</button>&ndash;&gt;-->
+					</div>
+
+					<form th:action="@{/product/queryProductById}">
+						<input  name="id">
+						<button  type="submit" class="btn btn-success mr-2">查找</button>
+					</form>
+
+
+					<a class="btn btn-sm btn-primary" th:href="@{/productAdd}">添加商品</a>
+=======
 <!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
 					<form th:action="@{/product/queryProductById}" th:method="post">
 					<div class="row">
@@ -49,6 +65,7 @@
 					</div>
 					</form>
 					<a class="btn btn-sm btn-primary mt-3" th:href="@{/productAdd}">添加商品</a>
+>>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 
 
 

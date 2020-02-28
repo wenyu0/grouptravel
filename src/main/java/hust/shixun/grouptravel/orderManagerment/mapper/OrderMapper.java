@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Mapper
+@Repository
 public interface OrderMapper {
 //    查询所有的订单
     @Select("select * from gt_order")
@@ -22,10 +23,10 @@ public interface OrderMapper {
     @Delete("delete from gt_order where orederId=#{id}")
     int deleteOrderById(int id);
 
-    @Insert("insert intio gt_order (orderId, createTime, productId, userId, orderPrice, payTime, status, PTid, pNum, currentDiscount, travelTime, notesId) values (#{orderId}, #{createTime}, #{productId}, #{userId}, #{orderPrice}, #{payTime}, #{status}, #{PTid}, #{pNum}, #{currentDiscount}, #{travelTime}, #{notesId})")
+    @Insert("insert into gt_order (orderId, createTime, productId, userId, orderPrice, payTime, status, PTid, PNum, currentDiscount, travelTime, notesId) values (#{orderId}, #{createTime}, #{productId}, #{userId}, #{orderPrice}, #{payTime}, #{status}, #{PTid}, #{PNum}, #{currentDiscount}, #{travelTime}, #{notesId})")
     int addOrder(Order order);
 
-    @Update("update gt_order set orderPrice=#{orderPrice},payTime=#{payTime},status=#{status},pNum=#{pNum},currentDiscount=#{currentDiscount},travelTime=#{travelTime} where orderId=#{orderId}")
+    @Update("update gt_order set orderPrice=#{orderPrice},payTime=#{payTime},status=#{status},PNum=#{PNum},currentDiscount=#{currentDiscount},travelTime=#{travelTime} where orderId=#{orderId}")
     int updateOrder(Order order);
 
     //查询当前时间（即当前日期天数）的当天已付款的订单并且返回一个订单的集合

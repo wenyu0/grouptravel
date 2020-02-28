@@ -48,7 +48,7 @@
 							<input type="hidden" name="adminId" th:value="${adm.getAdminId()}"></input>
 							<div class="form-group">
 								<label for="InputName">管理人员姓名</label>
-								<input type="text" class="form-control" name="adminName" id="InputName" placeholder="Admin name">
+								<input type="text" class="form-control" name="adminName" id="InputName" th:value="${adm!=null}?${adm.adminName}" placeholder="Admin name">
 							</div>
 							<div class="form-group">
 								<label for="InputPassword">密码</label>
