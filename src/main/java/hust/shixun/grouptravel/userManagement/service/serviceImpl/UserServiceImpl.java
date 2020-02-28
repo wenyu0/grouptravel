@@ -176,7 +176,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     public String getimgByCity(int cityId) {
         return userMapper.getimgByCity(cityId);
     }

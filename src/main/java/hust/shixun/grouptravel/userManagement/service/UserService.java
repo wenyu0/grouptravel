@@ -6,10 +6,15 @@ import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 
+
 import hust.shixun.grouptravel.entities.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 
+
+import hust.shixun.grouptravel.entities.User;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
