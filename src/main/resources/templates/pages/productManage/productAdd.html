@@ -43,7 +43,7 @@
                         <div class="card-body">
                             <h4 class="card-title">商品编辑</h4>
 
-                            <form class="forms-sample" th:action="@{/product/addProduct}" >
+                            <form class="forms-sample" th:action="@{/product/addProduct}"  >
                                 <!--不需要productId，利用其自增的性质-->
                             <!--    <div class="form-group">
                                     <label for="InputId">编号</label>
@@ -57,10 +57,8 @@
                                     <label for="InputName">城市Id</label>
                                     <input type="text" class="form-control" id="InputCity" name="cityId" placeholder="productcity">
                                 </div>
-                                <div class="form-group">
-                                    <label for="InputUrl">商品url直接显示为图片</label>
-                                    <input type="text" class="form-control" id="InputUrl" placeholder="url">
-                                </div>
+
+
                                 <div class="form-group">
                                     <label >价格</label>
                                     <div class="input-group">
@@ -70,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="InputUrl">文字描述</label>
+                                    <label>文字描述</label>
                                     <textarea class="form-control" id="InputArea" name="description" placeholder="description"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -128,25 +126,26 @@
                                     <div class="form-check ">
                                         <label class="form-check-label">
                                             <input type="checkbox" name="themeId" value="2" class="form-check-input" >
-                                            文艺游
+                                            美食游
                                         </label>
                                     </div>
                                     <div class="form-check ">
                                         <label class="form-check-label">
                                             <input type="checkbox"  name="themeId" value="3" class="form-check-input" >
-                                            童话游
+                                            文艺游
                                         </label>
                                     </div>
                                     <div class="form-check ">
                                         <label class="form-check-label">
                                             <input type="checkbox" name="themeId" value="4" class="form-check-input" >
-                                            美食游
+                                            观光游
                                         </label>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">提交</button>
                                 <button class="btn btn-light">取消</button>
                             </form>
+                            <a class="btn btn-sm btn-primary mt-3" th:href="@{/product/queryAllproducts}">返回</a>
                         </div>
                     </div>
                 </div>

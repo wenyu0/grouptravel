@@ -17,7 +17,7 @@
 
 	</head>
 
-<<<<<<< HEAD
+
 	<body>
 	<!--引入topbar-->
 	<div th:replace="commons/bar_1 :: top_bar"></div>
@@ -48,35 +48,32 @@
 								<div class="card-body">
 									<h4 class="card-title">游记编辑</h4>
 
-									<form class="forms-sample" method="post" action="@{/notes/updateNotes}">
+									<form class="forms-sample" method="post" th:action="@{/notes/updateNotes}">
 										<input type="hidden" th:value="${note.getNotesId()}" name="notesId">
 										<input type="hidden" th:value="${note.getProductId()}" name="produtId">
+										<input type="hidden" name="writeTime" th:value="${#dates.format(note.writeTime,'yyyy-MM-dd')}">
 
-										<div class="form-group">
+										<!--<div class="form-group">
 											<label >用户名</label>
 											<input type="text" class="form-control" name="userName" placeholder="userName">
-										</div>
+										</div>-->
 										<div class="form-group">
 											<label >游记标题</label>
 											<input type="text" class="form-control" name="title"  placeholder="title" th:value="${note!=null}?${note.title}">
 										</div>
 
-										<div class="form-group">
+										<!--<div class="form-group">
 											<label>游记图片url</label>
 											<input type="text" name="url" class="form-control" >
-										</div>
+										</div>-->
 										<div class="form-group">
 											<label>游记内容</label>
-											<textarea  name="content" class="form-control" th:value="${note!=null}?${note.content}"></textarea>
+											<textarea  name="content" class="form-control" th:text="${note!=null}?${note.content}"></textarea>
 										</div>
-										<div class="form-group">
+									<!--	<div class="form-group">
 											<label>游记评论</label>
 											<textarea  name="comment" class="form-control"></textarea>
-										</div>
-										<div class="form-group">
-											<label>创建时间</label>
-											<input name="writeTime" type="date" class="form-control" th:value="${note!=null}?${note.writeTime}">
-										</div>
+										</div>-->
 										<div class="form-group">
 										<!--	<label for="exampleFormControlSelect1">产品评分</label>
 											<select name="rate" class="form-control form-control-lg" id="exampleFormControlSelect1">
@@ -112,13 +109,13 @@
 		<script type="text/javascript" src="../../asserts/js/popper.min.js" ></script>
 		<script type="text/javascript" src="../../asserts/js/bootstrap.bundle.min.js" ></script>
 
-		<!-- Icons -->
+	<!--	 Icons
 		<script type="text/javascript" src="../../asserts/js/feather.min.js" ></script>
 		<script>
 			feather.replace()
 		</script>
 
-		<!-- Graphs -->
+		&lt;!&ndash; Graphs &ndash;&gt;
 		<script type="text/javascript" src="../../asserts/js/Chart.min.js" ></script>
 		<script>
 			var ctx = document.getElementById("myChart");
@@ -134,8 +131,8 @@
 						borderWidth: 4,
 						pointBackgroundColor: '#007bff'
 					}]
-=======
-	<!-- 显示Echarts图表 -->
+
+	&lt;!&ndash; 显示Echarts图表 &ndash;&gt;
 	<div style="height:410px;min-height:100px;margin:0 auto;" id="main"></div>
 
 
@@ -166,7 +163,7 @@
 					type: 'slider',    //支持鼠标滚轮缩放
 					start: 0,            //默认数据初始缩放范围为10%到90%
 					end: 100
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
+
 				},
 				{
 					type: 'inside',    //支持单独的滑动条缩放
@@ -338,7 +335,7 @@
 
 		myChart.setOption(option);    //载入图表
 
-	</script>
+	</script>-->
 
 	</body>
 </html>

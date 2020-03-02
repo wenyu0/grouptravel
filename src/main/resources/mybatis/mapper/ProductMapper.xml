@@ -55,6 +55,9 @@
 
     <select id="getMaxDiscountPro"  resultType="Product">
         select * from gt_product ORDER BY maxDiscount DESC  LIMIT 3
+    </select>
 
+    <select id="queryRateById" parameterType="int" resultType="int">
+        select AVG(rate) FROM gt_notes where productId=#{productId}
     </select>
 </mapper>

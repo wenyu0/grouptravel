@@ -1,6 +1,7 @@
 package hust.shixun.grouptravel.userManagement.service.serviceImpl;
 
 
+import hust.shixun.grouptravel.config.TimeConfig;
 import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.NotesComments;
@@ -28,8 +29,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.getCityList(provinceName);
     }
 
+//    后台下订单，加入计时器，2天未付款取消订单
     @Override
     public boolean addOrder(Order order) {
+        TimeConfig.orderClose(order.getPTid());
         return userMapper.addOrder(order);
     }
 
@@ -205,9 +208,29 @@ public class UserServiceImpl implements UserService {
         return userMapper.queryNotesByProductId(productId);
     }
 
+    @Override
+    public Boolean deleteNotesCommentById(int commentId) {
+        int i = 0;
+        try {
+            i = userMapper.deleteNotesCommentById(commentId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        if (i>0)
+            return true;
+        else
+            return false;
+    }
+
 
     public String getimgByCity(int cityId) {
         return userMapper.getimgByCity(cityId);
+    }
+
+    @Override
+    public String getimgByCityName(String name) {
+        return userMapper.getimgByCityName(name);
     }
 
     @Override
@@ -260,16 +283,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean updateOrder6(int orderId) {
+        return userMapper.updateOrder6(orderId);
+    }
+
+    @Override
     public List<Notes> queryCityNotes(int cityId) {
-        return userMapper.queryCityNotes(cityId);
+        return userMapper.queryCityNotesByCityId(cityId);
     }
 
     @Override
     public List<NotesComments> queryNotesCommentsByUserId(int userId) {
         return userMapper.queryNotesCommentsByUserId(userId);
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
+    @Override
+    public int queryCityIdByName(String cityName) {
+        return  userMapper.queryCityIdByName(cityName);
+    }
+
+    @Override
+    public List<String> queryImgBynoteId(int noteId) {
+        return userMapper.queryImgBynoteId(noteId);
+    }
+
 }

@@ -66,6 +66,10 @@
                                     <input type="date" name="travelTime" class="form-control" >
                                 </div>
                                 <div class="form-group">
+                                    <label>订单支付时间</label>
+                                    <input type="date" name="paylTime" class="form-control" >
+                                </div>
+                                <div class="form-group">
                                     <label >订单状态</label>
                                     <select class="form-control form-control-lg" name="status">
                                         <option>----------------</option>
@@ -75,6 +79,7 @@
                                         <option th:value="3">订单完成</option>
                                         <option th:value="4">退款中</option>
                                         <option th:value="5">退款成功</option>
+                                        <option th:value="6">订单取消</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -98,8 +103,10 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-success mr-2">提交</button>
-                                <button class="btn btn-light">取消</button>
+                                <button type="reset" class="btn btn-light" >取消</button>
                             </form>
+                                <a class="btn btn-sm btn-primary mt-3" th:href="@{/order/queryAllOrders}">返回</a>
+
                         </div>
                     </div>
                 </div>

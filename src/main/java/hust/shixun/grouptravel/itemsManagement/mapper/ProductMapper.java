@@ -39,29 +39,22 @@ public interface ProductMapper {
      //通过最热门的产品id来查询出相应的游记
      List<Notes> queryNoteByProductId(int id);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
      String queryProductThemeById(int id);
 
     String  queryTransportationNameById(int id);
 
     String  queryCityNameById(int id);
 
-<<<<<<< HEAD
 
 
 
 //  找出折扣优惠最大的三个旅游产品
     List<Product> getMaxDiscountPro();
 
-=======
-//  找出折扣优惠最大的三个旅游产品
-    List<Product> getMaxDiscountPro();
+//查找该产品的评分
+    Integer queryRateById(int productId);
 
-
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 }
 
 

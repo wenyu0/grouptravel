@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+</head>
+
+<body>
+<h2>上传产品图片</h2>
+<hr/>
+<form method="post"enctype="multipart/form-data" action="/addProductImage">
+    <p>
+        <input type="hidden" name="productId" th:value="${productId}">
+    </p>
+    <p>
+        文件<input type="file" name="productImage">
+    </p>
+
+    <p>
+        <input type="submit" value="上传">
+    </p>
+</form>
+
+
+</body>
+
+</html>
+</html>

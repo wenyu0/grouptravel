@@ -75,27 +75,28 @@
 								<div class="form-group">
 									<label>Gender</label><br/>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="gender"  value="1">
+										<input class="form-check-input" type="radio" name="gender"  value="1" th:checked="${user!=null}?${user.gender==1}">
 										<label class="form-check-label">男</label>
 									</div>
 									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="radio" name="gender"  value="0">
+										<input class="form-check-input" type="radio" name="gender"  value="0" th:checked="${user!=null}?${user.gender==0}">
 										<label class="form-check-label">女</label>
 									</div>
 								</div>
 								<div class="form-group">
 									<label>昵称</label>
+
 									<input type="text" name="nickname" class="form-control" th:value="${user!=null}?${user.nickname}">
 								</div>
 
 								<div class="form-group">
 									<label>账户创建时间</label>
-									<input type="date" name="createTime" class="form-control" th:value="${user!=null}?${user.createTime}">
+									<input type="date" name="createTime" class="form-control" th:value="${user!=null}?${#dates.format(user.createTime,'yyyy-MM-dd')}">
 								</div>
 
 								<div class="form-group">
 									<label>上次登录时间</label>
-									<input type="date" name="lastVisitTime" class="form-control" th:value="${user!=null}?${user.lastVisitTime}">
+									<input type="date" name="lastVisitTime" class="form-control" th:value="${user!=null}?${#dates.format(user.lastVisitTime,'yyyy-MM-dd')}">
 								</div>
 								<button type="submit" class="btn btn-success mr-2">提交</button>
 								<button class="btn btn-light">取消</button>

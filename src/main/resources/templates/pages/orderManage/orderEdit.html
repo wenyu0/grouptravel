@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="e" xmlns:th="http://www.thymeleaf.org">
+<html lang="e" xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/html">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,6 +41,7 @@
 
 					</div>
 
+
 <!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
 					<div class="row">
 						<div class="col-md-8 grid-margin stretch-card">
@@ -48,31 +49,37 @@
 								<div class="card-body">
 									<h4 class="card-title">订单编辑</h4>
 
-									<form class="forms-sample" th:action="@{/order/updateOrder}">
+									<form class="forms-sample" th:action="@{/order/updateOrder}" method="post">
 										<input type="hidden" name="orderId" th:value="${order.getOrderId()}">
-										<input type="hidden" name="createTime" th:value="${order.getCreateTime()}">
+										<input type="hidden" name="createTime" th:value="${#dates.format(order.getCreateTime(),'yyyy-MM-dd')}">
 										<input type="hidden" name="productId" th:value="${order.getProductId()}">
-										<input type="hidden" name="useId" th:value="${order.getUserId()}">
+										<input type="hidden" name="userId" th:value="${order.getUserId()}">
 										<input type="hidden" name="notesId" th:value="${order.getNotesId()}">
 
 										<div class="form-group">
 											<label>订单支付时间</label>
-											<input type="date" name="payTime"   class="form-control" th:value="${order!=null}?${order.payTime}">
+											<input type="date" name="payTime"   class="form-control" th:value="${order!=null}?${#dates.format(order.payTime,'yyyy-MM-dd')}"  >
 										</div>
 										<div class="form-group">
 											<label>订单出发时间</label>
-											<input type="date" name="travelTime" class="form-control" th:value="${order!=null}?${order.travelTime}">
+											<input type="date" name="travelTime" class="form-control" th:value="${order!=null}?${#dates.format(order.travelTime,'yyyy-MM-dd')}">
 										</div>
 										<div class="form-group">
 											<label >订单状态</label>
-											<select class="form-control form-control-lg" name="status">
-												<option>----------------</option>
-												<option th:value="0">下单未支付</option>
+											<select class="form-control form-control-lg" name="status" >
+												<option th:value="0" th:selected="${order!=null}?${order.status==0}">下单未支付</option>
+												<option th:value="1" th:selected="${order!=null}?${order.status==1}">下单已支付</option>
+												<option th:value="2" th:selected="${order!=null}?${order.status==2}">出行完成</option>
+												<option th:value="3" th:selected="${order!=null}?${order.status==3}">订单完成</option>
+												<option th:value="4" th:selected="${order!=null}?${order.status==4}">退款中</option>
+												<option th:value="5" th:selected="${order!=null}?${order.status==5}">退款成功</option>-->
+												<option th:value="6" th:selected="${order!=null}?${order.status==6}">订单取消</option>-->
+											<!--	<option th:value="0">下单未支付</option>
 												<option th:value="1">下单已支付</option>
 												<option th:value="2">出行完成</option>
 												<option th:value="3">订单完成</option>
-												<option th:value="4">退款中</option>
-												<option th:value="5">退款成功</option>
+												<option th:value="4" >退款中</option>
+												<option th:value="5" >退款成功</option>-->
 											</select>
 										</div>
 

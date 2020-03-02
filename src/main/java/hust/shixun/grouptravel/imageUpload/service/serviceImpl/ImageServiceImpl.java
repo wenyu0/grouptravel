@@ -76,12 +76,13 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> queryProductImages(int productId) {
-        return imageMapper.queryProductImages(productId);
+    public List<String> queryProductImages(int productId) {
+        List<String> list= imageMapper.queryProductImages(productId);
+        return list;
     }
 
     @Override
-    public List<Image> queryNotesImages(int notesId) {
+    public List<String> queryNotesImages(int notesId) {
         return imageMapper.queryNotesImages(notesId);
     }
 
@@ -89,4 +90,10 @@ public class ImageServiceImpl implements ImageService {
     public boolean deleteImages(int imageId) {
         return imageMapper.deleteImages(imageId);
     }
+
+    @Override
+    public boolean deleteImagesByUrl(String imageUrl) {
+        return imageMapper.deleteImagesByUrl(imageUrl);
+    }
+
 }

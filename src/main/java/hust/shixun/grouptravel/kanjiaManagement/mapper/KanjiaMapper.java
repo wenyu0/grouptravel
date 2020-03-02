@@ -45,4 +45,7 @@ public interface KanjiaMapper {
 
     @Select("select * from gt_kanjia")
     List<Kanjia> queryAllKanjia();
+
+    @Select("select uuid from gt_kanjia where PTid= #{PTid}")
+    String getuuidByPTid(int PTid);
 }

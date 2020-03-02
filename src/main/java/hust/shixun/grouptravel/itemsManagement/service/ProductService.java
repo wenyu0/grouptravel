@@ -33,4 +33,8 @@ public interface ProductService {
     String  queryCityNameById(int id);
 
     List<Product> getMaxDiscountPro();
+
+    int queryRateById(int productId);
+
+
 }

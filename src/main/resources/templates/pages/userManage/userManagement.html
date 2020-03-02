@@ -67,10 +67,11 @@
 							</thead>
 							<tbody>
 								<tr th:each="user:${users}">
-									<td th:text="${user.getUserId()}">2</td>
-									<td th:text="${user.getOpenId()}">123456789</td>
+									<td th:text="${user.getUserId()}"></td>
+									<td th:text="${user.getOpenId()}"></td>
 									<!--<td><img src="" th:src="@{/asserts/img/face2.jpg}" style="width: 30px;height: 30px;border-radius: 100%"></td>-->
 									<td th:text="${user.getAvatarUrl()}"></td>
+									<td th:text="${user.getPhoneNum()}"></td>
 									<td th:text="${user.getCountry()}"></td>
 									<td th:text="${user.getProvince()}"></td>
 									<td th:text="${user.getCity()}"></td>

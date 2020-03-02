@@ -1,6 +1,7 @@
 package hust.shixun.grouptravel.userManagement.controller;
 
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import hust.shixun.grouptravel.adminManagement.entities.Admin;
 
 import hust.shixun.grouptravel.entities.City;
@@ -10,18 +11,26 @@ import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.entities.User;
+import hust.shixun.grouptravel.itemsManagement.service.ProductService;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.soap.Node;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Controller
 public class UserController {
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public ProductService productService;
 
     @RequestMapping("/user/addOrder")
     @ResponseBody
@@ -133,7 +142,7 @@ public class UserController {
     }
 
 
-
+// 后台
     @RequestMapping("/user/queryAllUser")
     public String queryAllUser(Model model){
         List<User> users = userService.queryAllUser();
@@ -142,13 +151,14 @@ public class UserController {
 
     }
 
-
+//后台
     @RequestMapping("/user/deleteUser{id}")
     public String deleteAdmin(@PathVariable Integer id){
         userService.deleteUserById(id);
         return "redirect:/user/queryAllUser";
     }
 
+//    后台
     @PostMapping("/user/updateUser")
     public String updateUser(User user){
         userService.updateUser(user);
@@ -156,7 +166,7 @@ public class UserController {
     }
 
 
-
+    //后台
     @GetMapping("/user/updateUser{id}")
     public String updateUser(@PathVariable Integer id, Model model) {
         User user = userService.queryUserById(id);
@@ -164,19 +174,23 @@ public class UserController {
         return "pages/userManage/userEdit";
     }
 
+    //后台
     @RequestMapping("/user/addUser")
     public String addUser(User user){
         userService.addUser(user);
         return "redirect:/user/queryAllUser";
     }
 
-    @RequestMapping("/notes/queryNotesCommentsByNotesId")
-    public String queryNotesCommentsByNotesId(@PathVariable Integer notesId) {
-         userService.queryNotesCommentsByNotesId(notesId);
-         return null;
+    //后台
+    @RequestMapping("/notes/queryNotesCommentsByNotesId{notesId}")
+    public String queryNotesCommentsByNotesId(@PathVariable Integer notesId,Model model) {
+        List<NotesComments> notesComments = userService.queryNotesCommentsByNotesId(notesId);
+        model.addAttribute("notesComments",notesComments);
+        return "pages/youjiManage/youjiAndComment";
 
     }
 
+    //后台
     @RequestMapping("/notes/queryAllNotes")
     public String queryAllNotes(Model model) {
         List<Notes> notes = userService.queryAllNotes();
@@ -189,12 +203,14 @@ public class UserController {
         return userService.queryNotesById(id);
     }
 
+    //后台
     @PostMapping("/notes/updateNotes")
     public String updateNotes(Notes notes) {
         userService.updateNotes(notes);
         return "redirect:/notes/queryAllNotes";
     }
 
+    //后台
     @GetMapping("/notes/updateNotes{id}")
     public String updateNotes(@PathVariable Integer id,Model model) {
         Notes note = userService.queryNotesById(id);
@@ -202,19 +218,21 @@ public class UserController {
         return "pages/youjiManage/youjiEdit";
     }
 
+    //后台
     @RequestMapping("/notes/deleteNotes{id}")
     public String deleteNotesById(@PathVariable Integer id) {
         userService.deleteNotesById(id);
         return "redirect:/notes/queryAllNotes";
     }
 
-
+//后台
     @RequestMapping("/notes/addNotes")
     public String addNotes1(Notes notes){
         userService.addNotes(notes);
         return "redirect:/notes/queryAllNotes";
     }
 
+//后台调用
     @RequestMapping("/notes/queryNotesByProductId_")
     public String queryNotesByProductId(int productId,Model model){
         List<Notes> notes = userService.queryNotesByProductId(productId);
@@ -222,14 +240,49 @@ public class UserController {
         return "/pages/youjiManage/youjiQuery";
     }
 
+    //前台调用
+    @RequestMapping("/notes/queryNotesByProductId")
+    @ResponseBody
+    public Map<String,Object> queryNotesByProductId1(int productId){
+        Map<String,Object> map=new HashMap<>();
+        List<Notes> notes = userService.queryNotesByProductId(productId);
+//       用游记id查图片
+        for(Notes note: notes){
+            int notesId=note.getNotesId();
+            List<String> list=userService.queryImgBynoteId(notesId);
+            map.put(""+notesId, list);
+        }
+        map.put("notes",notes);
+        return map;
+    }
+
+    //后台调用
     @RequestMapping("/notes/queryNotesByCityId")
     public String queryNotesByCityId(int cityId,Model model){
         List<Notes> notes = userService.queryCityNotes(cityId);
         model.addAttribute("notes",notes);
         return "/pages/youjiManage/youjiQuery";
     }
+//前端通过城市名称调用城市游记
+    @RequestMapping("/notes/queryNotesByName")
+    @ResponseBody
+    public Map<String,Object> queryNotesByCityId1(String cityName){
+        Map<String,Object> map=new HashMap<>();
+        int cityId=userService.queryCityIdByName(cityName);
+        List<Notes> notes = userService.queryCityNotes(cityId);
+        for (Notes note:notes){
+            int noteId=note.getNotesId();
+            List<String> urls=userService.queryImgBynoteId(noteId);
+           if(urls!=null&&urls.size()!=0){
+               map.put(String.valueOf(noteId), urls);
+           }
 
+        }
+        map.put("notes",notes);
+        return map;
+    }
 
+    //后台调用
     @RequestMapping("/user/queryNotesByUserId_")
     public String queryNotesByUserId(int userId,Model model) {
         List<Notes> notes = userService.queryNotesByUserId(userId);
@@ -246,7 +299,14 @@ public class UserController {
         return userService.getimgByCity(cityId);
     }
 
-//    返回所有城市名称以及id
+    //    根据城市名称返回城市对应的图片路径
+    @RequestMapping("/user/getimgByCityName")
+    @ResponseBody
+    public String getimgByCity(String name){
+        return userService.getimgByCityName(name);
+    }
+
+    //    返回所有城市名称以及id
     @RequestMapping("/user/getAllCitys")
     @ResponseBody
     public List<City> getAllCitys(){
@@ -256,7 +316,7 @@ public class UserController {
 
     @RequestMapping("/user/queryOrdersWith1")
     @ResponseBody
-    public List<Order> queryOrdersWith1(int userId) {
+    public  List<Order> queryOrdersWith1(int userId) {
         return userService.queryOrdersWith1(userId);
     }
 
@@ -268,7 +328,7 @@ public class UserController {
 
     @RequestMapping("/user/queryOrdersWith2")
     @ResponseBody
-    public List<Order> queryOrdersWith2(int userId) {
+    public  List<Order> queryOrdersWith2(int userId) {
         return userService.queryOrdersWith2(userId);
     }
 
@@ -280,7 +340,7 @@ public class UserController {
 
     @RequestMapping("/user/queryOrdersWith3")
     @ResponseBody
-    public List<Order> queryOrdersWith3(int userId) {
+    public  List<Order> queryOrdersWith3(int userId) {
         return userService.queryOrdersWith3(userId);
     }
 
@@ -304,8 +364,15 @@ public class UserController {
 
     @RequestMapping("/user/queryOrdersWith5")
     @ResponseBody
-    public List<Order> queryOrdersWith5(int userId) {
+    public  List<Order> queryOrdersWith5(int userId) {
         return userService.queryOrdersWith5(userId);
+    }
+
+    //订单超时取消
+    @RequestMapping("/user/updateOrder6")
+    @ResponseBody
+    public Boolean updateOrder6(int orderId) {
+        return userService.updateOrder6(orderId);
     }
 
     @RequestMapping("/user/queryCityNotes")
@@ -321,4 +388,20 @@ public class UserController {
     }
 
 
+
+    //后台/addNotesImage{notesId}
+    @RequestMapping("/addNotesImage{notesId}")
+    public String addProductImage(@PathVariable Integer notesId,Model model){
+        model.addAttribute("notesId",notesId);
+        return "/pages/youjiManage/ad" +
+                "dNoteImage";
+
+    }
+
+    //后台/deleteNotesCommentById{commentId}
+    @RequestMapping("/deleteNotesCommentById{commentId}")
+    public String deleteNotesCommentById(@PathVariable Integer commentId){
+        userService.deleteNotesCommentById(commentId);
+        return "pages/youjiManage/youjiAndComment";
+    }
 }

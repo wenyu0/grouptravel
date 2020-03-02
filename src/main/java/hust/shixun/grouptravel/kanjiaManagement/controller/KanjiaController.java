@@ -1,9 +1,5 @@
 package hust.shixun.grouptravel.kanjiaManagement.controller;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 import hust.shixun.grouptravel.entities.Kanjia;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
@@ -68,17 +64,24 @@ public class KanjiaController {
     @RequestMapping("/kanjia/creatGroup")
     public String creatGroup(int orderId){
         Order order=orderService.queryOrderById(orderId);
-        int productId=order.getProductId();
+//        如果是再次点击分享砍价，则从订单中提取出PTid
+            int PTid=order.getPTid();
+            if(PTid==0){
+                int productId=order.getProductId();
+                String uuid=creatKanjiaList(productId);
 
-        String uuid=creatKanjiaList(productId);
+                if(uuid!=null){
+                    PTid= kanjiaMapper.getPTidByuuid(uuid);
+                    kanjiaMapper.setOrderPTid(PTid,orderId);
+                    return uuid;
+                }
+                return "生成失败";
+            }
+            return kanjiaMapper.getuuidByPTid(PTid);
 
-        if(uuid!=null){
-            int PTid= kanjiaMapper.getPTidByuuid(uuid);
-            kanjiaMapper.setOrderPTid(PTid,orderId);
-            return uuid;
         }
-        return "";
-    }
+
+
 //暂时不用
     @ResponseBody
     @PostMapping("/kanjia/getList")
@@ -115,21 +118,29 @@ public class KanjiaController {
            //查询该订单对应的产品
            int productId=order.getProductId();
            Product product=productService.queryProductById(productId);
+           String theme = productService.queryProductThemeById(product.getThemeId());
+           String transportation =  productService.queryTransportationNameById(product.getTransportationId());
+           String city = productService.queryCityNameById(product.getCityId());
+           int rate =productService.queryRateById(productId);
 
            info.put("product", product);
+           info.put("theme", theme);
+           info.put("transportation", transportation);
+           info.put("city",city);
+           info.put("rate",rate);
            return info;
        }
        return null;
     }
 
-
         //创建一个新的参与砍价者的订单,用uuid来成为邀请码,必须先判断砍价用户有没有到达上限
         //并传回pnum、currentDiscount、price等参数(从返回的order中取)
     @ResponseBody
     @RequestMapping("/kanjia/addNewOne")
-    public Order creatKanjiaOrder(int userId, String uuid){
+    public Map<String,Object> creatKanjiaOrder(int userId, String uuid){
         int PTid = kanjiaMapper.getPTidByuuid(uuid);
-           // 找出订单中ptid相同的数目(其中包括组团创始人)
+           Map<String,Object> map=new HashMap<>();
+        // 找出订单中ptid相同的数目(其中包括组团创始人)
            int num= kanjiaMapper.getSamePTid(PTid);
 //        查出该产品所能接受的最大砍价人数
            int maxNum= kanjiaMapper.getmaxNum(PTid);
@@ -163,7 +174,9 @@ public class KanjiaController {
                if(flag) {
                    Boolean flag2=userService.updateOrderPrice(orderId, reducePrice);
                    if(flag&&flag2)
-                       return newOrder;
+                       map.put("reducePrice", reducePrice);
+                        map.put("newOrder", newOrder);
+                       return map;
                }
 
         }
@@ -198,3 +211,4 @@ public class KanjiaController {
         return  "pages/kanjiaManage/KanjiaManagement";
     }
 }
+

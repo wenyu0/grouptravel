@@ -18,10 +18,12 @@ public interface ImageService {
     boolean saveNotesImg(int imageId,int notesId);
     boolean setCityImg(int imageId,int cityId);
     int queryImageId(String imageUrl);
-    List<Image> queryProductImages(int productId);
+    List<String> queryProductImages(int productId);
 
 
-    List<Image> queryNotesImages(int notesId);
+    List<String> queryNotesImages(int notesId);
 
     boolean deleteImages(int imageId);
+
+    boolean deleteImagesByUrl(String imageUrl);
 }

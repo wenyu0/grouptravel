@@ -67,6 +67,7 @@
 									<th>产品id</th>
 									<th>订单创建时间</th>
 									<th>订单出发时间</th>
+									<th>订单支付时间</th>
 									<th>订单状态</th>
 									<th>拼团编号</th>
 									<th>拼团人数</th>
@@ -77,26 +78,31 @@
 							</thead>
 							<tbody>
 								<tr th:each="order:${orders}">
-									<td th:text="${order.orderId}"></td>
+									<td th:text="${order.getOrderId()}"></td>
 									<td th:text="${order.getUserId()}"></td>
-									<td th:text="${order.productId}"></td>
+									<td th:text="${order.getProductId()}"></td>
 									<td th:text="${#dates.format(order.getCreateTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
 									<td th:text="${#dates.format(order.getTravelTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
-									<td th:text="${order.getStatus()}"></td>
+									<td th:text="${#dates.format(order.getPayTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+									<!--<td th:text="${order.getStatus()}"></td>-->
+									<td th:switch="${order.getStatus()}">
+										<p th:case="0">下单未支付</p>
+										<p th:case="1">下单已支付</p>
+										<p th:case="2">出行完成</p>
+										<p th:case="3">订单完成</p>
+										<p th:case="4">退款中</p>
+										<p th:case="5">退款完成</p>
+										<p th:case="6">订单取消</p>
+									</td>
 									<td th:text="${order.getPTid()}"></td>
 									<td th:text="${order.getPNum()}"></td>
 									<td th:text="${order.getCurrentDiscount()}"></td>
 									<td th:text="${order.getOrderPrice()}"></td>
 									<td>
-<<<<<<< HEAD
-										<a class="btn btn-sm btn-primary" href="orderEdit.html" th:href="@{/order/updateOrder}+${order.orderId}">编辑</a>
-										<a class="btn btn-sm btn-danger" href="orderEdit.html" th:href="@{/order/deleteOrderById}+${order.orderId}">删除</a>
-=======
 
-										<a class="btn btn-sm btn-primary" href="orderEdit.html" th:href="@{/order/updateOrder}+${order.orderId}">编辑</a>
-										<a class="btn btn-sm btn-danger" href="orderEdit.html" th:href="@{/order/deleteOrderById}+${order.orderId}">删除</a>
+										<a class="btn btn-sm btn-primary" href="orderEdit.html" th:href="@{/order/updateOrder}+${order.getOrderId()}">编辑</a>
+										<a class="btn btn-sm btn-danger" href="orderEdit.html" th:href="@{/order/deleteOrderById}+${order.getOrderId()}">删除</a>
 
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 									</td>
 								</tr>
 							</tbody>

@@ -1,5 +1,6 @@
 package hust.shixun.grouptravel.orderManagerment.controller;
 
+
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.orderManagerment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class OrderController {
         return orders;
     }
 
-    //查询当前时间（即当前日期天数）的当天下订单但是未支付订单并且返回一个订单的集合
+    //查询当前时间（即当前日期天数）的当天下订单但是未支付订单并且返回一个订单的集合（重载实现equals方法）
     @RequestMapping ("/order/todayUnPay")
     @ResponseBody
     public List<Order> querryTodayUnpayOrders(Date date) throws ParseException {
@@ -48,10 +49,29 @@ public class OrderController {
         List<Order> orders= orderService.queryDateAll(date);
 //        在查询当天支付的单
         List<Order> payOrder=querryTodayPayOrders(date);
-        orders.removeAll(payOrder);
+//        orders.removeAll(payOrder);不能这样写，即使对象的信息都是一样的，也不能保证是相同的
+        int flag=0;
+        int index=-1;
+        for(int i=0;i<payOrder.size();i++){
+            Order temp1=payOrder.get(i);
+            for(int j=0;j<orders.size();j++){
+                Order temp2=orders.get(j);
+                if(temp1.getOrderId()==temp2.getOrderId()){
+                  flag=1;
+                  index=j;
+                }
+            }
+            if(flag==1&&index!=-1){
+                orders.remove(index);
+                flag=0;index=-1;
+            }
+        }
 
         return orders;
     }
+
+
+
 
 //    查询String类型date1（之后进行强转成Date类型）与String类型date2（之后进行强转成Date类型）
 //    之间所有的订单(暂时先定为往后推7天的数据(查询一周的已支付单数))，并返回这7天订单数集合(对要写的日期格式进行规定'yyyy-MM-dd')
@@ -182,7 +202,7 @@ public class OrderController {
 
 
 
-
+//  后台
     @RequestMapping("/order/queryAllOrders")
     public String queryAllOrders(Model model){
         List<Order> orders = orderService.queryAllOrderList();
@@ -191,20 +211,21 @@ public class OrderController {
     }
 
 
-
+//后台
    @RequestMapping("/order/deleteOrderById{id}")
     public String deleteOrderById(@PathVariable Integer id){
         orderService.deleteOrderById(id);
         return "redirect:/order/queryAllOrder";
    }
 
+//   后台
    @RequestMapping("/order/addOrder")
     public String addOrder(Order order){
         orderService.addOrder(order);
         return "redirect:/order/queryAllOrder";
    }
 
-
+//  后台
    @GetMapping("/order/updateOrder{id}")
     public String updateOrder(@PathVariable Integer id,Model model){
        Order order = orderService.queryOrderById(id);
@@ -212,15 +233,15 @@ public class OrderController {
        return "pages/orderManage/orderEdit";
    }
 
-
+//  后台
    @PostMapping("/order/updateOrder")
     public String updateOrder(Order order){
         orderService.updateOrder(order);
-        return "redirect:/order/queryAllOrder";
+        return "redirect:/order/queryAllOrders";
 
    }
 
-
+//后台
    @RequestMapping("/order/queryOrderById_")
     public String queryOrderById(int orderId,Model model){
        Order order = orderService.queryOrderById(orderId);

@@ -24,7 +24,7 @@ public interface UserMapper {
 
 //    添加订单
     @Insert("INSERT into gt_order(createTime,productId,userId,orderPrice,payTime,status,PTid,pNum,currentDiscount,travelTime,notesId)" +
-            " VALUES(#{createTime},#{productId},#{userId},#{orderPrice},#{payTime},#{status},#{PTid},#{pNum},#{currentDiscount},#{travelTime},#{notesId})")
+            " VALUES(#{createTime},#{productId},#{userId},#{orderPrice},#{payTime},#{status},#{PTid},#{PNum},#{currentDiscount},#{travelTime},#{notesId})")
     boolean addOrder(Order order);
 
     //通过旅游产品id查询旅游产品，并返回该旅游产品。
@@ -105,6 +105,9 @@ public interface UserMapper {
     @Insert("INSERT INTO gt_notescomment(userId,notesId,commentContent) VALUES(#{userId},#{notesId},#{commentContent})")
     Boolean commentNotes(int userId, int notesId, String commentContent);
 
+    @Delete("delete from gtgt_notescomment where commentId=#{commentId}")
+    int deleteNotesCommentById(int commentId);
+
     //查看点赞的游记
     @Select("SELECT * from gt_notes where notesId in (SELECT notesId from gt_noteslike where userId = #{userId})")
     List<Notes> queryLikeNotes(int userId);
@@ -157,6 +160,7 @@ public interface UserMapper {
   3 订单完成
   4 退款中
   5 退款成功
+  6、订单取消
  */
     //通过所有未被支付的订单，并返回所有未被支付的订单的集合
     @Select("SELECT * FROM gt_order WHERE status=0 AND userId=#{userId}")
@@ -201,6 +205,22 @@ public interface UserMapper {
     //查询用户退款完成订单
     @Select("SELECT * FROM gt_order WHERE status=5 AND userId=#{userId}")
     List<Order> queryOrdersWith5(int userId);
+//根据城市名称查询城市图片
+    @Select("select imageUrl from gt_city ,gt_image where cityName=#{name} and gt_image.imageId=gt_city.imageId")
+    String getimgByCityName(String name);
 
+//    取消订单
+    @Update("UPDATE gt_order SET status=6 WHERE orderId=#{orderId}")
+    Boolean updateOrder6(int orderId);
 
+    @Select("select cityId from gt_city where cityName=#{cityName}")
+    int queryCityIdByName(String cityName);
+
+//通过游记id查找游记图片
+    @Select("select imageUrl from gt_image where imageId in (select imageId from gt_notesimage where notesId=#{notesId})")
+    List<String> queryImgBynoteId(int notesId);
+
+//    通过城市id查找城市游记
+    @Select("select * from gt_notes where productId in (select productId from gt_product where cityId=#{cityId})")
+    List<Notes> queryCityNotesByCityId(int cityId);
 }

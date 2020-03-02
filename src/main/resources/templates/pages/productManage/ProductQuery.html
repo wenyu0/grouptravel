@@ -64,7 +64,7 @@
                     <tr>
                         <th>商品编号</th>
                         <th>商品名</th>
-                        <th>商品图片url</th>
+                        <th>商品图片链接</th>
                         <th>商品所在城市</th>
                         <th>价格</th>
                         <th>文字描述</th>
@@ -81,7 +81,11 @@
                     <tr >
                         <td th:text="${product.getProductId()}"></td>
                         <td th:text="${product.getProductName()}"></td>
-                        <td>url</td>
+                        <td>
+                            <form id="image" method="post" th:action="@{/queryProductImages}+${product.getProductId()}" >
+                                <button type="submit" class="btn btn-success mr-2">图片</button>
+                            </form>
+                        </td>
                         <td th:text="${city}"></td>
                         <td th:text="${product.getPrice()}"></td>
                         <td th:text="${product.getDescription()}"></td>
@@ -96,6 +100,8 @@
                         <td>
                             <a class="btn btn-sm btn-primary" th:href="@{/product/updateProduct}+${product.getProductId()}" >编辑</a>
                             <a class="btn btn-sm btn-danger"  th:href="@{/product/deleteProduct}+${product.getProductId()}">删除</a>
+                            <a class="btn btn-sm btn-success"  th:href="@{/addProductImage}+${product.getProductId()}">添加图片</a>
+
                         </td>
                     </tr>
                     </tbody>

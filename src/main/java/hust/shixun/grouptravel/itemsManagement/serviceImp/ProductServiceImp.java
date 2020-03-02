@@ -119,5 +119,11 @@ public class ProductServiceImp implements ProductService {
         return productMapper.getMaxDiscountPro();
     }
 
+    @Override
+    public int queryRateById(int productId) {
+
+         return productMapper.queryRateById(productId);
+    }
+
 
 }

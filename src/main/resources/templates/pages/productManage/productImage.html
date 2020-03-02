@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+</head>
+
+<body>
+<h2>产品图片</h2>
+<hr/>
+<a class="btn btn-sm btn-primary" th:href="@{/product/queryAllproducts}">返回</a>
+<div class="table-responsive mt-2">
+
+<!--
+    <td th:value="${urls}"></td>
+    <td><img th:src=${urls}></td>-->
+
+    <!--<td><img src=${urls}></td>-->
+    <tr th:each="imageUrl:${urls}">
+        <!--<td th:value="${url}"></td>-->
+        <td><img th:src="${imageUrl}"></td>
+        <a class="btn btn-sm btn-primary mt-3" th:href="@{/deleteProductImagesByUrl}+'?imageUrl='+${imageUrl}">删除</a>
+    </tr>
+</div>
+
+
+</body>
+
+
+</html>

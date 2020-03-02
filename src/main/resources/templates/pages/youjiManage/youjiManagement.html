@@ -82,6 +82,7 @@
 						</form>
 
 
+						<td><a class="btn btn-sm btn-primary" th:href="@{/addNotes}">添加游记</a></td>
 
 
 					</div>
@@ -91,7 +92,7 @@
 								<tr>
 									<th>游记编号</th>
 									<th>商品id</th>
-									<th>用户名</th>
+									<!--<th>用户名</th>-->
 									<th>游记标题</th>
 									<th>游记图片</th>
 									<th>游记内容</th>
@@ -105,17 +106,22 @@
 							<tr th:each="note:${notes}">
 								<td th:text="${note.getNotesId()}"></td>
 								<td th:text="${note.getProductId()}"></td>
-								<td>小红</td>
-								<td th:text="${note.getTitle()}">武汉游心得</td>
-								<td>url</td>
-								<td><a href="#">游记内容</a></td>
+								<!--<td>小红</td>-->
+								<td th:text="${note.getTitle()}"></td>
+								<td>
+									<form id="image" method="post" th:action="@{/queryNotesImages}+${note.getNotesId()}" >
+										<button type="submit" class="btn btn-success mr-2">图片</button>
+									</form>
+								</td>
+								<td th:text="${note.getContent()}"></td>
 								<td><a th:href="@{/notes/queryNotesCommentsByNotesId}+${note.getNotesId()}">评论</a></td>
-								<td th:text="${note.getWriteTime()}">/td>
+								<td th:text="${#dates.format(note.getWriteTime(),'yyyy-MM-dd HH:mm:ss')}">/td>
 								<td th:text="${note.getRate()}"></td>
 
 								<td>
 									<a class="btn btn-sm btn-primary" th:href="@{/notes/updateNotes}+${note.getNotesId()}">编辑</a>
 									<a class="btn btn-sm btn-danger" th:href="@{/notes/deleteNotes}+${note.getNotesId()}">删除</a>
+									<a class="btn btn-sm btn-success"  th:href="@{/addNotesImage}+${note.getNotesId()}">添加图片</a>
 								</td>
 							</tr>
 

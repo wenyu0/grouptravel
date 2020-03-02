@@ -40,7 +40,7 @@
 						</nav>
 					</div>
 
-<<<<<<< HEAD
+
 					<!--<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
 					<div class="row">
 						<label class="mx-2">商品号</label>>
@@ -53,19 +53,20 @@
 						<button  type="submit" class="btn btn-success mr-2">查找</button>
 					</form>
 
-
 					<a class="btn btn-sm btn-primary" th:href="@{/productAdd}">添加商品</a>
-=======
+
+
+
 <!--					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>-->
-					<form th:action="@{/product/queryProductById}" th:method="post">
+					<!--<form th:action="@{/product/queryProductById}" th:method="post">
 					<div class="row">
 						<label class="mx-2">商品号</label>
 						<input type="text" class="custom-control mr-2" id="search1">
 						<button class="btn btn-primary" id="btn1" type="submit">查找</button>
 					</div>
 					</form>
-					<a class="btn btn-sm btn-primary mt-3" th:href="@{/productAdd}">添加商品</a>
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
+					<a class="btn btn-sm btn-primary mt-3" th:href="@{/productAdd}" >添加商品</a>
+-->
 
 
 
@@ -75,7 +76,7 @@
 								<tr>
 									<th>商品编号</th>
 									<th>商品名</th>
-									<th>商品图片url</th>
+									<th>商品图片链接</th>
 									<th>商品所在城市</th>
 									<th>价格</th>
 									<th>文字描述</th>
@@ -92,7 +93,13 @@
 									<tr th:each="prod:${products}">
 										<td th:text="${prod.getProductId()}"></td>
 										<td th:text="${prod.getProductName()}"></td>
-										<td>url</td>
+										<td>
+
+										<!--	<a href="javascript:void(0);" th:onclick="document.getElementById('image').onsubmit"  >图片</a>-->
+											<form id="image" method="post" th:action="@{/queryProductImages}+${prod.getProductId()}" >
+												<button type="submit" class="btn btn-success mr-2">图片</button>
+											</form>
+										</td>
 										<td th:text="${citys.get(prod.getProductId())}"></td>
 										<td th:text="${prod.getPrice()}"></td>
 										<td th:text="${prod.getDescription()}"></td>
@@ -107,6 +114,8 @@
 										<td>
 											<a class="btn btn-sm btn-primary" th:href="@{/product/updateProduct}+${prod.getProductId()}" >编辑</a>
 											<a class="btn btn-sm btn-danger"  th:href="@{/product/deleteProduct}+${prod.getProductId()}">删除</a>
+											<a class="btn btn-sm btn-success"  th:href="@{/addProductImage}+${prod.getProductId()}">添加图片</a>
+
 										</td>
 									</tr>
 								</tbody>
@@ -130,17 +139,35 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery.js}"></script>
+	<script type="text/javascript" src="../asserts/js/jquery-3.2.1.slim.min.js" th:src="@{/asserts/js/jquery-3.2.1.slim.min.js}"></script>
 	<script type="text/javascript" src="../asserts/js/popper.min.js" th:src="@{/asserts/js/popper.min.js}"></script>
 	<script type="text/javascript" src="../asserts/js/bootstrap.bundle.min.js"  th:src="@{/asserts/js/bootstrap.bundle.min.js}"></script>
 
-	<script>
-		$("#btn1").click(function(){
+<!--	<script>
+/*
+		$(".a_post").on("click",function (event) {
+			event.preventDefault();
+			$.ajax({
+				type: "post",
+				url: "/queryProductImages",
+				data: {"productId":$("#image").val()},
+				success:function (images) {
+					for(var i=0; i<images.size();i++){
+						console(images.get[i].imageURL)
+					}
+
+				}
+
+				}
+
+			)
+
+		})*//*click(function(){
 			var productId=$('#search1').val();
 			alert(productId);
 			search_1(productId);
-		});
-	</script>
+		});*/
+	</script>-->
 	</body>
 
 </html>

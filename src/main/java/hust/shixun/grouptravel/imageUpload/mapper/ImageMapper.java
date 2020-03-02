@@ -23,13 +23,15 @@ public interface ImageMapper {
     @Select("SELECT imageId from gt_image where imageUrl=#{imageUrl}")
     int queryImageId(String imageUrl);
 
-    @Select("SELECT * FROM gt_productimage,gt_image where productId=#{productId} AND gt_image.imageId = gt_productimage.imageId")
-    List<Image> queryProductImages(int productId);
+    @Select("SELECT imageUrl FROM gt_productimage,gt_image where productId=#{productId} AND gt_image.imageId = gt_productimage.imageId")
+    List<String> queryProductImages(int productId);
 
-    @Select("SELECT * FROM gt_notesimage,gt_image where notesId=#{notesId} AND gt_image.imageId = gt_notesimage.imageId")
-    List<Image> queryNotesImages(int notesId);
+    @Select("SELECT imageUrl FROM gt_notesimage,gt_image where notesId=#{notesId} AND gt_image.imageId = gt_notesimage.imageId")
+    List<String> queryNotesImages(int notesId);
 
     @Delete("DELETE gt_productimage,gt_notesimage FROM gt_productimage,gt_notesimage where gt_productimage.imageId = #{imageId},gt_notesimage.imageId =#{imageId}")
     boolean deleteImages(int imageId);
 
+    @Delete("delete from gt_image where imageUrl=#{imageUrl}")
+    boolean deleteImagesByUrl(String imageUrl);
 }

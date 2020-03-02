@@ -6,24 +6,8 @@ import hust.shixun.grouptravel.entities.NotesComments;
 import hust.shixun.grouptravel.entities.Order;
 import hust.shixun.grouptravel.entities.Product;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 import hust.shixun.grouptravel.entities.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 
-
-<<<<<<< HEAD
-=======
-import hust.shixun.grouptravel.entities.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -83,12 +67,6 @@ public interface UserService {
     List<Notes> queryLikeNotes(int userId);
 
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
     List<User> queryAllUser();
 
 
@@ -101,10 +79,6 @@ public interface UserService {
     Boolean addUser(User user);
 
     Boolean updateUser(User user);
-
-
-<<<<<<< HEAD
-
 
 
     List<NotesComments> queryNotesCommentsByNotesId(int notesId);
@@ -126,14 +100,14 @@ public interface UserService {
     List<Notes> queryNotesByProductId(int productId);
 
 
+    Boolean deleteNotesCommentById(int commentId);
 
 
 
-
-=======
->>>>>>> 5a4d00c365851b3481f0b7daed2d363d44a7588a
 //    根据城市id查找城市图片
     String getimgByCity(int cityId);
+//根据城市name查找城市图片
+    String  getimgByCityName(String name);
 
 //    返回所有城市名称
     List<City> getAllCitys();
@@ -165,10 +139,16 @@ public interface UserService {
     //查询用户退款完成订单
     List<Order> queryOrdersWith5(int userId);
 
+//    订单超时取消订单
+    Boolean updateOrder6(int orderId);
+
     //城市id查询城市游记
     List<Notes> queryCityNotes(int cityId);
 
     //通过用户id查找对游记的评论
     List<NotesComments> queryNotesCommentsByUserId(int userId);
 
+    int queryCityIdByName(String cityName);
+//通过游记id查找游记图片
+    List<String> queryImgBynoteId(int noteId);
 }
