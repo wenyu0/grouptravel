@@ -307,4 +307,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.queryImgBynoteId(noteId);
     }
 
+    @Override
+    public int queryNotesIdByNotes(Notes notes) {
+        return userMapper.queryNotesIdByNotes(notes);
+    }
+
+    @Override
+    public boolean setOrderNotesId(int orderId, int notesId) {
+        return userMapper.setOrderNotesId(orderId,notesId);
+    }
+
 }

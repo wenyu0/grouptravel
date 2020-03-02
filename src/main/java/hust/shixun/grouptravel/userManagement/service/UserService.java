@@ -151,4 +151,9 @@ public interface UserService {
     int queryCityIdByName(String cityName);
 //通过游记id查找游记图片
     List<String> queryImgBynoteId(int noteId);
+
+//    通过游记查找出游记编号
+    int queryNotesIdByNotes(Notes notes);
+
+    boolean setOrderNotesId(int orderId,int notesId);
 }

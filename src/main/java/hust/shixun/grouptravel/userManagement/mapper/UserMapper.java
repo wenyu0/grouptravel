@@ -223,4 +223,12 @@ public interface UserMapper {
 //    通过城市id查找城市游记
     @Select("select * from gt_notes where productId in (select productId from gt_product where cityId=#{cityId})")
     List<Notes> queryCityNotesByCityId(int cityId);
+
+//    通过游记查出游记id
+    @Select("select notesId from gt_notes where title=#{title} and content=#{content} and writeTime=#{writeTime} and rate=#{rate} and productId=#{productId}")
+    int queryNotesIdByNotes(Notes notes);
+
+//    添加游记时，给订单添加上游记关联
+    @Update("update gt_order set notesId=#{notesId} where orderId=#{orderId}")
+    boolean setOrderNotesId(int orderId, int notesId);
 }

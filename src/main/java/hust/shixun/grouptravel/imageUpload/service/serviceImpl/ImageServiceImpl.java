@@ -96,4 +96,18 @@ public class ImageServiceImpl implements ImageService {
         return imageMapper.deleteImagesByUrl(imageUrl);
     }
 
+    @Override
+    public boolean deleteProductImage(Integer imageId) {
+        return imageMapper.deleteProductImage(imageId);
+    }
+
+    @Override
+    public boolean deleteNotesImage(Integer imageId) {
+        return imageMapper.deleteNotesImage(imageId);
+    }
+
+    @Override
+    public int queryImageIdByImageUrl(String imageUrl) {
+        return imageMapper.queryImageIdByImageUrl(imageUrl);
+    }
 }

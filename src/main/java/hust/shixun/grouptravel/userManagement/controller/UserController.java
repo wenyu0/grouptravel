@@ -4,25 +4,19 @@ package hust.shixun.grouptravel.userManagement.controller;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import hust.shixun.grouptravel.adminManagement.entities.Admin;
 
-import hust.shixun.grouptravel.entities.City;
+import hust.shixun.grouptravel.entities.*;
 
-import hust.shixun.grouptravel.entities.Notes;
-import hust.shixun.grouptravel.entities.NotesComments;
-import hust.shixun.grouptravel.entities.Order;
-import hust.shixun.grouptravel.entities.Product;
-import hust.shixun.grouptravel.entities.User;
+import hust.shixun.grouptravel.imageUpload.service.ImageService;
 import hust.shixun.grouptravel.itemsManagement.service.ProductService;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.soap.Node;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -31,6 +25,10 @@ public class UserController {
 
     @Autowired
     public ProductService productService;
+
+    @Autowired
+    public ImageService imageService;
+
 
     @RequestMapping("/user/addOrder")
     @ResponseBody
@@ -92,10 +90,26 @@ public class UserController {
         return userService.queryNotesByUserId(userId);
     }
 
+//    前台
     @RequestMapping("/user/addNotes")
     @ResponseBody
-    public Boolean addNotes(Notes notes) {
-        return userService.addNotes(notes);
+    public Boolean addNotes(Notes notes,int orderId,@RequestParam(value = "notesImage") MultipartFile[] multipartFiles) {
+        boolean flag1= userService.addNotes(notes);
+        int notesId=userService.queryNotesIdByNotes(notes);
+        if (flag1){
+            List<String> imgList = imageService.uploadPic(multipartFiles);
+            for(String imgUrl:imgList){
+                Image image = new Image(imgUrl);
+                imageService.saveImg(image);
+                int newImgID = imageService.queryImageId(imgUrl);
+                imageService.saveNotesImg(newImgID,notesId);
+//                在订单中添加游记关联
+//                需要订单id
+                userService.setOrderNotesId(orderId,notesId);
+            }
+            return true;
+        }
+        return false;
     }
 
     @RequestMapping("/user/queryOrderPrice")
@@ -129,6 +143,7 @@ public class UserController {
         return userService.likeNotes(userId,notesId);
     }
 
+    //添加评论
     @RequestMapping("/user/commentNotes")
     @ResponseBody
     public Boolean commentNotes(int userId,int notesId,String commentContent){
@@ -187,6 +202,22 @@ public class UserController {
         List<NotesComments> notesComments = userService.queryNotesCommentsByNotesId(notesId);
         model.addAttribute("notesComments",notesComments);
         return "pages/youjiManage/youjiAndComment";
+
+    }
+
+//    前端
+    @RequestMapping("/notes/queryNotesCommentsByNotesId")
+    @ResponseBody
+    public Map<String, Object> queryNotesCommentsByNotesId1(Integer notesId) {
+        Map<String,Object> map=new HashMap<>();
+        List<NotesComments> notesComments = userService.queryNotesCommentsByNotesId(notesId);
+        for (NotesComments comment:notesComments){
+            int userId=comment.getUserId();
+            User user=userService.queryUserById(userId);
+            map.put(""+userId, user);
+        }
+        map.put("notesComments",notesComments);
+        return map;
 
     }
 

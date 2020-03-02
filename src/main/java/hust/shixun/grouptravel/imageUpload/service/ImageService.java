@@ -26,4 +26,14 @@ public interface ImageService {
     boolean deleteImages(int imageId);
 
     boolean deleteImagesByUrl(String imageUrl);
+
+
+
+    boolean deleteProductImage(Integer imageId);
+
+
+    boolean deleteNotesImage(Integer imageId);
+
+
+    int queryImageIdByImageUrl(String imageUrl);
 }

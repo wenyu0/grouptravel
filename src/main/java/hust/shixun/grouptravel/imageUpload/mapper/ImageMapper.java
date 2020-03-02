@@ -34,4 +34,14 @@ public interface ImageMapper {
 
     @Delete("delete from gt_image where imageUrl=#{imageUrl}")
     boolean deleteImagesByUrl(String imageUrl);
+
+
+    @Delete("delete from gt_productimage where imageId=#{imageId}")
+    boolean deleteProductImage(Integer imageId);
+
+    @Delete("delete from gt_notesimage where imageId=#{imageId}")
+    boolean deleteNotesImage(Integer imageId);
+
+    @Select("select imageId from gt_image where imageUrl=#{imageUrl}")
+    int queryImageIdByImageUrl(String imageUrl);
 }

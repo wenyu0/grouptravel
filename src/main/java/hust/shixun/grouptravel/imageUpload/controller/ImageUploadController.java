@@ -48,6 +48,7 @@ public class ImageUploadController {
         return "redirect:/notes/queryAllNotes";
     }
 
+
     @RequestMapping(value = "/setCityImage", method = RequestMethod.POST)
     public void setCityImage(@RequestParam(value = "cityImage") MultipartFile[] multipartFiles,
                               @RequestParam(value = "cityId") int notesId) {
@@ -97,17 +98,26 @@ public class ImageUploadController {
         return imageService.deleteImages(imageId);
     }
 
+
 //    后台/deleteProductImagesByUrl
     @RequestMapping(value = "/deleteProductImagesByUrl")
     public String deleteProductImagesByUrl(@RequestParam(value = "imageUrl") String imageUrl){
+        int i = imageService.queryImageIdByImageUrl(imageUrl);
+        imageService.deleteProductImage(i);
         imageService.deleteImagesByUrl(imageUrl);
         return "redirect:/product/queryAllproducts";
     }
 
-//    后台/deleteNotesImagesByUrl
+    //    后台/deleteNotesImagesByUrl
     @RequestMapping(value = "/deleteNotesImagesByUrl")
     public String deleteNotesImagesByUrl(@RequestParam(value = "imageUrl") String imageUrl){
+        /*  注意顺序
+        *   int i = imageService.queryImageIdByImageUrl(imageUrl);
+            imageService.deleteImagesByUrl(imageUrl);
+        * */
+        int i = imageService.queryImageIdByImageUrl(imageUrl);
         imageService.deleteImagesByUrl(imageUrl);
+        imageService.deleteNotesImage(i);
         return "redirect:/notes/queryAllNotes";
     }
 }

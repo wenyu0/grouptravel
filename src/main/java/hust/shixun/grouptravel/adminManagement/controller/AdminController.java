@@ -3,7 +3,6 @@ package hust.shixun.grouptravel.adminManagement.controller;
 import hust.shixun.grouptravel.adminManagement.entities.Admin;
 import hust.shixun.grouptravel.adminManagement.service.AdminService;
 
-import hust.shixun.grouptravel.config.TimeConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
