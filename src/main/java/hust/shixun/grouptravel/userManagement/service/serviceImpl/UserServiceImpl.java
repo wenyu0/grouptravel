@@ -13,6 +13,8 @@ import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
@@ -316,5 +318,11 @@ public class UserServiceImpl implements UserService {
     public boolean setOrderNotesId(int orderId, int notesId) {
         return userMapper.setOrderNotesId(orderId,notesId);
     }
+
+    @Override
+    public List<Order> queryAllNoTravelOrders(String currentTime) {
+        return userMapper.queryAllNoTravelOrders(currentTime);
+    }
+
 
 }

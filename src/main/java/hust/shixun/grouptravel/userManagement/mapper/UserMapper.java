@@ -9,6 +9,8 @@ import hust.shixun.grouptravel.entities.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 
@@ -162,6 +164,9 @@ public interface UserMapper {
   5 退款成功
   6、订单取消
  */
+    //查询所有未出行且出行时间未到的订单
+    @Select("SELECT * FROM gt_order Where status=1 AND travelTime < #{currentTime}")
+    List<Order> queryAllNoTravelOrders(String currentTime);
     //通过所有未被支付的订单，并返回所有未被支付的订单的集合
     @Select("SELECT * FROM gt_order WHERE status=0 AND userId=#{userId}")
     List<Order> queryOrdersWithUnpay(int userId);
