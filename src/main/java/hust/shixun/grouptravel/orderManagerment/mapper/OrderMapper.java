@@ -20,7 +20,7 @@ public interface OrderMapper {
     @Select("SELECT * FROM gt_order WHERE orderId=#{id}")
     Order queryOrderById(Integer id);
 
-    @Delete("delete from gt_order where orederId=#{id}")
+    @Delete("delete from gt_order where orderId=#{id}")
     int deleteOrderById(int id);
 
     @Insert("insert into gt_order (orderId, createTime, productId, userId, orderPrice, payTime, status, PTid, PNum, currentDiscount, travelTime, notesId) values (#{orderId}, #{createTime}, #{productId}, #{userId}, #{orderPrice}, #{payTime}, #{status}, #{PTid}, #{PNum}, #{currentDiscount}, #{travelTime}, #{notesId})")

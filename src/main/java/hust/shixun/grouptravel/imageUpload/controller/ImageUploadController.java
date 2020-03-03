@@ -50,7 +50,8 @@ public class ImageUploadController {
 
 
     @RequestMapping(value = "/setCityImage", method = RequestMethod.POST)
-    public void setCityImage(@RequestParam(value = "cityImage") MultipartFile[] multipartFiles,
+    @ResponseBody
+    public String setCityImage(@RequestParam(value = "cityImage") MultipartFile[] multipartFiles,
                               @RequestParam(value = "cityId") int notesId) {
         List<String> imgList = imageService.uploadPic(multipartFiles);
         for(String imgUrl:imgList){
@@ -59,6 +60,8 @@ public class ImageUploadController {
             int newImgID = imageService.queryImageId(imgUrl);
             imageService.setCityImg(newImgID,notesId);
         }
+
+        return "true";
     }
 
 //  后台

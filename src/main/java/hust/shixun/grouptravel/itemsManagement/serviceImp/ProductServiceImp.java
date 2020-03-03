@@ -121,7 +121,6 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public int queryRateById(int productId) {
-
          return productMapper.queryRateById(productId);
     }
 

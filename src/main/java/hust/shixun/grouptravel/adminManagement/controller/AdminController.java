@@ -36,6 +36,12 @@ public class AdminController {
         return "login";
     }
 
+//    加图片
+    @RequestMapping("/testImage")
+    public String index1(){
+        return "testImage";
+    }
+
 //后台
     @RequestMapping("/admin/queryAlladmin")
     public String queryAllAlladmin(Model model){

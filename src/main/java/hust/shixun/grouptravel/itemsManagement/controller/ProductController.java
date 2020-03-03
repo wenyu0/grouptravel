@@ -153,6 +153,12 @@ public class ProductController {
         for(int j:i){
             products.add(productService.queryProductById(j));
         }
+        if(products==null&&products.size()==0){
+            List<Product> all=productService.queryAllProducts();
+            products.add(all.get(0));
+            products.add(all.get(1));
+            products.add(all.get(2));
+        }
         return addParam(products);
     }
 
@@ -192,7 +198,12 @@ public class ProductController {
     @RequestMapping("/product/maxdiscountPros")
     public Map<String,Object> getMaxDiscountPro(){
         List<Product> products=productService.getMaxDiscountPro();
-
+        if(products==null&&products.size()==0){
+            List<Product> all=productService.queryAllProducts();
+            products.add(all.get(0));
+            products.add(all.get(1));
+            products.add(all.get(2));
+        }
         return addParam(products);
     }
 
@@ -204,16 +215,16 @@ public class ProductController {
             Map<Integer,String> transportations = new HashMap<Integer, String>();
             Map<Integer,String> citys = new HashMap<Integer, String>();
             Map<Integer,Integer> rates = new HashMap<Integer, Integer>();
-            Map<Integer,Object> productsMap = new HashMap<Integer, Object>();
+            Map<Integer,Object> ProductMap=new HashMap<>();
             for(Product product:products){
                 int productId=product.getProductId();
                 themes.put(productId,queryProductThemeById(product.getThemeId()));
                 transportations.put(productId,queryTransportationNameById(product.getTransportationId()));
                 citys.put(productId,queryCityNameById(product.getCityId()));
                 rates.put(productId,productService.queryRateById(productId));
-                productsMap.put(productId, product);
+                ProductMap.put(productId, product);
             }
-            map.put("products",productsMap);
+            map.put("products",ProductMap);
             map.put("themes",themes);
             map.put("transportations",transportations);
             map.put("citys",citys);

@@ -5,14 +5,30 @@
     <title>Title</title>
 </head>
 <body>
+<h2>上传城市图片</h2>
+<hr/>
+<form method="post"  enctype="multipart/form-data" action="/setCityImage">
+    <p>
+        <input type="text" name="cityId" value="">
+    </p>
+    <p>
+        文件<input type="file" name="cityImage">
+    </p>
+
+    <p>
+        <input type="submit" value="上传">
+    </p>
+</form>
+
+
 <h2>上传游记图片</h2>
 <hr/>
 <form method="post"  enctype="multipart/form-data" action="/user/addNotes">
     <p>
-        <input type="hidden" name="title" value="222">
-        <input type="hidden" name="content" value="222">
-        <input type="hidden" name="rate" value="3">
-        <input type="hidden" name="orderId" value="5">
+        <input type="hidden" name="title" value="333">
+        <input type="hidden" name="content" value="333">
+        <input type="hidden" name="rate" value="2">
+        <input type="hidden" name="orderId" value="4">
         <input type="hidden" name="productId" value="2">
         <input type="hidden" name="writeTime" value="2020-3-2">
     </p>

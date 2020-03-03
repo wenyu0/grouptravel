@@ -63,7 +63,7 @@ public interface UserMapper {
     Boolean updateNotes(Notes notes);
 
 
-    @Delete("delect from gt_notes where notesId=#{notesId}")
+    @Delete("delete from gt_notes where notesId=#{notesId}")
     int deleteNotesById(int id);
 
 

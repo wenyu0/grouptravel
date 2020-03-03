@@ -200,7 +200,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean deleteNotesById(int id) {
-        return deleteNotesById(id);
+        int flag= userMapper.deleteNotesById(id);
+        if(flag==1){
+            return true;
+        }
+        return false;
     }
 
     @Override

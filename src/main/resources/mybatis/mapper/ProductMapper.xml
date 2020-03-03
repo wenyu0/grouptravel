@@ -58,6 +58,6 @@
     </select>
 
     <select id="queryRateById" parameterType="int" resultType="int">
-        select AVG(rate) FROM gt_notes where productId=#{productId}
+        select IFNULL(AVG(rate),0) FROM gt_notes where productId=#{productId}
     </select>
 </mapper>

@@ -215,14 +215,14 @@ public class OrderController {
    @RequestMapping("/order/deleteOrderById{id}")
     public String deleteOrderById(@PathVariable Integer id){
         orderService.deleteOrderById(id);
-        return "redirect:/order/queryAllOrder";
+        return "redirect:/order/queryAllOrders";
    }
 
 //   后台
    @RequestMapping("/order/addOrder")
     public String addOrder(Order order){
         orderService.addOrder(order);
-        return "redirect:/order/queryAllOrder";
+        return "redirect:/order/queryAllOrders";
    }
 
 //  后台

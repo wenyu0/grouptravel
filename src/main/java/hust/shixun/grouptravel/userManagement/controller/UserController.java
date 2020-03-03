@@ -33,6 +33,9 @@ public class UserController {
     @RequestMapping("/user/addOrder")
     @ResponseBody
     public boolean addOrder(Order order) {
+        int productId=order.getProductId();
+        Product product=productService.queryProductById(productId);
+        order.setOrderPrice(product.getPrice());
         return userService.addOrder(order);
     }
 
@@ -93,7 +96,13 @@ public class UserController {
 //    前台
     @RequestMapping("/user/addNotes")
     @ResponseBody
-    public Boolean addNotes(Notes notes,int orderId,@RequestParam(value = "notesImage") MultipartFile[] multipartFiles) {
+    public Boolean addNotes(weixinUpLoad weixinUpLoad,@RequestParam(value = "notesImage") MultipartFile[] multipartFiles) {
+        Notes notes=new Notes();
+        notes.setTitle(weixinUpLoad.getTitle());
+        notes.setContent(weixinUpLoad.getContent());
+        notes.setWriteTime(weixinUpLoad.getWriteTime());
+        notes.setProductId(weixinUpLoad.getProductId());
+        notes.setRate(weixinUpLoad.getRate());
         boolean flag1= userService.addNotes(notes);
         int notesId=userService.queryNotesIdByNotes(notes);
         if (flag1){
@@ -105,7 +114,7 @@ public class UserController {
                 imageService.saveNotesImg(newImgID,notesId);
 //                在订单中添加游记关联
 //                需要订单id
-                userService.setOrderNotesId(orderId,notesId);
+                userService.setOrderNotesId(weixinUpLoad.getOrderId(),notesId);
             }
             return true;
         }
@@ -344,6 +353,16 @@ public class UserController {
         return userService.getAllCitys();
     }
 
+    /*
+  订单状态
+  0 下单未支付
+  1 下单已支付（未出行）
+  2 出行完成（未点评）
+  3 订单完成
+  4 退款中
+  5 退款成功
+  6、订单取消
+ */
 
     @RequestMapping("/user/queryOrdersWith1")
     @ResponseBody
