@@ -9,6 +9,8 @@ import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.entities.User;
 
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 public interface UserService {
@@ -156,4 +158,6 @@ public interface UserService {
     int queryNotesIdByNotes(Notes notes);
 
     boolean setOrderNotesId(int orderId,int notesId);
+
+    List<Order> queryAllNoTravelOrders(String currentTime);
 }
