@@ -61,7 +61,7 @@ public interface UserMapper {
     @Select("select * from gt_notes where notesId=#{notesId}")
     Notes queryNotesById(int id);
 
-    @Update("update gt_notes (title,content,writeTime,rate) values(#{title},#{content},#{writeTime},#{rate})")
+    @Update("update gt_notes set title=#{title},content=#{content},writeTime=#{writeTime},rate=#{rate}")
     Boolean updateNotes(Notes notes);
 
 
@@ -236,4 +236,7 @@ public interface UserMapper {
 //    添加游记时，给订单添加上游记关联
     @Update("update gt_order set notesId=#{notesId} where orderId=#{orderId}")
     boolean setOrderNotesId(int orderId, int notesId);
+
+    @Update("update gt_order set payTime = now() where orderId=#{orderId}")
+    boolean setPayTimeByOrderId(int orderId);
 }

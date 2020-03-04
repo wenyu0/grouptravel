@@ -328,5 +328,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.queryAllNoTravelOrders(currentTime);
     }
 
+    @Override
+    public boolean setPayTimeByOrderId(int orderId) {
+        return userMapper.setPayTimeByOrderId(orderId);
+    }
+
 
 }

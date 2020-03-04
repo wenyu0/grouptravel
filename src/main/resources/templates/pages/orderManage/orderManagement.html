@@ -102,6 +102,8 @@
 
 										<a class="btn btn-sm btn-primary" href="orderEdit.html" th:href="@{/order/updateOrder}+${order.getOrderId()}">编辑</a>
 										<a class="btn btn-sm btn-danger" href="orderEdit.html" th:href="@{/order/deleteOrderById}+${order.getOrderId()}">删除</a>
+										<a class="btn btn-sm btn-success" href="orderEdit.html" th:if="${order.getStatus()}==4" th:href="@{/user/updateUnpayOrder_}+${order.getOrderId()}">退款</a>
+
 
 									</td>
 								</tr>

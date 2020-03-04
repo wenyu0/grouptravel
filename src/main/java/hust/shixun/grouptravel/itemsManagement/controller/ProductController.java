@@ -1,21 +1,17 @@
 package hust.shixun.grouptravel.itemsManagement.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.itemsManagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ProductController {
@@ -113,7 +109,11 @@ public class ProductController {
     @GetMapping("/product/updateProduct{id}")
     public String updateProduct(@PathVariable Integer id, Model model) {
         Product product = productService.queryProductById(id);
+        String cityName = productService.queryCityNameById(id);
         model.addAttribute("pro",product);
+        model.addAttribute("cities",productService.queryAllCitys());
+        model.addAttribute("cities",productService.queryAllCitys());
+        model.addAttribute("cityName",cityName);
         return "/pages/productManage/ProductEdit";
     }
 
@@ -132,6 +132,16 @@ public class ProductController {
         return "redirect:/product/queryAllproducts";
 
     }
+
+
+/*
+    @RequestMapping("/queryAllCituys")
+    public String queryAllCituys(Model model){
+
+        List<City> cities = productService.queryAllCitys();
+        model.addAttribute("citys",cities);
+    }
+*/
 
     @RequestMapping("/product/queryHotProductId")
     public List<Integer> queryHotProductId(String date_1,String date_2) {
@@ -169,7 +179,7 @@ public class ProductController {
 
     @RequestMapping("/notes/queryHotNotes")
     @ResponseBody
-    public List<Notes> queryHotNotes(String date_1,String date_2){
+    public List<Notes> queryHotNotes(String date_1, String date_2){
         List<Integer> i = queryHotProductId(date_1, date_2);
         List<Notes> notes = new ArrayList<>();
         for(int j:i){
@@ -215,16 +225,16 @@ public class ProductController {
             Map<Integer,String> transportations = new HashMap<Integer, String>();
             Map<Integer,String> citys = new HashMap<Integer, String>();
             Map<Integer,Integer> rates = new HashMap<Integer, Integer>();
-            Map<Integer,Object> ProductMap=new HashMap<>();
+            Map<Integer,Object> productsMap = new HashMap<Integer, Object>();
             for(Product product:products){
                 int productId=product.getProductId();
                 themes.put(productId,queryProductThemeById(product.getThemeId()));
                 transportations.put(productId,queryTransportationNameById(product.getTransportationId()));
                 citys.put(productId,queryCityNameById(product.getCityId()));
                 rates.put(productId,productService.queryRateById(productId));
-                ProductMap.put(productId, product);
+                productsMap.put(productId, product);
             }
-            map.put("products",ProductMap);
+            map.put("products",productsMap);
             map.put("themes",themes);
             map.put("transportations",transportations);
             map.put("citys",citys);
@@ -236,8 +246,11 @@ public class ProductController {
 
 //    后台/productAdd
         @RequestMapping("/productAdd")
-        public String xxx(){
-            return "pages/productManage/productAdd";
+        public String xxx(Model model){
+        model.addAttribute("cities",productService.queryAllCitys());
+
+        return "pages/productManage/productAdd";
+
         }
 
 

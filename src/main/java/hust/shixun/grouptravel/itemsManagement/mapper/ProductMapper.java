@@ -1,12 +1,11 @@
 package hust.shixun.grouptravel.itemsManagement.mapper;
 
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Product;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public interface ProductMapper {
      int deleteProductById(int id);
 
      //查询出最热门的三个旅游项目
-     List<Integer> queryHotProductId(Map<String,String> map);
+     List<Integer> queryHotProductId(Map<String, String> map);
 
      //通过最热门的产品id来查询出相应的游记
      List<Notes> queryNoteByProductId(int id);
@@ -45,6 +44,8 @@ public interface ProductMapper {
     String  queryTransportationNameById(int id);
 
     String  queryCityNameById(int id);
+
+    List<City> queryAllCitys();
 
 
 

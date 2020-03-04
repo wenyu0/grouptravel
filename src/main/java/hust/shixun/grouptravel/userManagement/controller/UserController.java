@@ -8,6 +8,7 @@ import hust.shixun.grouptravel.entities.*;
 
 import hust.shixun.grouptravel.imageUpload.service.ImageService;
 import hust.shixun.grouptravel.itemsManagement.service.ProductService;
+import hust.shixun.grouptravel.orderManagerment.service.OrderService;
 import hust.shixun.grouptravel.userManagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,12 +79,14 @@ public class UserController {
     @RequestMapping("/user/queryOrdersWithUnpay")
     @ResponseBody
     public List<Order> queryOrdersWithUnpay(@RequestParam(value = "userId") int userId) {
-        return userService.queryOrdersWithUnpay(userId);
+        List<Order> list=userService.queryOrdersWithUnpay(userId);
+        return list;
     }
 
     @RequestMapping("/user/updateUnpayOrder")
     @ResponseBody
     public Boolean updateUnpayOrder(@RequestParam(value = "orderId") int orderId) {
+        userService.setPayTimeByOrderId(orderId);
         return userService.updateUnpayOrder(orderId);
     }
 
@@ -367,7 +370,8 @@ public class UserController {
     @RequestMapping("/user/queryOrdersWith1")
     @ResponseBody
     public  List<Order> queryOrdersWith1(int userId) {
-        return userService.queryOrdersWith1(userId);
+            List<Order> orders=userService.queryOrdersWith1(userId);
+        return orders;
     }
 
     @RequestMapping("/user/updateOrder2")
@@ -453,5 +457,11 @@ public class UserController {
     public String deleteNotesCommentById(@PathVariable Integer commentId){
         userService.deleteNotesCommentById(commentId);
         return "pages/youjiManage/youjiAndComment";
+    }
+
+    @RequestMapping("/user/updateUnpayOrder_{orderId}")
+    public String updateUnpayOrder_(@PathVariable Integer orderId){
+        userService.updateOrder5(orderId);
+        return "redirect:/order/queryAllOrders";
     }
 }

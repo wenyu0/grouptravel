@@ -180,7 +180,7 @@ public class OrderController {
     @RequestMapping ("/order/queryOrderById")
     @ResponseBody
     public Order queryOrderById(Integer id){
-        return  orderService.queryOrderById(id);
+        return orderService.queryOrderById(id);
     }
 
     public  Date addAndSubtractDaysByCalendar(Date dateTime/*待处理的日期*/,int n/*加减天数*/){

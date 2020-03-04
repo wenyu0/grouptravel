@@ -53,10 +53,18 @@
                                     <label for="InputName">商品名</label>
                                     <input type="text" class="form-control" id="InputName" name="productName" placeholder="productName">
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="InputName">城市Id</label>
-                                    <input type="text" class="form-control" id="InputCity" name="cityId" placeholder="productcity">
+                                    <label >城市</label>
+                                    <select class="form-control form-control-lg" name="cityId">
+                                        <option>----------------</option>
+                                        <tr th:each="city:${cities}">
+                                        <option th:value="${city.getCityId()}" th:text="${city.getCityName()}"></option>
+                                        <tr>
+                                    </select>
                                 </div>
+
+
 
 
                                 <div class="form-group">
@@ -87,6 +95,31 @@
                                     <label>产品行程时间</label>
                                     <input type="text" name="productTime" class="form-control">
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label >产品出行方式</label>
+                                    <select class="form-control form-control-lg" name="transportationId" >
+                                        <option>----------------</option>
+                                        <option th:value="1" >飞机</option>
+                                        <option th:value="2" >火车</option>
+                                        <option th:value="3">汽车</option>
+                                        <option th:value="4">自行车</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label >主题</label>
+                                    <select class="form-control form-control-lg" name="themeId" >
+                                        <option>----------------</option>
+                                        <option th:value="1" >风景游</option>
+                                        <option th:value="2" >美食游</option>
+                                        <option th:value="3" >文艺游</option>
+                                        <option th:value="4" >观光游</option>
+                                    </select>
+                                </div>
+                             <!--
 
                                 <div class="form-group">
                                     <label>产品出行方式</label>
@@ -141,7 +174,7 @@
                                             观光游
                                         </label>
                                     </div>
-                                </div>
+                                </div>-->
                                 <button type="submit" class="btn btn-success mr-2">提交</button>
                                 <button class="btn btn-light">取消</button>
                             </form>

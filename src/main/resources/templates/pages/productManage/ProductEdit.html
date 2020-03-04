@@ -49,10 +49,32 @@
 											<label for="InputName">商品名</label>
 											<input type="text" class="form-control" id="InputName" name="productName" placeholder="productName" th:value="${pro!=null}?${pro.productName}">
 										</div>
-										<div class="form-group">
+									<!--	<div class="form-group">
 											<label for="InputName">城市Id</label>
 											<input type="text" class="form-control" id="InputCity" name="cityId" placeholder="productcity"  th:value="${pro!=null}?${pro.cityId}">
+										</div>-->
+
+										<div class="form-group">
+											<label >城市</label>
+											<select class="form-control form-control-lg" name="cityId">
+												<tr th:each="city:${cities}" >
+													<!--<option th:value="${city.getCityId()}" th:text="${city.getCityName()}"></option>-->
+													<!--<option  th:selected="${pro!=null}?${pro.cityId}"></option>-->
+													<!--<option th:value="${city.getCityId()}" th:text="${city.getCityName()}"></option>
+													<option th:value="${pro.getCityId()}" th:selected="${pro!=null}?${pro.cityId}" ></option>-->
+													<option th:if="${pro.getCityId()}==${city.getCityId()}" th:text="${city.getCityName()}" th:value="${pro.getCityId()}"></option>
+												<tr>
+												<tr th:each="city:${cities}" >
+													<!--<option th:value="${city.getCityId()}" th:text="${city.getCityName()}"></option>-->
+													<!--<option  th:selected="${pro!=null}?${pro.cityId}"></option>-->
+													<!--<option th:value="${city.getCityId()}" th:text="${city.getCityName()}"></option>
+													<option th:value="${pro.getCityId()}" th:selected="${pro!=null}?${pro.cityId}" ></option>-->
+													<option th:if="${pro.getCityId()}!=${city.getCityId()}" th:text="${city.getCityName()}" th:value="${city.getCityId()}"></option>
+												<tr>
+
+											</select>
 										</div>
+
 
 										<div class="form-group">
 											<label >价格</label>
@@ -64,7 +86,7 @@
 										</div>
 										<div class="form-group">
 											<label>文字描述</label>
-											<textarea class="form-control" id="InputArea" name="description" placeholder="description" th:value="${pro!=null}?${pro.description}"></textarea>
+											<textarea class="form-control" id="InputArea" name="description" placeholder="description" th:text="${pro!=null}?${pro.description}"></textarea>
 										</div>
 										<div class="form-group">
 											<label>拼团上限人数</label>
@@ -78,12 +100,38 @@
 												<span class="input-group-addon bg-primary border-primary text-white">.00</span>
 											</div>
 										</div>
+
+
+
 										<div class="form-group">
 											<label>产品行程时间</label>
 											<input type="text" name="productTime" class="form-control" th:value="${pro!=null}?${pro.productTime}">
 										</div>
 
+
 										<div class="form-group">
+											<label >产品出行方式</label>
+											<select class="form-control form-control-lg" name="transportationId" >
+												<option th:value="1" th:selected="${pro!=null}?${pro.transportationId==1}">飞机</option>
+												<option th:value="2" th:selected="${pro!=null}?${pro.transportationId==2}">火车</option>
+												<option th:value="3" th:selected="${pro!=null}?${pro.transportationId==3}">汽车</option>
+												<option th:value="4" th:selected="${pro!=null}?${pro.transportationId==4}">自行车</option>
+											</select>
+										</div>
+
+
+										<div class="form-group">
+											<label >主题</label>
+											<select class="form-control form-control-lg" name="themeId" >
+												<option th:value="1" th:selected="${pro!=null}?${pro.themeId==1}">风景游</option>
+												<option th:value="2" th:selected="${pro!=null}?${pro.themeId==2}">美食游</option>
+												<option th:value="3" th:selected="${pro!=null}?${pro.themeId==3}">文艺游</option>
+												<option th:value="4" th:selected="${pro!=null}?${pro.themeId==4}">观光游</option>
+											</select>
+										</div>
+
+
+									<!--	<div class="form-group">
 											<label>产品出行方式</label>
 											<div class="form-check">
 												<label class="form-check-label">
@@ -109,34 +157,34 @@
 													自行车
 												</label>
 											</div>
-										</div>
-										<div class="form-group">
+										</div>-->
+										<!--<div class="form-group">
 											<label>主题</label>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox" name="themeId" value="1" class="form-check-input">
+													<input type="checkbox" name="themeId" th:value="${pro!=null}?${pro.themeId}" class="form-check-input">
 													风景游
 												</label>
 											</div>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox" name="themeId" value="2" class="form-check-input" >
+													<input type="checkbox" name="themeId" th:value="${pro!=null}?${pro.themeId}" class="form-check-input" >
 													美食游
 												</label>
 											</div>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox"  name="themeId" value="3" class="form-check-input" >
+													<input type="checkbox"  name="themeId" value="3"  th:selected="${pro!=null}?${pro.themeId==3}" class="form-check-input" >
 													文艺游
 												</label>
 											</div>
 											<div class="form-check ">
 												<label class="form-check-label">
-													<input type="checkbox" name="themeId" value="4" class="form-check-input" >
+													<input type="checkbox" name="themeId" value="4" th:selected="${pro!=null}?${pro.themeId==4}" class="form-check-input" >
 													观光游
 												</label>
 											</div>
-										</div>
+										</div>-->
 										<button type="submit" class="btn btn-success mr-2">提交</button>
 										<button class="btn btn-light">取消</button>
 									</form>

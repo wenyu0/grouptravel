@@ -160,4 +160,6 @@ public interface UserService {
     boolean setOrderNotesId(int orderId,int notesId);
 
     List<Order> queryAllNoTravelOrders(String currentTime);
+
+    boolean setPayTimeByOrderId(int orderId);
 }

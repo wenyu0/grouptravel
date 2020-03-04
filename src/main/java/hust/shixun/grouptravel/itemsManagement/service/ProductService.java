@@ -1,9 +1,9 @@
 package hust.shixun.grouptravel.itemsManagement.service;
 
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Product;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +35,8 @@ public interface ProductService {
     List<Product> getMaxDiscountPro();
 
     int queryRateById(int productId);
+
+    List<City> queryAllCitys();
 
 
 }

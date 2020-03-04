@@ -1,5 +1,6 @@
 package hust.shixun.grouptravel.itemsManagement.serviceImp;
 
+import hust.shixun.grouptravel.entities.City;
 import hust.shixun.grouptravel.entities.Notes;
 import hust.shixun.grouptravel.entities.Product;
 import hust.shixun.grouptravel.itemsManagement.mapper.ProductMapper;
@@ -7,7 +8,6 @@ import hust.shixun.grouptravel.itemsManagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -121,7 +121,13 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public int queryRateById(int productId) {
+
          return productMapper.queryRateById(productId);
+    }
+
+    @Override
+    public List<City> queryAllCitys() {
+        return productMapper.queryAllCitys();
     }
 
 
